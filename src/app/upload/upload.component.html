@@ -1,0 +1,11 @@
+<form>
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Upload Funko Pop</label>
+      <input type="file" class="form-control-file" id="#imgInp" accept="image/*" (change)="readURL($event);" required>
+      <img id="popPreview" [src]="imageSrc || '../../assets/diy_male.jpg'" alt="Funko Pop" />
+      <input type="text" class="form-control" id="name" placeholder="Name" required>
+      <input type="text" class="form-control" id="series-name" placeholder="Series" required>
+      <input type="text" class="form-control" id="category" placeholder="Category" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
