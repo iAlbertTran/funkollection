@@ -15,3 +15,7 @@
 
     padding: 20px 10px;
 }
+
+input, img, select{
+    margin-bottom: 10px;
+}
