@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UploadComponent } from './upload/upload.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 const appRoutes: Routes = [
   {path: 'upload', component: UploadComponent}
 ]
@@ -17,6 +19,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot(
       appRoutes,
