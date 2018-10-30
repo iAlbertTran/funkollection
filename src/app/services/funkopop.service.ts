@@ -7,32 +7,33 @@ import { FunkoPop } from '../models/funkopop';
 @Injectable()
 export class FunkoPopService {
 
-  apiUrl = 'http://localhost:8000/api';
+  baseURL = 'http://localhost:8000/api';
+  funkopopURL = this.baseURL + '/funkopop';
 
   constructor(private http: HttpClient) {}
 
   getAllFunkoPops(){
-    return this.http.get('http://localhost:8000/api/funkopop');
+    return this.http.get(`${this.funkopopURL}`);
   }
 
   getFunkoPop(name: string){
-    return this.http.get('http://localhost:8000/api/funkopop/' + name);
+    return this.http.get(`${this.funkopopURL}/name`);
   }
 
   insertFunkoPop(funkopop: FunkoPop){
-    return this.http.post('http://localhost:8000/api/funkopop/', funkopop);
+    return this.http.post(`${this.funkopopURL}`, funkopop);
   }
 
   updateFunkoPop(funkopop: FunkoPop) {
-    return this.http.put('http://localhost:8000/api/funkopop/' + funkopop.name, funkopop);
+    return this.http.put(`${this.funkopopURL}/${funkopop.name}`, funkopop);
   }
 
   deleteFunkoPop(name: string) {
-    return this.http.delete('http://localhost:8000/api/funkopop/' + name);
+    return this.http.delete(`${this.funkopopURL}/name`);
   }
 
   getSeries (): Observable<Series[]> {
-    return this.http.get<Series[]>(`${this.apiUrl}/series`)
+    return this.http.get<Series[]>(`${this.baseURL}/series`)
       .pipe();
   }
 }
