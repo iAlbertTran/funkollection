@@ -2,16 +2,16 @@
   <div class="upload-container">
       <form>
           <div class="form-group">
-            <label for="exampleFormControlFile1">Upload Funko Pop</label>
+            <label for="exampleFormControlFile1">Upload a Funko Pop to your collection!</label>
             <input type="file" class="form-control-file" id="#imgInp" accept="image/*" (change)="readURL($event);" required>
             <img id="popPreview" [src]="imageSrc || '../../assets/diy_male.jpg'" alt="Funko Pop" />
             <input type="text" class="form-control" id="name" placeholder="Name" required>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select  #selectedSeries class="form-control" id="series" (change)="checkSelection(selectedSeries.value)">
               <option>Series</option>
-              <ng-Container *ngFor="let series of seriesNames; let index = index">
-                <option>{{ series["SERIESNAME"] }}</option>
-              </ng-Container>
-            </select>            
+              <option *ngFor="let item of series">{{ item.name }}</option>
+              <option>Other</option>
+            </select>
+            <input *ngIf="displayNewSeriesInput" type="text" class="form-control" id="new-series" placeholder="New Series">            
             <input type="text" class="form-control" id="category" placeholder="Category" required>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>

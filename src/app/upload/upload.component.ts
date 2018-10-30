@@ -1,33 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { FunkoPopService } from '../services/funkopop.service';
+
+import { map } from "rxjs/operators";
+
+import { Series } from "../models/series";
 
 @Component({
-  selector: 'app-upload',
+  selector: 'upload',
   templateUrl: './upload.component.html',
+  providers: [FunkoPopService],
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
 
   imageSrc: any;
   event: any;
-  url = "http://localhost:8000/api/series";
-  seriesNames: any;
-  constructor() { }
+  series: Series[];
+  displayNewSeriesInput: boolean;
+  constructor( private apiService: FunkoPopService ) { 
+  }
 
   ngOnInit() {
-    var oReq = new XMLHttpRequest();
-    oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", reqListener);
-    oReq.open("GET", this.url);
+    this.getSeries();
+    this.displayNewSeriesInput = false;
+  }
 
-    oReq.send();
-
-    function reqListener(){
-      this.seriesNames = JSON.parse(oReq.responseText);
-      this.seriesNames = this.seriesNames.sort(function(a,b){
-        return (b["SERIESNAME"] < a["SERIESNAME"]) ? 1 : ((b["SERIESNAME"] > a["SERIESNAME"]) ? -1 : 0);
+  getSeries(): void{
+    this.apiService.getSeries()
+      .subscribe(series => {
+        series.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
       });
-      console.log(this.seriesNames);
-    }
+        this.series = series;
+
+      });
+    
+
   }
 
 
@@ -41,5 +50,15 @@ export class UploadComponent implements OnInit {
 
         reader.readAsDataURL(file);
     }
-}
+  }
+
+  checkSelection(value: any){
+
+    if(value == 'Other'){
+      this.displayNewSeriesInput = true;
+    }
+    else{
+      this.displayNewSeriesInput = false;
+    }
+  }
 }
