@@ -8,14 +8,29 @@ import { RouterModule, Routes } from '@angular/router';
 import { UploadComponent } from './upload/upload.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
+import { UserService } from './user-service';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
-  {path: 'upload', component: UploadComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: '', component: HomeComponent,
+    children: [
+      {path: 'upload', component: UploadComponent}
+    ]  
+  },
+  
 ]
 @NgModule({
   declarations: [
     AppComponent,
-    UploadComponent
+    UploadComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
