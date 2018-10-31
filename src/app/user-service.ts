@@ -15,7 +15,7 @@ export class UserService {
     localStorage.setItem('login',this.isUserLoggedIn);
   }
   getUserLoggedIn() {
-    return (localStorage.getItem('login') != null ? localStorage.getItem('login') : false);
+    return localStorage.getItem('login') != null ? localStorage.getItem('login') : false;
   }
   setUserLoggedOut() {
     this.isUserLoggedIn = false;

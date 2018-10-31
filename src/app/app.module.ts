@@ -41,7 +41,7 @@ const appRoutes: Routes = [
       {enableTracing: true}
     )
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
