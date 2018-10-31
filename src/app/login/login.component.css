@@ -1,7 +1,7 @@
 .content{
     height: 100%;
     width: 100%;
-
+    min-width: 320px;
     display: flex;
 }
 
@@ -12,11 +12,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    padding: 10px;
 }
 
 .left-container h3{
     color: #007CEC;
     margin-bottom: 40px;
+    text-align: center;
 }
 
 .left-container .mobile-avatar{
@@ -59,6 +62,8 @@
 .right-container{
     width: 50%;
 
+    padding: 10px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,6 +74,7 @@
 
 .right-container *{
     color: #DBDFE4;
+    text-align: center;
 
 }
 
@@ -83,7 +89,6 @@ h3{
     max-width: 500px;
 
     font-weight: bold;
-    text-align: center;
 
     letter-spacing: 2px;
 }
@@ -109,6 +114,7 @@ h3{
     .left-container h3{
         color: #DBDFE4;
         margin: 20px 0;
+        text-align: center;
     }
 
     .left-container .mobile-avatar{
