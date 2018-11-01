@@ -46,13 +46,13 @@
     margin: 10px 0;
 
     border-color: #007CEC;
-    background: #DBDFE4;
+    background: #ffffff;
     color: #007CEC;
 }
 
 .login-container button{
     background: #007CEC;
-    color: #DBDFE4;
+    color: #ffffff;
 }
 
 .login-container input::placeholder{
@@ -73,7 +73,7 @@
 }
 
 .right-container *{
-    color: #DBDFE4;
+    color: #ffffff;
     text-align: center;
 
 }
@@ -83,7 +83,7 @@
 }
 
 h3{
-    color: #DBDFE4;
+    color: #ffffff;
 
     width: 100%;
     max-width: 500px;
@@ -112,7 +112,7 @@ h3{
     }
 
     .left-container h3{
-        color: #DBDFE4;
+        color: #ffffff;
         margin: 20px 0;
         text-align: center;
     }
@@ -122,22 +122,26 @@ h3{
     }
 
     .left-container input{
-        border-color: #DBDFE4;
+        border-color: #ffffff;
         background: #007CEC;
-        color: #DBDFE4;
+        color: #ffffff;
 
     }
 
     .login-container button{
-        background: #DBDFE4;
+        background: #ffffff;
         color: #007CEC;
     }
 
     .left-container input::placeholder{
-        color: #DBDFE4;
+        color: #ffffff;
     }
 
     .right-container{
         display: none;
+    }
+
+    a{
+        color: #ffffff;
     }
 }
