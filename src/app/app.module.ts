@@ -13,10 +13,12 @@ import { RegisterComponent } from './register/register.component';
 
 import { UserService } from './user-service';
 import { HomeComponent } from './home/home.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
   {path: '', component: HomeComponent,
     children: [
       {path: 'upload', component: UploadComponent}
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     UploadComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
