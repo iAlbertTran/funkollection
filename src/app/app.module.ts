@@ -15,6 +15,8 @@ import { UserService } from './user-service';
 import { HomeComponent } from './home/home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
+import { FormsModule } from '@angular/forms';
+
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: true}
