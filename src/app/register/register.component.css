@@ -163,6 +163,22 @@
     text-transform: uppercase;
 }
 
+.stage-icon{
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #007CEC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.stage-title{
+    margin-top: 10px;
+    font-weight: bold;
+}
+
 #passwordAlert{
     color: red;
 }
@@ -218,7 +234,6 @@
 
     .signup-container h5{
         font-size: 18px;
-        
     }
 
     .signup-container label, .signup-container input, .signup-container button{

@@ -10,10 +10,14 @@ export class RegisterComponent implements OnInit {
   email: String;
   password: String;
   verifyPassword: String;
-  stepCounter: number = 1;
   passwordMatch = true;
   stepOneComplete: Boolean = false;
   stepTwoComplete: Boolean = false;
+  startStepTwo: Boolean = false;
+  stepTitle: string = "Create Your Account";
+  username: String = "";
+  firstName: String = "";
+  lastName: String = "";
 
   constructor() { }
 
@@ -22,7 +26,11 @@ export class RegisterComponent implements OnInit {
 
   checkInputFields(){
     this.stepOneComplete = true;
-    ++this.stepCounter;
+
+    setTimeout(() =>{
+      this.stepTitle = "Personal Information";
+      this.startStepTwo = true;
+    }, 500);
   }
 
   checkPassword(){
