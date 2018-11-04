@@ -13,8 +13,13 @@ export class RegisterComponent implements OnInit {
   passwordMatch = true;
   stepOneComplete: Boolean = false;
   stepTwoComplete: Boolean = false;
+
+  goBackToStepOne: Boolean = false;
+  goBackToStepTwo: Boolean = false;
+
   startStepTwo: Boolean = false;
-  stepTitle: string = "Create Your Account";
+  startStepThree: Boolean = false;
+
   username: String = "";
   firstName: String = "";
   lastName: String = "";
@@ -24,12 +29,21 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  checkInputFields(){
+  finishStepOne(){
     this.stepOneComplete = true;
+    this.goBackToStepOne = false;
 
     setTimeout(() =>{
-      this.stepTitle = "Personal Information";
       this.startStepTwo = true;
+    }, 500);
+  }
+
+  finishStepTwo(){
+    this.stepTwoComplete = true;
+    this.goBackToStepTwo = false;
+
+    setTimeout(() =>{
+      this.startStepThree = true;
     }, 500);
   }
 
@@ -40,6 +54,25 @@ export class RegisterComponent implements OnInit {
     else{
       this.passwordMatch = true;
     }
+  }
+
+  backToStepOne(){
+    this.goBackToStepOne = true;
+    this.startStepTwo = false;
+    this.goBackToStepTwo = false;
+
+    setTimeout(() =>{
+      this.stepOneComplete = false;
+    }, 500);
+  }
+
+  backToStepTwo(){
+    this.goBackToStepTwo = true;
+    this.startStepThree = false;
+
+    setTimeout(() =>{
+      this.stepTwoComplete = false;
+    }, 500);
   }
   
 }

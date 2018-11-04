@@ -11,13 +11,13 @@
           <div class="connector connector-one">
             <div id="connector-one-progress-bar" [class.fill-width]="stepOneComplete" class="connector-progress-bar" role="progressbar"aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
-          <div class="step step-two" [class.fill-background]="stepOneComplete">
+          <div class="step step-two" [class.fill-background]="startStepTwo && !goBackToStepOne">
             <i class="fas fa-newspaper step-icon"></i>
           </div>
-          <div class="connector connector-one" [class.fill-width]="stepTwoComplete">
-            <div class="connector-progress-bar connector-two-progress-bar" role="progressbar"aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="connector connector-one">
+            <div id="connector-two-progress-bar" class="connector-progress-bar" [class.fill-width]="stepTwoComplete" role="progressbar"aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
-          <div class="step step-three" [class.fill-background]="stepTwoComplete">
+          <div class="step step-three" [class.fill-background]="stepTwoComplete && !goBackToStepTwo">
             <i class="fas fa-search step-icon"></i>
           </div>
       </div>
@@ -28,93 +28,96 @@
       </div>
     </div>
 
-    <div class="sign-up-form" [class.animated]="stepOneComplete" [class.fadeOutLeft]="stepOneComplete && !startStepTwo" [class.fadeInRight]="startStepTwo">
-      <div class="step-titles">
-        <div class="stage-icon">
-            <i class="fas fa-user-cog"></i>
-        </div>
-          <h5 class="stage-title"> Create Your Account </h5>
-        </div>
-      <form #f="ngForm">  
-        <div class="form-group email-form-group">
-          <label for="email">Email address</label>
-          <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" placeholder="Enter email" required email>
-          <small id="emailHelp" class="form-text text-muted" *ngIf="!f.valid">Please enter a valid email. We will send you a verification email.</small>
-        </div>
-        <div class="form-group">
-          <label for="passwordinput">Password</label>
-          <input type="password" [(ngModel)]="password" (change)="checkPassword()" name="password" class="form-control" id="passwordinput" placeholder="Password" required>
-        </div>
-        <div class="form-group verifyPassword-form-group">
-          <label for="verifypassword">Verify Password</label>
-          <input type="password" [(ngModel)]="verifyPassword" (change)="checkPassword()" name="verifyPassword" class="form-control" id="verifypassword" placeholder="Re-enter password" required>
-          <small id="passwordAlert" class="form-text" *ngIf="!passwordMatch">*Passwords do not match</small>
-
-        </div>   
-      </form>
-      <div class="button-container">
-          <button class="btn prev-btn" [class.show-button]="stepOneComplete">Previous</button>
-          <button class="btn next-btn" (click)="checkInputFields()" [disabled]="!f.valid || !passwordMatch" [class.show-button]="!StepTwoComplete">Next</button>
-        </div>
-    </div>
-
-    <div class="sign-up-form" [class.animated]="stepOneComplete" [class.fadeOutLeft]="stepOneComplete && !startStepTwo" [class.fadeInRight]="startStepTwo">
+    <div class="overlay-signup-forms">
+      <div class="sign-up-form animated" [class.zoomOut]="stepOneComplete && !goBackToStepOne" [class.zoomIn]="goBackToStepOne">
         <div class="step-titles">
-            <div class="stage-icon">
-                <i class="fas fa-user-edit"></i>
-            </div>
-            <h5 class="stage-title"> Personal Information </h5>
+          <div class="stage-icon">
+              <i class="fas fa-user-cog"></i>
+          </div>
+            <h5 class="stage-title"> Create Your Account </h5>
           </div>
         <form #f="ngForm">  
-          <div class="form-group username-form-group">
-            <label for="username">Username</label>
-            <input type="text" [(ngModel)]="username" name="username" class="form-control" id="username" placeholder="Funkollector" required>
+          <div class="form-group email-form-group">
+            <label for="email">Email address</label>
+            <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" placeholder="Enter email" required email>
+            <small id="emailHelp" class="form-text text-muted" *ngIf="!f.valid">Please enter a valid email. We will send you a verification email.</small>
           </div>
           <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="John" required>
+            <label for="passwordinput">Password</label>
+            <input type="password" [(ngModel)]="password" (change)="checkPassword()" name="password" class="form-control" id="passwordinput" placeholder="Password" required>
           </div>
-          <div class="form-group lastname-form-group">
-            <label for="lastName">Last Name</label>
-            <input type="lastName" [(ngModel)]="lastName" name="lastName" class="form-control" id="lastName" placeholder="Smith" required>  
+          <div class="form-group verifyPassword-form-group">
+            <label for="verifypassword">Verify Password</label>
+            <input type="password" [(ngModel)]="verifyPassword" (change)="checkPassword()" name="verifyPassword" class="form-control" id="verifypassword" placeholder="Re-enter password" required>
+            <small id="passwordAlert" class="form-text" *ngIf="!passwordMatch">*Passwords do not match</small>
+  
           </div>   
         </form>
         <div class="button-container">
-            <button class="btn prev-btn" [class.show-button]="stepOneComplete">Previous</button>
-            <button class="btn next-btn" (click)="checkInputFields()" [disabled]="!f.valid || !passwordMatch" [class.show-button]="!StepTwoComplete">Next</button>
+            <div style="opacity: 0; width: 10px; height: 10px"></div>
+            <button class="btn next-btn" (click)="finishStepOne()" [class.show-next-btn]="f.valid || passwordMatch" >Next</button>
           </div>
       </div>
-
-      <div class="sign-up-form" [class.animated]="stepOneComplete" [class.fadeOutLeft]="stepOneComplete && !startStepTwo" [class.fadeInRight]="startStepTwo">
+  
+      <div class="sign-up-form animated" *ngIf="stepOneComplete" [class.fadeInRight]="stepOneComplete && !goBackToStepOne" [class.fadeOutRight]="goBackToStepOne" [class.zoomOut]="stepTwoComplete && !goBackToStepTwo" [class.zoomIn]="goBackToStepTwo">
           <div class="step-titles">
               <div class="stage-icon">
-                  <i class="fas fa-check"></i>              
-                </div>
-              <h5 class="stage-title"> Review </h5>
+                  <i class="fas fa-user-edit"></i>
+              </div>
+              <h5 class="stage-title"> Personal Information </h5>
             </div>
           <form #f="ngForm">  
-            <div class="form-group email-form-group">
-              <label for="email">Email address</label>
-              <h4> {{ email }} </h4>
-              <div class="form-group email-form-group">
-                  <label for="username">Username</label>
-                  {{ username }}
-
-                </div>
-                <div class="form-group">
-                  <label for="firstName">First Name</label>
-                  {{ firstName }}
-                </div>
-                <div class="form-group verifyPassword-form-group">
-                  <label for="lastName">Last Name</label>
-                  {{ lastName }}
-                </div>   
-            </div>  
+            <div class="form-group username-form-group">
+              <label for="username">Username</label>
+              <input type="text" [(ngModel)]="username" name="username" class="form-control" id="username" placeholder="Funkollector" required>
+            </div>
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="John" required>
+            </div>
+            <div class="form-group lastname-form-group">
+              <label for="lastName">Last Name</label>
+              <input type="lastName" [(ngModel)]="lastName" name="lastName" class="form-control" id="lastName" placeholder="Smith" required>  
+            </div>   
           </form>
           <div class="button-container">
-              <button class="btn prev-btn" [class.show-button]="stepOneComplete">Previous</button>
-              <button class="btn next-btn" (click)="checkInputFields()" [disabled]="!f.valid || !passwordMatch" [class.show-button]="!StepTwoComplete">Submit</button>
+              <button class="btn prev-btn" (click)="backToStepOne()">Previous</button>
+              <button class="btn next-btn" (click)="finishStepTwo()" [disabled]="!f.valid || !passwordMatch" [class.show-button]="!StepTwoComplete">Next</button>
             </div>
         </div>
-  </div>
+  
+        <div class="sign-up-form animated fadeInRight" *ngIf="stepTwoComplete" [class.fadeInRight]="stepTwoComplete" [class.fadeOutRight]="goBackToStepTwo">
+            <div class="step-titles">
+                <div class="stage-icon">
+                    <i class="fas fa-check"></i>              
+                  </div>
+                <h5 class="stage-title"> Review </h5>
+              </div>
+            <form #f="ngForm">  
+              <div class="form-group email-form-group">
+                <label for="email">Email address</label>
+                <h4> {{ email }} </h4>
+                <div class="form-group email-form-group">
+                    <label for="username">Username</label>
+                    {{ username }}
+  
+                  </div>
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    {{ firstName }}
+                  </div>
+                  <div class="form-group verifyPassword-form-group">
+                    <label for="lastName">Last Name</label>
+                    {{ lastName }}
+                  </div>   
+              </div>  
+            </form>
+            <div class="button-container">
+                <button class="btn prev-btn" (click)="backToStepTwo()">Previous</button>
+                <button class="btn next-btn" [disabled]="!f.valid || !passwordMatch" [class.show-button]="!StepTwoComplete">Submit</button>
+              </div>
+          </div>
+    </div>
+    </div>
+    
 </div>

@@ -75,7 +75,6 @@
 
     transition-property: background-color;
     transition-duration: 1s;
-    transition-delay: 1s;
 }
 
 .step-one{
@@ -133,6 +132,9 @@
     color: #007CEC;
     font-weight: bold;
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+
+    position: absolute;
+    width: 100%;
 }
 
 .next-btn, .prev-btn{
@@ -191,19 +193,30 @@
     width: 100%;
 }
 
+.empty-width{
+    width: 0;
+}
+
 .fill-background{
     background-color: #007CEC;
 }
 
-.prev-btn, .next-btn{
-    transition-property: opacity;
-    transition-duration: 1s;
-
-    opacity: 0;
-
+.empty-background{
+    background-color: #F2F2F2;
 }
 
-.show-button{
+.overlay-signup-forms{
+    position: relative;
+    width: 100%;
+}
+
+.next-btn{
+    transition-property: opacity;
+    transition-duration: 1s;
+    opacity: 0;
+}
+
+.show-next-btn{
     opacity: 1;
 }
 
