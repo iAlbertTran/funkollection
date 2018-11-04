@@ -4,7 +4,7 @@ import { FunkoPopService } from '../services/funkopop.service';
 
 import { map } from "rxjs/operators";
 
-import { Series } from "../models/series";
+import { Series } from "../models/Series";
 
 @Component({
   selector: 'upload',
