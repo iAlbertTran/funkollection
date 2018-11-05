@@ -7,7 +7,7 @@
     align-items: center;
     padding: 10px;
 
-    background: #ffffff;
+    background: #4C4F54 url(../../assets/transparent-bgs/inspiration-geometry.png);
 }
 
 .return-container{
@@ -16,15 +16,15 @@
 }
 
 .login-button{
-    border: 1px solid #007CEC;
-    color: #007CEC !important;
-    background: #ffffff;
+    border: 1px solid #44C8BA;
+    color: #44C8BA !important;
+    background: #4C4F54;
 
     text-transform: uppercase;
 }
 
 .login-button:hover{
-    background: #007CEC;
+    background: #44C8BA;
     color: #ffffff !important;
 }
 
@@ -32,10 +32,10 @@
     width: 100%;
     max-width: 750px;
     height: calc(100% - 60px);
+    max-height: 500px;
 
     margin-top: 40px;
 
-    background: #ffffff;
 
 }
 
@@ -43,6 +43,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    margin: 20px 0;
 }
 
 .progress-bar{
@@ -54,13 +56,12 @@
     width: 100%;
     max-width: calc(100% - 100px);
 
-    color: #007CEC;
-    background: #ffffff;
+    background: transparent;
 }
 
 
 .step, .connector{
-    background: #F2F2F2;
+    background: #9EA1A6;
 }
 
 .step{
@@ -77,10 +78,6 @@
     transition-duration: 1s;
 }
 
-.step-one{
-    color: #ffffff;
-}
-
 
 .connector{
     width: calc((100% - 150px) / 2);
@@ -88,19 +85,19 @@
 }
 
 .step-icon{
-    color: #ffffff;
+    color: #F8F9FD;
     font-size: 25px;
 }
 
 .step-one{
-    background: #007CEC;
+    background: #44C8BA;
 }
 
 .connector-progress-bar{
     height: 10px;
     transition-property: width;
     transition-duration: 1s;
-    background: #007CEC;
+    background: #44C8BA;
     width: 0;
 }
 
@@ -114,7 +111,7 @@
 
 .label{
     margin-top: 5px;
-    color: #007CEC;
+    color: #44C8BA;
     font-weight: bold;
     width: 150px;
 
@@ -127,18 +124,21 @@
 .sign-up-form{
     margin-top: 40px;
 
-    padding: 10px;
+    padding: 5% 10%;
     border-radius: 5px;
-    color: #007CEC;
+    color: #F2F2F2;
     font-weight: bold;
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
 
     position: absolute;
     width: 100%;
+
+    border: 1px solid #44C8BA;
+    background: #4C4F54;
 }
 
 .next-btn, .prev-btn{
-    border: 1px solid #007CEC;
+    border: 1px solid #44C8BA;
 }
 
 .button-container{
@@ -147,13 +147,16 @@
 }
 
 .button-container button:hover{
-    background: #007CEC;
+    background: #44C8BA;
     color: #ffffff;
 }
 
 .button-container button{
-    background: #ffffff;
-    color: #007CEC;
+    background: #4C4F54;
+    color: #44C8BA;
+
+    transition-property: background-color, color, opacity;
+    transition-duration: 0.15s;
 }
 
 .step-titles{
@@ -161,15 +164,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
-    text-transform: uppercase;
 }
 
 .stage-icon{
     font-size: 25px;
     width: 50px;
     height: 50px;
-    border: 2px solid #007CEC;
+    border: 2px solid #44C8BA;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -182,7 +183,7 @@
 }
 
 #passwordAlert{
-    color: red;
+    color: #44C8BA;
 }
 
 .verifyPassword-form-group{
@@ -198,7 +199,7 @@
 }
 
 .fill-background{
-    background-color: #007CEC;
+    background-color: #44C8BA;
 }
 
 .empty-background{
@@ -212,12 +213,52 @@
 
 .next-btn{
     transition-property: opacity;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
     opacity: 0;
 }
 
 .show-next-btn{
     opacity: 1;
+}
+
+.form-group{
+    display: flex;
+    color: #F8F9FD;
+    padding: 10px 0;
+}
+
+.form-group .input-group-prepend{
+    background: none;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #C8CBD0;
+    color: #F8F9FD;
+
+    padding-left: 0;
+}
+
+.form-group input{
+    border: none;
+    border-bottom: 1px solid #C8CBD0;
+    border-radius: 0;
+    background: #4C4F54;
+    color: #f8f8f8;
+
+}
+
+.form-group input::placeholder{
+    color: #9EA1A6;
+}
+
+.reviewForm i{
+    font-size: 20px;
+    margin-right: 20px;
+    color: #44C8BA;
+}
+
+.reviewForm h6{
+    border-bottom: 1px solid #9EA1A6;
+    width: 100%;
 }
 
 
@@ -232,7 +273,6 @@
 
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
         max-height: 500px;
     }
 
