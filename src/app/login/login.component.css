@@ -3,6 +3,8 @@
     width: 100%;
     min-width: 320px;
     display: flex;
+
+
 }
 
 .left-container{
@@ -14,10 +16,12 @@
     align-items: center;
 
     padding: 10px;
+
+    background: #4C4F54;
 }
 
 .left-container h3{
-    color: #007CEC;
+    color: #44C8BA ;
     margin-bottom: 40px;
     text-align: center;
 }
@@ -30,7 +34,6 @@
 .login-container{
     width: 100%;
     max-width: 300px;
-    border-radius: 10px;
 }
 
 .login-container .input-group{
@@ -41,22 +44,36 @@
 
     width: 100%;
 
-    border-radius: 30px;
-    text-align: center;
-    margin: 10px 0;
+    border-radius: 3px;
+    background: transparent;
+    color: #F8F9FD;
 
-    border-color: #007CEC;
-    background: #ffffff;
-    color: #007CEC;
+    border: none;
+    border-bottom: 1px solid #9EA1A6;
+    border-radius: 0;
+    padding: 10px 0;
 }
 
 .login-container button{
-    background: #007CEC;
+    background: #44C8BA;
     color: #ffffff;
+    
+
+    border: none;
+    margin-bottom: 20px;
 }
 
 .login-container input::placeholder{
-    color: #007CEC;
+    color: #9EA1A6;
+}
+
+.login-container a{
+    color: #C8CBD0;
+    padding: 10px 0;
+}
+
+.login-container a:active{
+    color: #C8CBD0;
 }
 
 .right-container{
@@ -69,11 +86,11 @@
     justify-content: center;
     align-items: center;
 
-    background: #007CEC;
+    background: #44C8BA url(../../assets/transparent-bgs/robots.png);
 }
 
 .right-container *{
-    color: #ffffff;
+    color: #F8F9FD;
     text-align: center;
 
 }
@@ -83,7 +100,7 @@
 }
 
 h3{
-    color: #ffffff;
+    color: #F8F9FD;
 
     width: 100%;
     max-width: 500px;
@@ -93,12 +110,36 @@ h3{
     letter-spacing: 2px;
 }
 
+.form-group{
+    display: flex;
+    color: #F8F9FD;
+    padding: 10px 0;
+}
+
+.form-group .input-group-prepend{
+    background: none;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #C8CBD0;
+    color: #F8F9FD;
+
+    padding-left: 0;
+}
+
+.form-group input{
+    border: none;
+    border-bottom: 1px solid #C8CBD0;
+    border-radius: 0;
+    background: transparent;
+    color: #f8f8f8;
+
+}
+
 @media only screen and (max-width: 480px) {
     .content{
         flex-direction: column;
         justify-content: space-around;
 
-        background: #007CEC;
 
         
     }
@@ -106,13 +147,12 @@ h3{
     .left-container{
         width: 100%;
         height: 100%;
-        padding: 0 20px;
-
+        padding: 20px;
+        background: #4C4F54 url(../../assets/transparent-bgs/robots.png);
 
     }
 
     .left-container h3{
-        color: #ffffff;
         margin: 20px 0;
         text-align: center;
     }
@@ -121,27 +161,9 @@ h3{
         display: block;
     }
 
-    .left-container input{
-        border-color: #ffffff;
-        background: #007CEC;
-        color: #ffffff;
-
-    }
-
-    .login-container button{
-        background: #ffffff;
-        color: #007CEC;
-    }
-
-    .left-container input::placeholder{
-        color: #ffffff;
-    }
 
     .right-container{
         display: none;
     }
 
-    a{
-        color: #ffffff;
-    }
 }
