@@ -41,14 +41,13 @@
               <span class="input-group-text input-group-prepend"><i class="far fa-envelope"></i></span>
               <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" placeholder="Enter email" required email>
           </div>
-          <small id="emailHelp" class="form-text text-muted" *ngIf="!f.valid">Please enter a valid email. We will send you a verification email.</small>
           <div class="form-group">
             <span class="input-group-text input-group-prepend"><i class="fas fa-unlock-alt"></i></span>
-            <input type="password" [(ngModel)]="password" (change)="checkPassword()" name="password" class="form-control" id="passwordinput" placeholder="Password" required>
+            <input type="password" [(ngModel)]="password" (input)="checkPassword()" name="password" class="form-control" id="passwordinput" placeholder="Password" required>
           </div>
           <div class="form-group verifyPassword-form-group">
             <span class="input-group-text input-group-prepend"><i class="fas fa-unlock-alt"></i></span>
-            <input type="password" [(ngModel)]="verifyPassword" (change)="checkPassword()" name="verifyPassword" class="form-control" id="verifypassword" placeholder="Re-enter password" required>  
+            <input type="password" [(ngModel)]="verifyPassword" (input)="checkPassword()" name="verifyPassword" class="form-control" id="verifypassword" placeholder="Re-enter password" required>  
           </div>   
           <small id="passwordAlert" class="form-text" *ngIf="!passwordMatch">*Passwords do not match</small>
 
@@ -86,7 +85,7 @@
             </div>
         </div>
   
-        <div class="sign-up-form animated fadeInRight" *ngIf="stepTwoComplete" [class.fadeInRight]="stepTwoComplete" [class.fadeOutRight]="goBackToStepTwo">
+        <div class="sign-up-form animated fadeInRight" *ngIf="stepTwoComplete && !registerSuccess" [class.fadeInRight]="stepTwoComplete" [class.fadeOutRight]="goBackToStepTwo">
             <div class="step-titles">
               <div class="stage-icon">
                 <i class="fas fa-search"></i>             
@@ -109,8 +108,25 @@
             </form>
             <div class="button-container">
                 <button class="btn prev-btn" (click)="backToStepTwo()">Previous</button>
-                <button class="btn next-btn" [disabled]="!reviewForm.valid" [class.show-next-btn]="reviewForm.valid">Submit</button>
+                <button class="btn next-btn" [disabled]="!reviewForm.valid" [class.show-next-btn]="reviewForm.valid" (click)="submitRegistration()">Submit</button>
               </div>
+          </div>
+          
+          <div class="sign-up-form success-message-container" *ngIf="registerSuccess">
+            <div class="check_mark">
+              <div class="sa-icon sa-success animate">
+              <span class="sa-line sa-tip animateSuccessTip"></span>
+              <span class="sa-line sa-long animateSuccessLong"></span>
+              <div class="sa-placeholder"></div>
+              <div class="sa-fix"></div>
+              </div>
+            </div>
+            
+            <div class="success-text-container"> 
+              <h3>Awesome!</h3>
+              <p>Thank you for registering. You may now login. Enjoy funkollecting!</p>
+              <button class="btn login-button" [routerLink]="['/login']">Return To Login</button>
+            </div>
           </div>
     </div>
     </div>

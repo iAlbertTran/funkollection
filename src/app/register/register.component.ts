@@ -1,30 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FunkollectionApiService } from '../services/funkollection-api.service';
+
+import { RegisterModel } from '../models/register';
+
+import { map } from "rxjs/operators";
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css', '../../assets/css/success.css'],
+  providers: [ RegisterModel, FunkollectionApiService ]
 })
 export class RegisterComponent implements OnInit {
 
-  email: String;
-  password: String;
-  verifyPassword: String;
+  email: string;
+  password: string;
+  verifyPassword: string;
   passwordMatch = true;
-  stepOneComplete: Boolean = false;
-  stepTwoComplete: Boolean = false;
+  stepOneComplete: boolean = false;
+  stepTwoComplete: boolean = false;
 
-  goBackToStepOne: Boolean = false;
-  goBackToStepTwo: Boolean = false;
+  goBackToStepOne: boolean = false;
+  goBackToStepTwo: boolean = false;
 
-  startStepTwo: Boolean = false;
-  startStepThree: Boolean = false;
+  startStepTwo: boolean = false;
+  startStepThree: boolean = false;
 
-  username: String = "";
-  firstName: String = "";
-  lastName: String = "";
+  username: string = "";
+  firstName: string = "";
+  lastName: string = "";
 
-  constructor() { }
+  registerSuccess: boolean = false;
+  unableToRegister: boolean = false;
+
+
+  constructor(private _registerModel: RegisterModel, private _apiService: FunkollectionApiService) { 
+  }
 
   ngOnInit() {
   }
@@ -48,6 +60,7 @@ export class RegisterComponent implements OnInit {
   }
 
   checkPassword(){
+    console.log(this.password, this.verifyPassword);
     if(this.password !== this.verifyPassword){
       this.passwordMatch = false;
     }
@@ -74,5 +87,23 @@ export class RegisterComponent implements OnInit {
       this.stepTwoComplete = false;
     }, 500);
   }
-  
+
+  submitRegistration(){
+    this._registerModel.email = this.email;
+    this._registerModel.password = this.password;
+    this._registerModel.username = this.username;
+    this._registerModel.firstName = this.firstName;
+    this._registerModel.lastName = this.lastName;
+
+
+    this._apiService.registerUser(this._registerModel)
+      .subscribe(
+        res => {
+          this.registerSuccess = true;
+        },
+        err => { 
+          alert("Unable to register user. Please try again later.")
+        }   
+    );
+  }
 }
