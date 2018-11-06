@@ -25,7 +25,7 @@
 
 .login-button:hover{
     background: #44C8BA;
-    color: #ffffff !important;
+    color: #F8F9FD !important;
 }
 
 .signup-container{
@@ -147,7 +147,7 @@
 
 .button-container button:hover{
     background: #44C8BA;
-    color: #ffffff;
+    color: #F8F9FD;
 }
 
 .button-container button{
@@ -260,6 +260,18 @@
     width: 100%;
 }
 
+.success-text-container{
+    font-weight: normal;
+}
+
+.success-text-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
 
 @media only screen and (max-width: 480px) {
     .return-container a{
@@ -285,10 +297,10 @@
     }
 
     .signup-container h5{
-        font-size: 18px;
+        font-size: 16px;
     }
 
-    .signup-container label, .signup-container input, .signup-container button{
+    .signup-container label, .signup-container input, .signup-container button, .reviewForm h6{
         font-size: 12px;
     }
     
@@ -332,3 +344,7 @@
     }
 }
 
+
+  
+  
+  
