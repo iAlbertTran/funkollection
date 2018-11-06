@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FunkoPopService } from '../services/funkopop.service';
+import { FunkollectionApiService } from '../services/funkollection-api.service';
 
 import { map } from "rxjs/operators";
 
@@ -9,7 +9,7 @@ import { Series } from "../models/Series";
 @Component({
   selector: 'upload',
   templateUrl: './upload.component.html',
-  providers: [FunkoPopService],
+  providers: [FunkollectionApiService],
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
@@ -18,7 +18,7 @@ export class UploadComponent implements OnInit {
   event: any;
   series: Series[];
   displayNewSeriesInput: boolean;
-  constructor( private apiService: FunkoPopService ) { 
+  constructor( private apiService: FunkollectionApiService ) { 
   }
 
   ngOnInit() {
