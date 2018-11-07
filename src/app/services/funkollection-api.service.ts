@@ -8,6 +8,8 @@ import { Series } from '../models/Series';
 
 import { HttpHeaders } from '@angular/common/http';
 
+import { LoginModel } from '../models/loginModel';
+
 @Injectable()
 export class FunkollectionApiService {
 
@@ -60,6 +62,10 @@ export class FunkollectionApiService {
 
   registerUser( _registerModel: RegisterModel ){
     return this.http.post(`${this.baseURL}/account/register`, _registerModel, this.httpOptions);
+  }
+
+  loginUser( _loginModel: LoginModel ){
+    return this.http.post(`${this.baseURL}/account/login`, _loginModel, this.httpOptions);
   }
   
 }
