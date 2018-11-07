@@ -47,7 +47,19 @@ export class FunkollectionApiService {
       .pipe();
   }
 
+
+
+
+  checkAvailableEmail( _email: String ){
+    return this.http.post(`${this.baseURL}/account/isEmailRegistered`, {email: _email}, this.httpOptions);
+  }
+
+  checkAvailableUsername( _username: String ){
+    return this.http.post(`${this.baseURL}/account/isUsernameRegistered`, {username: _username}, this.httpOptions);
+  }
+
   registerUser( _registerModel: RegisterModel ){
     return this.http.post(`${this.baseURL}/account/register`, _registerModel, this.httpOptions);
   }
+  
 }

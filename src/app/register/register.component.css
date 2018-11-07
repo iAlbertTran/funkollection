@@ -181,7 +181,7 @@
     font-weight: bold;
 }
 
-#passwordAlert{
+#passwordAlert, #emailTakenAlert, #userNameTakenAlert{
     color: #44C8BA;
 }
 
@@ -270,6 +270,10 @@
     align-items: center;
 
     text-align: center;
+}
+
+.email-form-group, .username-form-group{
+    margin-bottom: 0;
 }
 
 

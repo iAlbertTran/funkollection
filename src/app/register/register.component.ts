@@ -34,6 +34,8 @@ export class RegisterComponent implements OnInit {
   registerSuccess: boolean = false;
   unableToRegister: boolean = false;
 
+  emailTaken: boolean = false;
+  userNameTaken: boolean = false;
 
   constructor(private _registerModel: RegisterModel, private _apiService: FunkollectionApiService) { 
   }
@@ -42,25 +44,62 @@ export class RegisterComponent implements OnInit {
   }
 
   finishStepOne(){
-    this.stepOneComplete = true;
-    this.goBackToStepOne = false;
 
-    setTimeout(() =>{
-      this.startStepTwo = true;
-    }, 500);
+    this._apiService.checkAvailableEmail(this.email)
+      .subscribe(
+        res => {
+          if(res["statusCode"] == 200){
+            this.emailTaken = false;
+            this.stepOneComplete = true;
+            this.goBackToStepOne = false;
+
+            setTimeout(() =>{
+              this.startStepTwo = true;
+            }, 500);
+          }
+          
+        },
+        err => { 
+          if(err.error.statusCode == 409){
+            this.emailTaken = true;
+          }
+          else{
+            alert("Unable to check availability of email. Please try again later.")
+          }
+        }   
+    );
+
+    
   }
 
   finishStepTwo(){
-    this.stepTwoComplete = true;
-    this.goBackToStepTwo = false;
 
-    setTimeout(() =>{
-      this.startStepThree = true;
-    }, 500);
+    this._apiService.checkAvailableUsername(this.username)
+      .subscribe(
+        res => {
+          if(res["statusCode"] == 200){
+            this.userNameTaken = false;
+            this.stepTwoComplete = true;
+            this.goBackToStepTwo = false;
+
+            setTimeout(() =>{
+              this.startStepThree = true;
+            }, 500);
+          }
+          
+        },
+        err => { 
+          if(err.error.statusCode == 409){
+            this.userNameTaken = true;
+          }
+          else{
+            alert("Unable to check availability of username. Please try again later.")
+          }
+        }   
+    );
   }
 
   checkPassword(){
-    console.log(this.password, this.verifyPassword);
     if(this.password !== this.verifyPassword){
       this.passwordMatch = false;
     }

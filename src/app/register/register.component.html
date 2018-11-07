@@ -41,6 +41,7 @@
               <span class="input-group-text input-group-prepend"><i class="far fa-envelope"></i></span>
               <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" placeholder="Enter email" required email>
           </div>
+          <small id="emailTakenAlert" class="form-text" *ngIf="emailTaken">*Email is already taken.</small>
           <div class="form-group">
             <span class="input-group-text input-group-prepend"><i class="fas fa-unlock-alt"></i></span>
             <input type="password" [(ngModel)]="password" (input)="checkPassword()" name="password" class="form-control" id="passwordinput" placeholder="Password" required>
@@ -70,6 +71,7 @@
               <span class="input-group-text input-group-prepend"><i class="fas fa-user-tie"></i></span>
               <input type="text" [(ngModel)]="username" name="username" class="form-control" id="username" placeholder="Username" required>
             </div>
+            <small id="userNameTakenAlert" class="form-text" *ngIf="userNameTaken">*Username is already taken.</small>
             <div class="form-group">
               <span class="input-group-text input-group-prepend"><i class="fas fa-pencil-alt"></i></span>
               <input type="text" [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="First Name" required>
