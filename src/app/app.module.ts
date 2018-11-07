@@ -11,22 +11,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
-import { UserService } from './user-service';
 import { HomeComponent } from './home/home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 import { FormsModule } from '@angular/forms';
 
+import{ AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
+
+import{ FunkollectionApiService } from './services/funkollection-api.service';
+
+import { LoginModel } from './models/loginModel';
+
 const appRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'reset-password', component: ResetPasswordComponent},
   {path: '', component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       {path: 'upload', component: UploadComponent}
     ]  
   },
-  
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'reset-password', component: ResetPasswordComponent}  
 ]
 @NgModule({
   declarations: [
@@ -47,7 +53,7 @@ const appRoutes: Routes = [
       {enableTracing: true}
     )
   ],
-  providers: [UserService],
+  providers: [AuthGuard, AuthService, FunkollectionApiService, LoginModel],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
