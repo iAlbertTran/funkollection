@@ -24,12 +24,9 @@ import{ FunkollectionApiService } from './services/funkollection-api.service';
 import { LoginModel } from './models/loginModel';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {path: 'upload', component: UploadComponent}
-    ]  
-  },
+  { path: 'Home', redirectTo: '', pathMatch: 'full' },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] }, 
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'reset-password', component: ResetPasswordComponent}  
