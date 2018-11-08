@@ -5,17 +5,29 @@
             <label for="exampleFormControlFile1">Upload a Funko Pop to your collection!</label>
             <input type="file" class="form-control-file" id="#imgInp" accept="image/*" (change)="readURL($event);" required>
             <img id="popPreview" [src]="imageSrc || '../../assets/diy_male.jpg'" alt="Funko Pop" />
-            <input type="text" class="form-control" id="name" placeholder="Name" required>
-            <select  #selectedSeries class="form-control" id="series" (change)="checkSelection(selectedSeries.value)">
-              <option>Series</option>
+
+            <input type="text" class="form-control" [(ngModel)]="name" name="name" id="name" placeholder="Name" required>
+
+            <select  #selectedSeries [(ngModel)]="seriesSelector" name="seriesSelector" class="form-control" id="series" (change)="checkSeriesSelection(selectedSeries.value)">
+                <option [ngValue]="undefined" disabled  selected> Series </option>
               <option *ngFor="let item of series">{{ item.name }}</option>
               <option>Other</option>
             </select>
-            <input *ngIf="displayNewSeriesInput" type="text" class="form-control" id="new-series" placeholder="New Series">            
-            <input type="text" class="form-control" id="category" placeholder="Category" required>
-            <input type="number" class="form-control" id="number" placeholder="Number" required>
+
+            <input *ngIf="displayNewSeriesInput" [(ngModel)]="seriesInput" name="seriesInput" type="text" class="form-control" id="new-series" placeholder="New Series">            
+            
+            <select  #selectedCategory [(ngModel)]="categorySelector" name="categorySelector" class="form-control" id="category" (change)="checkCategorySelection(selectedCategory.value)">
+              <option [ngValue]="undefined" disabled  selected> Category </option>
+              <option *ngFor="let item of categories">{{ item.name }}</option>
+              <option>Other</option>
+            </select>
+
+            <input *ngIf="displayNewCategoryInput" [(ngModel)]="categoryInput" name="categoryInput" type="text" class="form-control" id="new-category" placeholder="New Category">            
+            
+            <input type="number" [(ngModel)]="number" name="number" min="0" max="999" class="form-control" id="number" placeholder="Number" required>
+          
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="uploadPop()">Upload</button>
         </form>
   </div>
 </div>
