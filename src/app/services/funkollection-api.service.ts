@@ -5,6 +5,7 @@ import { FunkoPop } from '../models/funkopop';
 
 import { RegisterModel } from '../models/register';
 import { Series } from '../models/Series';
+import { Category } from '../models/category';
 
 import { HttpHeaders } from '@angular/common/http';
 
@@ -46,6 +47,11 @@ export class FunkollectionApiService {
 
   getSeries (): Observable<Series[]> {
     return this.http.get<Series[]>(`${this.baseURL}/series`)
+      .pipe();
+  }
+
+  getCategories (): Observable<Series[]> {
+    return this.http.get<Category[]>(`${this.baseURL}/category`)
       .pipe();
   }
 
