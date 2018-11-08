@@ -17,23 +17,31 @@ export class LoginComponent implements OnInit {
   password: string;
 
   loginFailed: boolean = false;
-  
+  isLoggedIn: boolean = false;
   ngOnInit() {
+    this.isLoggedIn = this.authService.isLoggednIn();
+    if(this.isLoggedIn){
+      this.router.navigate(['Home']);
+    }
   }
 
   login() {
     this._loginModel.username = this.username;
     this._loginModel.password = this.password;
 
-    this.authService.login(this._loginModel);
-    console.log(this.authService.isLoggednIn);
-    if (this.authService.isLoggednIn()) {
-      this.loginFailed = false;
-      this.router.navigate([""]);
-    }
-    else{
-      this.loginFailed = true;
-    }
+    this.authService.login(this._loginModel)
+      .subscribe(
+        res => { 
+          console.log(res);
+          if(res["statusCode"] == 200){
+            this.authService.sendToken(this._loginModel.username);
+            this.loginFailed = false;
+            this.router.navigate([""]);
+          }
+        },
+        err => {
+          this.loginFailed = true;
+      });
   }
  
   logout() {

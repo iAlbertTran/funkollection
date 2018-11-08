@@ -1,10 +1,12 @@
+
+
 .content{
-    height: 100%;
+    height: calc(100% + 56px);
     width: 100%;
     min-width: 320px;
     display: flex;
     flex-direction: row-reverse;
-
+    margin: 0;
 
 }
 
