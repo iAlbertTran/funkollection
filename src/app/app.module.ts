@@ -22,11 +22,19 @@ import { AuthService } from './auth.service';
 import{ FunkollectionApiService } from './services/funkollection-api.service';
 
 import { LoginModel } from './models/loginModel';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   { path: 'Home', redirectTo: '', pathMatch: 'full' },
-  { path: '', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] }, 
+  { path: '', 
+      component: HomeComponent,
+      canActivate: [AuthGuard],
+      children: [
+        { path: '', pathMatch: 'full', redirectTo: 'Dashboard'},
+        { path: 'Dashboard', component: DashboardComponent}, 
+        { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] }, 
+      ]
+  },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'reset-password', component: ResetPasswordComponent}  
@@ -38,7 +46,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

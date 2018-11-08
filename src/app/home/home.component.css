@@ -1,0 +1,182 @@
+.navbar{
+    background: #4C4F54;
+    color: #F8F9FD;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand{
+    color: #44C8BA;
+    font-size: 18px;
+    text-transform: uppercase;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+
+.navbar-brand:hover{
+    color: #F8F9FD;
+}
+
+.navbar-brand i{
+    font-size: 25px;
+    margin-right: 5px;
+}
+
+
+.menu-brand{
+    color: #44C8BA;
+    font-size: 18px;
+    text-transform: uppercase;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+
+    height: 55px;
+}
+
+
+.menu-brand i{
+    font-size: 25px;
+    margin-right: 5px;
+}
+
+
+.menu-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+
+    height: 40px;
+}
+
+.menu-container:hover{
+    cursor: pointer;
+}
+
+.menu-container p{
+    margin: 0;
+    font-size: 14px;
+}
+
+.menu-container i{
+    margin-left: 10px;
+}
+
+.overlay-menu{
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    background: #4C4F54;
+    z-index: 10000;
+
+    right: 0;
+    top: 0;
+
+    transform: translateX(275px);
+    -webkit-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
+
+    color: #9EA1A6;
+
+    padding: 20px;
+
+    transition-property: transform;
+    transition-duration: 0.5s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.overlay-menu .menu-brand{
+    margin: 20px 0;
+}
+
+.close-menu-container{
+    font-size: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.close-menu-container i{
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+
+.close-menu-container i:hover{
+    cursor: pointer;
+    color: #44C8BA;
+}
+
+.nav-options-container{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    font-size: 20px;
+}
+
+.nav-options-container li{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+    transition-property: color;
+    transition-duration: 0.5s;    
+}
+
+.nav-options-container li:hover{
+    cursor: pointer;
+    color: #44C8BA;
+}
+
+.nav-options-container li i{
+    margin-right: 8px;
+}
+
+.show-drawer-menu{
+    transform: translateX(0);
+}
+
+.logout-container{
+    height: 50px;
+    font-size: 24px;
+
+    background: #44C8BA;
+    color: #4C4F54;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+
+.logout-container:hover{
+    cursor: pointer;
+    color: #F8F9FD;
+}
+
+.logout-container p{
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}

@@ -10,14 +10,7 @@ import { AuthService } from './auth.service';
 export class AppComponent {
   constructor(private authService: AuthService){}
   title = 'funkollection';
-  isLoggedIn = this.authService.isLoggednIn();
-  showMenu: boolean = false;
 
-  showMenuDrawer(){
-    this.showMenu = true;
-  }
-
-  closeMenuDrawer(){
-    this.showMenu = false;
+  ngOnInit(){
   }
 }

@@ -1,5 +1,32 @@
-<div class="content">
-  <p>
-    home works!
-  </p>  
-</div>
+<div class="overlay-menu" [class.show-drawer-menu]="showMenu">
+    <div class="overlay-menu-options">
+        <div class="close-menu-container" (click)="closeMenuDrawer()">
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="menu-brand">
+              <i class="far fa-smile-beam"></i>
+              Funkollection
+          </div>
+          <ul class="nav-options-container">
+            <li [routerLink]="['']"><i class="fas fa-home"></i> Home</li>
+            <li [routerLink]="['/upload']"><i class="fas fa-upload"></i> Upload</li>
+          </ul>
+    </div>
+    <div class="logout-container" (click)="logout()">
+        <p>Log out</p>
+    </div>
+  </div>
+  
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <a class="navbar-brand" href="#">
+      <i class="far fa-smile-beam"></i>
+      Funkollection
+    </a>
+  
+    <div class="menu-container" (click)="showMenuDrawer()">
+      <p>Menu</p>
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+<router-outlet></router-outlet>

@@ -4,30 +4,4 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </head>
 
-<div class="overlay-menu" [class.show-drawer-menu]="showMenu">
-  <div class="close-menu-container" (click)="closeMenuDrawer()">
-    <i class="fas fa-times"></i>
-  </div>
-  <div class="menu-brand">
-      <i class="far fa-smile-beam"></i>
-      Funkollection
-  </div>
-  <ul class="nav-options-container">
-    <li [routerLink]="['']"><i class="fas fa-home"></i> Home</li>
-    <li [routerLink]="['upload']"><i class="fas fa-upload"></i> Upload</li>
-  </ul>
-</div>
-
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" *ngIf='isLoggedIn'>
-  <a class="navbar-brand" href="#">
-    <i class="far fa-smile-beam"></i>
-    Funkollection
-  </a>
-
-  <div class="menu-container" (click)="showMenuDrawer()">
-    <p>Menu</p>
-    <i class="fas fa-bars"></i>
-  </div>
-</nav>
-
 <router-outlet></router-outlet>
