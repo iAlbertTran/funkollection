@@ -16,21 +16,10 @@ export class AuthService {
   }
   logout() {
     localStorage.removeItem("LoggedInUser");
-    this.myRoute.navigate(["Login"]);
+    this.myRoute.navigate(["/login"]);
   }
 
   login(_loginModel : LoginModel){
-    this._apiService.loginUser(_loginModel)
-      .subscribe(
-        res => { 
-          console.log(res);
-          if(res["statusCode"] == 200){
-            this.sendToken(_loginModel.username);
-          }
-        },
-        err => {
-
-        }
-    );
+    return this._apiService.loginUser(_loginModel);
   }
 }
