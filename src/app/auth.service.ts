@@ -5,17 +5,31 @@ import { FunkollectionApiService } from './services/funkollection-api.service';
 @Injectable()
 export class AuthService {
   constructor(private myRoute: Router, private _loginModel: LoginModel, private _apiService: FunkollectionApiService) { }
-  sendToken(token: string) {
-    localStorage.setItem("LoggedInUser", token)
+
+  sendLoginToken(user: string) {
+    sessionStorage.setItem("LoggedInUser", user)
   }
-  getToken() {
-    return localStorage.getItem("LoggedInUser")
+
+  sendAccessToken(token: string){
+    sessionStorage.setItem("access_token", token);
+    console.log(this.getAccessToken());
   }
+
+  getLoginToken() {
+    return sessionStorage.getItem("LoggedInUser")
+  }
+
+  getAccessToken() {
+    return sessionStorage.getItem("access_token")
+  }
+
   isLoggednIn() {
-    return this.getToken() !== null;
+    return this.getLoginToken() !== null;
   }
+
   logout() {
-    localStorage.removeItem("LoggedInUser");
+    sessionStorage.removeItem("LoggedInUser");
+    sessionStorage.removeItem("access_token");
     this.myRoute.navigate(["/login"]);
   }
 
