@@ -1,4 +1,4 @@
-export interface FunkoPop {
+export class FunkoPop {
     name: string;
     series: string;
     category: string;
