@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
         res => { 
           console.log(res);
           if(res["statusCode"] == 200){
-            this.authService.sendToken(this._loginModel.username);
+            this.authService.sendLoginToken(this._loginModel.username);
+            this.authService.sendAccessToken(res["token"]);
             this.loginFailed = false;
             this.router.navigate([""]);
           }
