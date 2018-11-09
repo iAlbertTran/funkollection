@@ -11,19 +11,63 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { LoginModel } from '../models/loginModel';
 
+import { AuthService } from '../auth.service';
+
+
 @Injectable()
 export class FunkollectionApiService {
 
   baseURL = 'http://localhost:8000/api';
   funkopopURL = this.baseURL + '/funkopop';
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-    })
-  };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
+
+  getAuthHeaders(): HttpHeaders {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    
+    return headers;
+  }
+
+  getAuthHeadersWithToken(): HttpHeaders {
+
+    var token = this.getAccessToken();
+
+  
+    let headers = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    
+    return headers;
+  }
+
+  getUploadAuthHeaders(): HttpHeaders {
+
+    var token = this.getAccessToken();
+
+  
+    let headers = new HttpHeaders({ 
+      'Content-Type': 'multipart/form-data',
+      'Authorization': `Bearer ${token}`
+    });
+    
+    return headers;
+  }
+
+  getLoginAuthHeaders(): HttpHeaders {
+		let headers = new HttpHeaders({"Content-Type": "application/x-www-form-urlencoded"});
+
+    
+    return headers;
+  }
+
+
+  getAccessToken() {
+    return sessionStorage.getItem("access_token")
+  }
+
 
   getAllFunkoPops(){
     return this.http.get(`${this.funkopopURL}`);
@@ -37,8 +81,12 @@ export class FunkollectionApiService {
     return this.http.post(`${this.funkopopURL}`, funkopop);
   }
 
-  updateFunkoPop(funkopop: FunkoPop) {
-    return this.http.put(`${this.funkopopURL}/${funkopop.name}`, funkopop);
+  uploadFunkoPop(funkopop: FormData) {
+
+    var api_headers = this.getUploadAuthHeaders();
+
+    console.log(api_headers);
+    return this.http.post(`${this.funkopopURL}/upload/new`, funkopop, { headers: api_headers });
   }
 
   deleteFunkoPop(name: string) {
@@ -59,19 +107,30 @@ export class FunkollectionApiService {
 
 
   checkAvailableEmail( _email: String ){
-    return this.http.post(`${this.baseURL}/account/isEmailRegistered`, {email: _email}, this.httpOptions);
+
+    let api_headers = this.getAuthHeaders();
+    return this.http.post(`${this.baseURL}/account/isEmailRegistered`, {email: _email}, { headers: api_headers});
   }
 
   checkAvailableUsername( _username: String ){
-    return this.http.post(`${this.baseURL}/account/isUsernameRegistered`, {username: _username}, this.httpOptions);
+
+    let api_headers = this.getAuthHeaders();
+
+    return this.http.post(`${this.baseURL}/account/isUsernameRegistered`, {username: _username}, { headers: api_headers});
   }
 
   registerUser( _registerModel: RegisterModel ){
-    return this.http.post(`${this.baseURL}/account/register`, _registerModel, this.httpOptions);
+    let api_headers = this.getAuthHeaders();
+
+    return this.http.post(`${this.baseURL}/account/register`, _registerModel, { headers: api_headers});
   }
 
   loginUser( _loginModel: LoginModel ){
-    return this.http.post(`${this.baseURL}/account/login`, _loginModel, this.httpOptions);
+
+    let api_headers = this.getLoginAuthHeaders();
+    let formencoded = `username=${_loginModel.username}&password=${_loginModel.password}`;
+
+    return this.http.post(`${this.baseURL}/account/login`, formencoded, {headers: api_headers});
   }
   
 }
