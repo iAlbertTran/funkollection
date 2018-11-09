@@ -6,13 +6,16 @@ import { map } from "rxjs/operators";
 
 import { Series } from "../models/Series";
 import { Category } from "../models/category";
+import { FunkoPop } from "../models/funkopop";
+
 
 @Component({
   selector: 'upload',
   templateUrl: './upload.component.html',
-  providers: [FunkollectionApiService],
+  providers: [FunkollectionApiService, FunkoPop],
   styleUrls: ['./upload.component.css']
 })
+
 export class UploadComponent implements OnInit {
 
   imageSrc: any;
@@ -24,6 +27,8 @@ export class UploadComponent implements OnInit {
   displayNewSeriesInput: boolean = false;
   displayNewCategoryInput: boolean = false;
 
+  imagePath: string;
+  imageData: any;
   name: string;
   seriesSelector: string;
   seriesInput: string;
@@ -32,7 +37,7 @@ export class UploadComponent implements OnInit {
   number: string;
 
 
-  constructor( private apiService: FunkollectionApiService ) { 
+  constructor( private apiService: FunkollectionApiService, private _funkoPopModel: FunkoPop) { 
   }
 
   ngOnInit() {
@@ -61,7 +66,6 @@ export class UploadComponent implements OnInit {
         categories.sort(function (a, b) {
           return a.name.localeCompare(b.name);
       });
-        console.log(categories);
         this.categories = categories;
 
       });
@@ -73,12 +77,12 @@ export class UploadComponent implements OnInit {
   readURL(event: Event): void {
     this.event = event;
     if (this.event.target.files && this.event.target.files[0]) {
-        const file = this.event.target.files[0];
+        this.imageData = this.event.target.files[0];
 
         const reader = new FileReader();
         reader.onload = e => this.imageSrc = reader.result;
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(this.imageData);
     }
   }
 
@@ -103,8 +107,43 @@ export class UploadComponent implements OnInit {
   }
 
   uploadPop(){
-    console.log(this.name);
-    console.log(this.number);
-    console.log(this.seriesSelector == undefined);
+
+    let formData = new FormData();
+    formData.append('file', this.imageData);
+    
+    this._funkoPopModel.name = this.name;
+
+    if(this.seriesSelector == "Other"){
+      this._funkoPopModel.series = this.seriesInput;
+    }
+    else{
+      this._funkoPopModel.series = this.seriesSelector;
+    }
+
+    if(this.categorySelector == "Other"){
+      this._funkoPopModel.category = this.categoryInput;
+    }
+    else{
+      this._funkoPopModel.category = this.categorySelector;
+    }
+    
+    formData.append("funkopop", JSON.stringify(this._funkoPopModel));
+
+    
+    this.apiService.uploadFunkoPop(formData)
+      .subscribe(
+        res => {
+          if(res["statusCode"] == 200){
+          }
+          
+        },
+        err => { 
+          if(err.error.statusCode == 409){
+          }
+          else{
+          }
+        }   
+    );
+
   }
 }
