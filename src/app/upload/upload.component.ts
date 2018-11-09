@@ -107,9 +107,6 @@ export class UploadComponent implements OnInit {
   }
 
   uploadPop(){
-
-    let formData = new FormData();
-    formData.append('file', this.imageData);
     
     this._funkoPopModel.name = this.name;
 
@@ -126,10 +123,12 @@ export class UploadComponent implements OnInit {
     else{
       this._funkoPopModel.category = this.categorySelector;
     }
-    
+
+    let formData = new FormData();
+
+    formData.append('file', this.imageData);
     formData.append("funkopop", JSON.stringify(this._funkoPopModel));
 
-    
     this.apiService.uploadFunkoPop(formData)
       .subscribe(
         res => {

@@ -49,7 +49,6 @@ export class FunkollectionApiService {
 
   
     let headers = new HttpHeaders({ 
-      'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer ${token}`
     });
     
