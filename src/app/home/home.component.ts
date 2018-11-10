@@ -27,7 +27,16 @@ export class HomeComponent implements OnInit {
   }
 
   logout(){
-    this.authService.logout();
+    this.authService.logout()
+      .subscribe(
+        res => { 
+          if(res["statusCode"] == 200){
+            this.authService.endSession();
+          }
+        },
+        err => {
+          alert('unable to log out');
+      });
 
   }
 
