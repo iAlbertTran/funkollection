@@ -34,7 +34,7 @@ export class UploadComponent implements OnInit {
   seriesInput: string;
   categorySelector: string;
   categoryInput: string;
-  number: string;
+  number: number;
 
 
   constructor( private apiService: FunkollectionApiService, private _funkoPopModel: FunkoPop) { 
@@ -109,7 +109,7 @@ export class UploadComponent implements OnInit {
   uploadPop(){
     
     this._funkoPopModel.name = this.name;
-
+    this._funkoPopModel.number = this.number;
     if(this.seriesSelector == "Other"){
       this._funkoPopModel.series = this.seriesInput;
     }
@@ -126,8 +126,9 @@ export class UploadComponent implements OnInit {
 
     let formData = new FormData();
 
-    formData.append('file', this.imageData);
+    formData.append("user", sessionStorage.getItem("LoggedInUser"));
     formData.append("funkopop", JSON.stringify(this._funkoPopModel));
+    formData.append('file', this.imageData);
 
     this.apiService.uploadFunkoPop(formData)
       .subscribe(
