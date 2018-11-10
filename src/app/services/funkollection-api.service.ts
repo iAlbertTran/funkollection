@@ -33,7 +33,7 @@ export class FunkollectionApiService {
   getAuthHeadersWithToken(): HttpHeaders {
 
     var token = this.getAccessToken();
-
+    console.log(token);
   
     let headers = new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -47,7 +47,6 @@ export class FunkollectionApiService {
 
     var token = this.getAccessToken();
 
-  
     let headers = new HttpHeaders({ 
       'Authorization': `Bearer ${token}`
     });
@@ -66,6 +65,7 @@ export class FunkollectionApiService {
   getAccessToken() {
     return sessionStorage.getItem("access_token")
   }
+
 
 
   getAllFunkoPops(){
@@ -130,6 +130,11 @@ export class FunkollectionApiService {
     let formencoded = `username=${_loginModel.username}&password=${_loginModel.password}`;
 
     return this.http.post(`${this.baseURL}/account/login`, formencoded, {headers: api_headers});
+  }
+
+  logoutUser(){
+    let api_headers = this.getAuthHeadersWithToken();
+    return this.http.post(`${this.baseURL}/account/logout`, null, {headers: api_headers});
   }
   
 }
