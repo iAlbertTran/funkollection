@@ -27,10 +27,14 @@ export class AuthService {
     return this.getLoginToken() !== null;
   }
 
-  logout() {
+  endSession(){
     sessionStorage.removeItem("LoggedInUser");
     sessionStorage.removeItem("access_token");
     this.myRoute.navigate(["/login"]);
+  }
+
+  logout() {
+    return this._apiService.logoutUser();
   }
 
   login(_loginModel : LoginModel){
