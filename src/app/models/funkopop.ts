@@ -1,6 +1,9 @@
+import { Series } from "../models/Series";
+import { Category } from "../models/category";
+
 export class FunkoPop {
     name: string;
-    series: string;
-    category: string;
+    series: Series;
+    category: Category;
     number: number;
   }
