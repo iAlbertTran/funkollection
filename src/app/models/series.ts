@@ -1,4 +1,4 @@
 export class Series {
-    id: number;
+    id: string;
     name: string;
   }
