@@ -42,7 +42,6 @@ export class UploadComponent implements OnInit {
 
   ngOnInit() {
     this.getSeries();
-    this.getCategories();
     this.displayNewSeriesInput = false;
   }
 
@@ -60,8 +59,8 @@ export class UploadComponent implements OnInit {
 
   }
 
-  getCategories(): void{
-    this.apiService.getCategories()
+  getCategories(seriesID: string): void{
+    this.apiService.getCategoriesForSeries(seriesID)
       .subscribe(categories => {
         categories.sort(function (a, b) {
           return a.name.localeCompare(b.name);
@@ -90,9 +89,16 @@ export class UploadComponent implements OnInit {
 
     if(value == 'Other'){
       this.displayNewSeriesInput = true;
+      this.categories = [];
     }
     else{
       this.displayNewSeriesInput = false;
+
+      const selectedSeries = this.series.find((element) => {
+        return element.name == value;
+      });
+
+      this.getCategories(selectedSeries.id);
     }
   }
 
@@ -110,26 +116,79 @@ export class UploadComponent implements OnInit {
     
     this._funkoPopModel.name = this.name;
     this._funkoPopModel.number = this.number;
+
     if(this.seriesSelector == "Other"){
-      this._funkoPopModel.series = this.seriesInput;
+        this.addSeries();
     }
     else{
-      this._funkoPopModel.series = this.seriesSelector;
-    }
 
-    if(this.categorySelector == "Other"){
-      this._funkoPopModel.category = this.categoryInput;
-    }
-    else{
-      this._funkoPopModel.category = this.categorySelector;
-    }
+      const selectedSeries = this.series.find((element) => {
+        return element.name == this.seriesSelector;
+      });
 
-    let formData = new FormData();
+      this._funkoPopModel.series = selectedSeries;
 
-    formData.append("user", sessionStorage.getItem("LoggedInUser"));
-    formData.append("funkopop", JSON.stringify(this._funkoPopModel));
-    formData.append('file', this.imageData);
+      if(this.categorySelector == "Other"){
+        this.addCategory(selectedSeries.id, this.categoryInput);
+      }
 
+      else{
+  
+        const selectedCategory = this.series.find((element) => {
+          return element.name == this.categorySelector;
+        });
+  
+        this._funkoPopModel.category = selectedCategory;
+
+
+        let formData = new FormData();
+
+        formData.append("user", sessionStorage.getItem("LoggedInUser"));
+        formData.append("funkopop", JSON.stringify(this._funkoPopModel));
+        formData.append('file', this.imageData);
+
+        this.uploadFunkoPop(formData);
+
+      }
+    } 
+  }
+
+  addSeries(){
+    this.apiService.addSeries(this.seriesInput)
+        .subscribe(
+          res => {
+            if(res["statusCode"] == 200){
+              var id = res["seriesID"];
+              this._funkoPopModel.series =  {id: id, name: this.seriesInput };
+
+              if(this.categorySelector == "Other"){
+                this.addCategory(id, this.categoryInput)
+              }
+            }
+        });
+  }
+
+  addCategory(series: string, category: string){
+    this.apiService.addCategoryForSeries(series, category)
+        .subscribe(
+          res => {
+            if(res["statusCode"] == 200){
+              var id = res["categoryID"];
+              this._funkoPopModel.category = { id: id, name: category };
+
+
+              let formData = new FormData();
+
+              formData.append("user", sessionStorage.getItem("LoggedInUser"));
+              formData.append("funkopop", JSON.stringify(this._funkoPopModel));
+              formData.append('file', this.imageData);
+
+              this.uploadFunkoPop(formData);
+            }
+        });
+  }
+
+  uploadFunkoPop(formData: FormData){
     this.apiService.uploadFunkoPop(formData)
       .subscribe(
         res => {
@@ -144,6 +203,5 @@ export class UploadComponent implements OnInit {
           }
         }   
     );
-
   }
 }
