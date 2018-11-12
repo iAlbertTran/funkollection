@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
   title = 'funkollection';
   isLoggedIn: boolean = false;
   showMenu: boolean = false;
-
   ngOnInit(){
     this.isLoggedIn = this.authService.isLoggednIn();
   }

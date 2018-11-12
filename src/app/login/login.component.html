@@ -4,7 +4,6 @@
       <h3>
           WELCOME TO FUNKOLLECTION
       </h3>
-      <small id="loginFailedAlert" class="form-text" *ngIf="loginFailed">*Login failed, please try again.</small>
       <div class='login-container'>
           <form>
               <div class="form-group">
@@ -19,7 +18,7 @@
               <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
             </form>
             <div class="register-link">
-                <a [routerLink]="['/register']">Don't have an account?</a>
+                <a [routerLink]="['/register']" (click)="_helperService.removeAllErrors()">Don't have an account?</a>
             </div>
             <div class="reset-link">
                 <a [routerLink]="['/reset-password']">Forgot password?</a>

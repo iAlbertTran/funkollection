@@ -5,6 +5,8 @@ import { FunkollectionApiService } from '../services/funkollection-api.service';
 import { RegisterModel } from '../models/register';
 
 import { map } from "rxjs/operators";
+import { HelperService } from '../services/helper.service';
+
 
 @Component({
   selector: 'app-register',
@@ -17,7 +19,7 @@ export class RegisterComponent implements OnInit {
   email: string;
   password: string;
   verifyPassword: string;
-  passwordMatch = true;
+
   stepOneComplete: boolean = false;
   stepTwoComplete: boolean = false;
 
@@ -34,10 +36,14 @@ export class RegisterComponent implements OnInit {
   registerSuccess: boolean = false;
   unableToRegister: boolean = false;
 
-  emailTaken: boolean = false;
-  userNameTaken: boolean = false;
+  emailTakenMessage: String = 'Email is already taken.';
+  passwordMatchMessage: String = "Passwords do not match."
+  usernameTakenMessage: String = 'Username is already taken.';
+  unableToCheckEmailAvailability: String = 'Unable to check availability of email. Please try again later.';
+  unableToCheckUsernameAvailability: String = 'Unable to check availability of username. Please try again later.';
+  unableToRegisterMessage: String = 'Unable to register user. Please try again later.';
 
-  constructor(private _registerModel: RegisterModel, private _apiService: FunkollectionApiService) { 
+  constructor(private _registerModel: RegisterModel, private _helperService: HelperService, private _apiService: FunkollectionApiService) { 
   }
 
   ngOnInit() {
@@ -49,7 +55,9 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         res => {
           if(res["statusCode"] == 200){
-            this.emailTaken = false;
+
+            this._helperService.removeErrorFromMessages(this.emailTakenMessage);
+
             this.stepOneComplete = true;
             this.goBackToStepOne = false;
 
@@ -61,10 +69,12 @@ export class RegisterComponent implements OnInit {
         },
         err => { 
           if(err.error.statusCode == 409){
-            this.emailTaken = true;
+
+            this._helperService.addErrorToMessages(this.emailTakenMessage);
+
           }
           else{
-            alert("Unable to check availability of email. Please try again later.")
+            this._helperService.addErrorToMessages(this.unableToCheckEmailAvailability);
           }
         }   
     );
@@ -78,7 +88,8 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         res => {
           if(res["statusCode"] == 200){
-            this.userNameTaken = false;
+
+            this._helperService.removeErrorFromMessages(this.usernameTakenMessage);
             this.stepTwoComplete = true;
             this.goBackToStepTwo = false;
 
@@ -90,10 +101,10 @@ export class RegisterComponent implements OnInit {
         },
         err => { 
           if(err.error.statusCode == 409){
-            this.userNameTaken = true;
+            this._helperService.addErrorToMessages(this.usernameTakenMessage);
           }
           else{
-            alert("Unable to check availability of username. Please try again later.")
+            this._helperService.addErrorToMessages(this.unableToCheckUsernameAvailability);
           }
         }   
     );
@@ -101,14 +112,16 @@ export class RegisterComponent implements OnInit {
 
   checkPassword(){
     if(this.password !== this.verifyPassword){
-      this.passwordMatch = false;
+      this._helperService.addErrorToMessages(this.passwordMatchMessage);
     }
     else{
-      this.passwordMatch = true;
+      this._helperService.removeErrorFromMessages(this.passwordMatchMessage);
     }
   }
 
   backToStepOne(){
+    this._helperService.removeErrorFromMessages(this.usernameTakenMessage);
+    
     this.goBackToStepOne = true;
     this.startStepTwo = false;
     this.goBackToStepTwo = false;
@@ -139,9 +152,10 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         res => {
           this.registerSuccess = true;
+          this._helperService.removeErrorFromMessages(this.unableToRegisterMessage);
         },
         err => { 
-          alert("Unable to register user. Please try again later.")
+          this._helperService.addErrorToMessages(this.unableToRegisterMessage);
         }   
     );
   }

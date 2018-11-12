@@ -1,6 +1,6 @@
 <div class="content">
   <div class="return-container">
-      <a class="btn btn-primary login-button" [routerLink]="['/login']"><i class="fas fa-arrow-circle-left"></i> Sign In</a>
+      <a class="btn btn-primary login-button" [routerLink]="['/login']" (click)="_helperService.removeAllErrors()"><i class="fas fa-arrow-circle-left"></i> Sign In</a>
   </div>
   <div class="signup-container">
     <div class="progress-container">
@@ -41,7 +41,6 @@
               <span class="input-group-text input-group-prepend"><i class="far fa-envelope"></i></span>
               <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" placeholder="Enter email" required email>
           </div>
-          <small id="emailTakenAlert" class="form-text" *ngIf="emailTaken">*Email is already taken.</small>
           <div class="form-group">
             <span class="input-group-text input-group-prepend"><i class="fas fa-unlock-alt"></i></span>
             <input type="password" [(ngModel)]="password" (input)="checkPassword()" name="password" class="form-control" id="passwordinput" placeholder="Password" required>
@@ -50,12 +49,11 @@
             <span class="input-group-text input-group-prepend"><i class="fas fa-unlock-alt"></i></span>
             <input type="password" [(ngModel)]="verifyPassword" (input)="checkPassword()" name="verifyPassword" class="form-control" id="verifypassword" placeholder="Re-enter password" required>  
           </div>   
-          <small id="passwordAlert" class="form-text" *ngIf="!passwordMatch">*Passwords do not match</small>
 
         </form>
         <div class="button-container">
             <div style="opacity: 0; width: 10px; height: 10px"></div>
-            <button class="btn next-btn" (click)="finishStepOne()" [class.show-next-btn]="f.valid && passwordMatch" [disabled]="!f.valid || !passwordMatch" >Next</button>
+            <button class="btn next-btn" (click)="finishStepOne()" [class.show-next-btn]="f.valid" [disabled]="!f.valid" >Next</button>
           </div>
       </div>
   
@@ -71,7 +69,6 @@
               <span class="input-group-text input-group-prepend"><i class="fas fa-user-tie"></i></span>
               <input type="text" [(ngModel)]="username" name="username" class="form-control" id="username" placeholder="Username" required>
             </div>
-            <small id="userNameTakenAlert" class="form-text" *ngIf="userNameTaken">*Username is already taken.</small>
             <div class="form-group">
               <span class="input-group-text input-group-prepend"><i class="fas fa-pencil-alt"></i></span>
               <input type="text" [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="First Name" required>
