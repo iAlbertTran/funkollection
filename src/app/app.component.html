@@ -5,3 +5,16 @@
 </head>
 
 <router-outlet></router-outlet>
+
+
+<div class="error-notice" [class.show-error-msg]="_helperService.errorOccured">
+
+  <div class="close-error-container" (click)="_helperService.hideErrorMessages()">
+    <i class="fas fa-times"></i>
+  </div>
+
+  <div class="error-text">
+      {{ _helperService.errorText }}
+  </div>
+  
+</div>

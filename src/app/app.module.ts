@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 
 import{ AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
+import { HelperService } from './services/helper.service';
 
 import{ FunkollectionApiService } from './services/funkollection-api.service';
 
@@ -59,7 +60,7 @@ const appRoutes: Routes = [
       {enableTracing: true}
     )
   ],
-  providers: [AuthGuard, AuthService, FunkollectionApiService, LoginModel],
+  providers: [AuthGuard, AuthService, HelperService, FunkollectionApiService, LoginModel],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
