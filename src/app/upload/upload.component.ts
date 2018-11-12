@@ -35,7 +35,7 @@ export class UploadComponent implements OnInit {
   categorySelector: string;
   categoryInput: string;
   number: number;
-
+  
 
   constructor( private apiService: FunkollectionApiService, private _funkoPopModel: FunkoPop) { 
   }
@@ -134,7 +134,7 @@ export class UploadComponent implements OnInit {
 
       else{
   
-        const selectedCategory = this.series.find((element) => {
+        const selectedCategory = this.categories.find((element) => {
           return element.name == this.categorySelector;
         });
   
