@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FunkollectionApiService } from '../services/funkollection-api.service';
-
+import { HelperService } from '../services/helper.service';
 import { map } from "rxjs/operators";
 
 import { Series } from "../models/Series";
@@ -36,8 +36,15 @@ export class UploadComponent implements OnInit {
   categoryInput: string;
   number: number;
   
+  seriesExists: Boolean = false;
 
-  constructor( private apiService: FunkollectionApiService, private _funkoPopModel: FunkoPop) { 
+  categoryExists: Boolean = false;
+
+  unableToUploadFunkoPopMessage: String = "Unable to upload funko pop. Please try again later";
+  unableToAddNewCategoryMessage: String = "Unable to add new category. Please try again later";
+  unableToAddNewSeriesMessage: String = 'Unable to add new series. Please try again later';
+
+  constructor( private apiService: FunkollectionApiService, private _helperService: HelperService, private _funkoPopModel: FunkoPop) { 
   }
 
   ngOnInit() {
@@ -86,12 +93,18 @@ export class UploadComponent implements OnInit {
   }
 
   checkSeriesSelection(value: any){
+    
+    this.categoryInput = "";
 
-    if(value == 'Other'){
+    if(value == 'Add new series...'){
       this.displayNewSeriesInput = true;
       this.categories = [];
+
     }
     else{
+
+      this.seriesInput = "";
+
       this.displayNewSeriesInput = false;
 
       const selectedSeries = this.series.find((element) => {
@@ -104,10 +117,13 @@ export class UploadComponent implements OnInit {
 
   checkCategorySelection(value: any){
 
-    if(value == 'Other'){
+    if(value == 'Add new category...'){
       this.displayNewCategoryInput = true;
     }
     else{
+
+      this.categoryInput = "";
+
       this.displayNewCategoryInput = false;
     }
   }
@@ -117,7 +133,7 @@ export class UploadComponent implements OnInit {
     this._funkoPopModel.name = this.name;
     this._funkoPopModel.number = this.number;
 
-    if(this.seriesSelector == "Other"){
+    if(this.seriesSelector == "Add new series..."){
         this.addSeries();
     }
     else{
@@ -128,7 +144,7 @@ export class UploadComponent implements OnInit {
 
       this._funkoPopModel.series = selectedSeries;
 
-      if(this.categorySelector == "Other"){
+      if(this.categorySelector == "Add new category..."){
         this.addCategory(selectedSeries.id, this.categoryInput);
       }
 
@@ -158,14 +174,21 @@ export class UploadComponent implements OnInit {
         .subscribe(
           res => {
             if(res["statusCode"] == 200){
+
+              this._helperService.removeErrorFromMessages(this.unableToAddNewSeriesMessage);
+
               var id = res["seriesID"];
               this._funkoPopModel.series =  {id: id, name: this.seriesInput };
 
-              if(this.categorySelector == "Other"){
+              if(this.categorySelector == "Add new category..."){
                 this.addCategory(id, this.categoryInput)
               }
             }
-        });
+          },
+          err => {
+            this._helperService.addErrorToMessages(this.unableToAddNewSeriesMessage);
+          }
+        );
   }
 
   addCategory(series: string, category: string){
@@ -173,6 +196,9 @@ export class UploadComponent implements OnInit {
         .subscribe(
           res => {
             if(res["statusCode"] == 200){
+
+              this._helperService.removeErrorFromMessages(this.unableToAddNewCategoryMessage);
+
               var id = res["categoryID"];
               this._funkoPopModel.category = { id: id, name: category };
 
@@ -185,7 +211,11 @@ export class UploadComponent implements OnInit {
 
               this.uploadFunkoPop(formData);
             }
-        });
+          },
+          err => {
+            this._helperService.addErrorToMessages(this.unableToAddNewCategoryMessage);
+          }
+        );
   }
 
   uploadFunkoPop(formData: FormData){
@@ -193,15 +223,58 @@ export class UploadComponent implements OnInit {
       .subscribe(
         res => {
           if(res["statusCode"] == 200){
+            this._helperService.removeErrorFromMessages(this.unableToUploadFunkoPopMessage);
           }
           
         },
         err => { 
-          if(err.error.statusCode == 409){
-          }
-          else{
-          }
+          this._helperService.addErrorToMessages(this.unableToUploadFunkoPopMessage);
         }   
     );
+  }
+
+  checkNewSeriesInput(){
+    this.seriesExists = false;
+    var seriesName = '';
+    this.series.forEach(element => {
+      if(element.name.toLowerCase() == this.seriesInput.toLowerCase()){
+        this.seriesExists = true;
+        seriesName = element.name;
+      }
+    });
+
+    if(this.seriesExists){
+      
+      this.displayNewSeriesInput = false;
+      this.seriesSelector = seriesName;
+      this.seriesInput = "";
+
+      this.checkSeriesSelection(this.seriesSelector);
+    }
+
+
+
+  }
+
+  checkNewCategoryInput(){
+    this.categoryExists = false;
+    var categoryName = '';
+    this.categories.forEach(element => {
+      if(element.name.toLowerCase() == this.categoryInput.toLowerCase()){
+        this.categoryExists = true;
+        categoryName = element.name;
+      }
+    });
+
+    if(this.categoryExists){
+      this.displayNewCategoryInput = false;
+      this.categorySelector = categoryName;
+      this.categoryInput = '';
+
+      this.checkCategorySelection(this.categorySelector);
+    }
+
+
+
   }
 }

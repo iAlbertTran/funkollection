@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router } from '@angular/router'; // Router
 import { AuthService } from '../auth.service';
-
+import { HelperService } from '../services/helper.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthService, private _route: Router){}
+  constructor(private authService: AuthService, private _helperService: HelperService, private _route: Router){}
   title = 'funkollection';
   isLoggedIn: boolean = false;
   showMenu: boolean = false;
@@ -26,6 +26,9 @@ export class HomeComponent implements OnInit {
   }
 
   logout(){
+    
+    this._helperService.removeAllErrors();
+
     this.authService.logout()
       .subscribe(
         res => { 
