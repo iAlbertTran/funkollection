@@ -1,4 +1,23 @@
+.content{
+    display: flex;
+}
 
+.content-left{
+    width: 40%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+.content-right{
+    width: 60%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
 
 #popPreview{
     width: 200px;
@@ -20,4 +39,15 @@
 
 input, img, select{
     margin-bottom: 10px;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .content-right{
+        display: none;
+    }
+
+    .content-left{
+        width: 100%;
+    }
 }
