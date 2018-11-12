@@ -8,8 +8,8 @@
               Funkollection
           </div>
           <ul class="nav-options-container">
-            <li [routerLink]="['']"><i class="fas fa-home"></i> Home</li>
-            <li [routerLink]="['/upload']"><i class="fas fa-upload"></i> Upload</li>
+            <li [routerLink]="['']" (click)="_helperService.removeAllErrors()"><i class="fas fa-home"></i> Home</li>
+            <li [routerLink]="['/upload']" (click)="_helperService.removeAllErrors()"><i class="fas fa-upload"></i> Upload</li>
           </ul>
     </div>
     <div class="logout-container" (click)="logout()">
