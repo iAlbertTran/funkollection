@@ -20,7 +20,7 @@
 
     padding: 20px;
 
-    background: #4C4F54;
+    background: #1C1C1E;
 }
 
 .left-container h3{
@@ -162,7 +162,7 @@ h3{
         width: 100%;
         height: 100%;
         padding: 20px;
-        background: #4C4F54 url(../../assets/transparent-bgs/robots.png);
+        background: #1C1C1E url(../../assets/transparent-bgs/robots.png);
 
     }
 

@@ -18,13 +18,21 @@ html{
 .content{
     display: flex;
     justify-content: center;
-}
-
-.content{
+    
+    background: #282B2D;
     width: 100%;
-    height: calc(100% - 56px);
+    height: 100%;
 
     margin-top: 56px;
+
+    padding: 0 20%;
+
+}
+
+@media only screen and (max-width: 480px) {
+    .content{
+        padding: 0;
+    }
 }
 
 

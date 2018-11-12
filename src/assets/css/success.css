@@ -54,7 +54,7 @@
     position: absolute;
     width: 60px;
     height: 120px;
-    background: #4C4F54;
+    background: #1C1C1E;
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
   }
@@ -98,7 +98,7 @@
   .sa-icon.sa-success .sa-fix {
     width: 5px;
     height: 90px;
-    background-color: #4C4F54;
+    background-color: #1C1C1E;
     position: absolute;
     left: 28px;
     top: 8px;

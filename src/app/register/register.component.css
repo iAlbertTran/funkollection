@@ -8,7 +8,7 @@
     align-items: center;
     padding: 10px;
 
-    background: #4C4F54 url(../../assets/transparent-bgs/inspiration-geometry.png);
+    background: #1C1C1E url(../../assets/transparent-bgs/inspiration-geometry.png);
 
     margin: 0;
 }
@@ -21,7 +21,7 @@
 .login-button{
     border: 1px solid #44C8BA;
     color: #44C8BA !important;
-    background: #4C4F54;
+    background: #1C1C1E;
 
     text-transform: uppercase;
 }
@@ -136,7 +136,7 @@
     width: 100%;
 
     border: 1px solid #44C8BA;
-    background: #4C4F54;
+    background: #1C1C1E;
 }
 
 .next-btn, .prev-btn{
@@ -154,7 +154,7 @@
 }
 
 .button-container button{
-    background: #4C4F54;
+    background: #1C1C1E;
     color: #44C8BA;
 
     transition-property: background-color, color, opacity;
@@ -243,7 +243,7 @@
     border: none;
     border-bottom: 1px solid #C8CBD0;
     border-radius: 0;
-    background: #4C4F54;
+    background: #1C1C1E;
     color: #f8f8f8;
 
 }

@@ -1,10 +1,13 @@
 .navbar{
-    background: #4C4F54;
+    background: #1C1C1E;
     color: #F8F9FD;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 .navbar-brand{
@@ -80,7 +83,7 @@
     position: fixed;
     height: 100%;
     width: 250px;
-    background: #4C4F54;
+    background: #1C1C1E;
     z-index: 10000;
 
     right: 0;
@@ -160,7 +163,7 @@
     font-size: 24px;
 
     background: #44C8BA;
-    color: #4C4F54;
+    color: #1C1C1E;
 
     display: flex;
     justify-content: center;
@@ -179,4 +182,11 @@
     margin: 0;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 480px) {
+    .navbar{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
