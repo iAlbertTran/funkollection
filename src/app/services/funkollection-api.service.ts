@@ -4,7 +4,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { FunkoPop } from '../models/funkopop';
 
 import { RegisterModel } from '../models/register';
-import { Series } from '../models/Series';
+import { Series } from '../models/series';
 import { Category } from '../models/category';
 
 import { HttpHeaders } from '@angular/common/http';
@@ -43,7 +43,7 @@ export class FunkollectionApiService {
     return headers;
   }
 
-  getUploadAuthHeaders(): HttpHeaders {
+  getAuthTokenHeader(): HttpHeaders {
 
     var token = this.getAccessToken();
 
@@ -69,11 +69,24 @@ export class FunkollectionApiService {
 
 
   getAllFunkoPops(){
-    return this.http.get(`${this.funkopopURL}`);
+    var api_headers = this.getAuthTokenHeader();
+    return this.http.get(`${this.funkopopURL}`, { headers: api_headers });
   }
 
   getFunkoPop(name: string){
     return this.http.get(`${this.funkopopURL}/name`);
+  }
+
+  getFunkoPopImage(name: String){
+    var api_headers = this.getAuthTokenHeader();
+    return this.http.get(`${this.funkopopURL}/${name}`, { headers: api_headers });
+  }
+
+  getUserFunkoPops(){
+    var api_headers = this.getAuthTokenHeader();
+    var user = sessionStorage.getItem("LoggedInUser");
+
+    return this.http.get(`${this.funkopopURL}/${user}`, { headers: api_headers });
   }
 
   insertFunkoPop(funkopop: FunkoPop){
@@ -82,9 +95,8 @@ export class FunkollectionApiService {
 
   uploadFunkoPop(funkopop: FormData) {
 
-    var api_headers = this.getUploadAuthHeaders();
+    var api_headers = this.getAuthTokenHeader();
 
-    console.log(api_headers);
     return this.http.post(`${this.funkopopURL}/upload`, funkopop, { headers: api_headers });
   }
 
@@ -153,5 +165,5 @@ export class FunkollectionApiService {
     let api_headers = this.getAuthHeadersWithToken();
     return this.http.post(`${this.baseURL}/account/logout`, null, {headers: api_headers});
   }
-  
+
 }
