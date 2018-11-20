@@ -4,7 +4,7 @@ import { FunkollectionApiService } from '../services/funkollection-api.service';
 import { HelperService } from '../services/helper.service';
 import { map } from "rxjs/operators";
 
-import { Series } from "../models/Series";
+import { Series } from "../models/series";
 import { Category } from "../models/category";
 import { FunkoPop } from "../models/funkopop";
 

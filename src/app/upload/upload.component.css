@@ -8,6 +8,7 @@
 
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .content-right{
     width: 60%;
