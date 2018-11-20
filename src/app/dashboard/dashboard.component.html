@@ -1,5 +1,5 @@
 <div class="content">
-    <p>
-        dashboard works!
-      </p>
+    <div class="individual-funkopop" *ngFor="let funkopop of funkopops">
+        <img src="http://localhost:8000/api/funkopop/{{funkopop.image}}" />
+    </div>
 </div>
