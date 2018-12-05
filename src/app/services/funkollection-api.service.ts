@@ -74,6 +74,7 @@ export class FunkollectionApiService {
   }
 
   getFunkoPop(name: string){
+
     return this.http.get(`${this.funkopopURL}/name`);
   }
 
