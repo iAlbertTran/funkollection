@@ -1,3 +1,84 @@
+.content{
+    padding: 20px 10%;
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - 56px);
+    height: auto;
+}
+
+.funkopop-grid{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.individual-funkopop{
+    width: 300px;
+    height: 300px;
+    margin: 5px;
+    padding: 20px;
+    
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(62, 57, 107, 0.07);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(62, 57, 107, 0.07);
+    box-shadow: 0px 1px 15px 1px rgba(62, 57, 107, 0.07);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    background: #ffffff;
+}
+
 .individual-funkopop img{
-    width: 200px;
+    width: 100%;
+
+    position: absolute;
+}
+
+.pop-overlay{
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0, 0.7);
+    
+    position: absolute;
+    
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: 0.25s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.pop-overlay i{
+    font-size: 50px;
+    margin: 10px;
+
+    color: #ffffff;
+}
+
+.pop-overlay i:hover{
+    cursor: pointer;
+}
+
+.pop-overlay .pop-overlay-name{
+    color: #44C8BA;
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom: 20px;
+
+    width: 100%;
+    text-align: center;
+
+    margin: 40px 0;
+}
+
+.opacity{
+    opacity: 1;
 }

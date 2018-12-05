@@ -1,5 +1,16 @@
 <div class="content">
-    <div class="individual-funkopop" *ngFor="let funkopop of funkopops">
-        <img src="http://localhost:8000/api/funkopop/{{funkopop.image}}" />
+    <div class="funkopop-grid">
+        <div class="individual-funkopop" *ngFor="let funkopop of funkopops" (mouseover)="showOverlay(funkopop.id)" (mouseout)="hideOverlay(funkopop.id)">
+            <img src="http://localhost:8000/api/funkopop/{{funkopop.image}}" />
+            <div id="{{funkopop.id}}-pop-overlay" class='pop-overlay'>
+
+                <div class="pop-overlay-name">{{funkopop.name}}</div>
+                <div>
+                    <i class="fas fa-info-circle" (click)="showPopInfo(funkopop)"></i>
+                    <i class="fas fa-plus-circle" (click)="addToCollection(funkopop)"></i>
+                    <i class="fab fa-gratipay" (click)="addToWishlist(funkopop)"></i>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
