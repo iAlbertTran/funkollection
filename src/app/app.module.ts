@@ -25,6 +25,8 @@ import{ FunkollectionApiService } from './services/funkollection-api.service';
 import { LoginModel } from './models/loginModel';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+
 const appRoutes: Routes = [
   { path: 'Home', redirectTo: '', pathMatch: 'full' },
   { path: '', 
@@ -51,6 +53,7 @@ const appRoutes: Routes = [
     DashboardComponent
   ],
   imports: [
+    SweetAlert2Module.forRoot(),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
