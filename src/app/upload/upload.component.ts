@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FunkollectionApiService } from '../services/funkollection-api.service';
 import { HelperService } from '../services/helper.service';
@@ -9,6 +10,7 @@ import { Category } from "../models/category";
 import { FunkoPop } from "../models/funkopop";
 
 import swal from 'sweetalert2';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'upload',
@@ -46,8 +48,8 @@ export class UploadComponent implements OnInit {
   unableToAddNewCategoryMessage: String = "Unable to add new category. Please try again later";
   unableToAddNewSeriesMessage: String = 'Unable to add new series. Please try again later';
 
-
-  constructor( private apiService: FunkollectionApiService, private _helperService: HelperService, private _funkoPopModel: FunkoPop) { 
+  currentForm: NgForm;
+  constructor( private myRoute: Router, private apiService: FunkollectionApiService, private _helperService: HelperService, private _funkoPopModel: FunkoPop) { 
   }
 
   ngOnInit() {
@@ -131,8 +133,8 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  uploadPop(){
-    
+  uploadPop(form: NgForm){
+    this.currentForm = form;
     this._funkoPopModel.name = this.name;
     this._funkoPopModel.number = this.number;
 
@@ -231,8 +233,19 @@ export class UploadComponent implements OnInit {
               title: 'Success!',
               type: 'success',
               text: 'Pop! Vinyl has been successfully uploaded.',
+              showCancelButton: true,
+              cancelButtonText: 'Go to Dashboard',
+              confirmButtonText: 'Add another Funko Pop.',
               width: 600,
-            })
+            }).then((result) => {
+              if(result.value){
+                this.currentForm.reset();
+                this.imageSrc = '../../assets/diy_male.jpg';
+              }
+              else{
+                this.myRoute.navigate(["/Dashboard"]);
+              }
+            });
           }
           
         },

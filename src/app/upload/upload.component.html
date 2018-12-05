@@ -1,23 +1,13 @@
-<swal
-  #uploadSuccess
-  title="Success!"
-  text="Pop! Vinyl has been successfully uploaded."
-  type="success"
-  [showCancelButton]="true"
-  [focusCancel]="true"
-  (confirm)="deleteFile(file)">
-</swal>
-
 <div class="content">
   <div class="content-left">
       <div class="upload-container">
-          <form #uploadForm="ngForm">
+          <form #uploadForm="ngForm" id='uploadingForm' (submit)='uploadPop(uploadForm)'>
               <div class="form-group">
                 <label for="exampleFormControlFile1">Upload a Funko Pop to your collection!</label>
                 <input type="file" [(ngModel)]="imagePath" name="imagePath" class="form-control-file" id="#imgInp" accept="image/*" (change)="readURL($event);" required>
     
                 <select  #selectedSeries [(ngModel)]="seriesSelector" name="seriesSelector" class="form-control" id="series" (change)="checkSeriesSelection(selectedSeries.value)">
-                    <option [ngValue]="undefined" disabled  selected> Series </option>
+                <option [ngValue]="undefined" disabled  selected> Series </option>
                   <option *ngFor="let item of series">{{ item.name }}</option>
                   <option>Add new series...</option>
                 </select>
@@ -37,7 +27,7 @@
                 <input type="number" [(ngModel)]="number" name="number" min="0" max="999" class="form-control" id="number" placeholder="Number" required>
               
               </div>
-              <button type="submit" class="btn btn-primary" (click)="uploadPop()" [disabled]="!uploadForm.valid">Upload</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!uploadForm.valid">Upload</button>
           </form>
       </div>
   </div>
