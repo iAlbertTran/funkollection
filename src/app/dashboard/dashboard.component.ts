@@ -12,7 +12,6 @@ export class DashboardComponent implements OnInit {
 
   getFunkoPopFailedMessage: String = 'Unable to retrieve Pop! Vinyls';
   funkopops: FunkoPop[];
-
   constructor(private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
   ngOnInit() {
@@ -26,10 +25,9 @@ export class DashboardComponent implements OnInit {
           if(res['statusCode'] == 200){
             var popArray = res['funkopops'];
             popArray.sort((a,b) => {
-              return a.series.localeCompare(b.series) || a.category.localeCompare(b.category) || a.name.localeCompare(b.name)|| a.number - b.number;
+              return a.series.localeCompare(b.series) || a.category.localeCompare(b.category) || a.number - b.number || a.name.localeCompare(b.name);
             });
             this.funkopops = popArray;
-            console.log(this.funkopops);
           }
         },
         err => {
@@ -41,13 +39,22 @@ export class DashboardComponent implements OnInit {
 
   showOverlay(id: string){
     let popOverlay = document.getElementById(id + '-pop-overlay');
+    let popOptions = document.getElementById(id + '-overlay-options');
+    let popName = document.getElementById(id + '-overlay-name');
 
-    popOverlay.className="pop-overlay opacity";
+    popOverlay.className = "pop-overlay opacity";
+    popOptions.className  = "animated faster fadeInUp";
+    popName.className = "pop-overlay-name animated faster fadeInDown";
+  
   }
 
   hideOverlay(id: string){
     let popOverlay = document.getElementById(id + '-pop-overlay');
+    let popOptions = document.getElementById(id + '-overlay-options');
+    let popName = document.getElementById(id + '-overlay-name');
 
     popOverlay.className="pop-overlay";
+    popOptions.className  = "animated faster fadeOutDown";
+    popName.className = "pop-overlay-name animated faster fadeOutUp";
   }
 }

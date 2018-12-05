@@ -4,8 +4,8 @@
             <img src="http://localhost:8000/api/funkopop/{{funkopop.image}}" />
             <div id="{{funkopop.id}}-pop-overlay" class='pop-overlay'>
 
-                <div class="pop-overlay-name">{{funkopop.name}}</div>
-                <div>
+                <div id='{{funkopop.id}}-overlay-name' class="pop-overlay-name">{{funkopop.name}}</div>
+                <div id='{{funkopop.id}}-overlay-options'>
                     <i class="fas fa-info-circle" (click)="showPopInfo(funkopop)"></i>
                     <i class="fas fa-plus-circle" (click)="addToCollection(funkopop)"></i>
                     <i class="fab fa-gratipay" (click)="addToWishlist(funkopop)"></i>
