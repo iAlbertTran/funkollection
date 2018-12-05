@@ -20,8 +20,8 @@
 
 }
 
-#popPreview{
-    width: 200px;
+.content-right img{
+    width: 100%;
 }
 
 .upload-container{
@@ -44,11 +44,23 @@ input, img, select{
 
 
 @media only screen and (max-width: 480px) {
+
+    .content{
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+    }
     .content-right{
-        display: none;
+        width: 100%;
+        height: 300px;
+        padding: 20px;
+    }
+
+    .content-right img{
+        width: 200px;
     }
 
     .content-left{
         width: 100%;
+        height: auto;
     }
 }

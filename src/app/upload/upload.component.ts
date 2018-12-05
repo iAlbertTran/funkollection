@@ -8,6 +8,7 @@ import { Series } from "../models/series";
 import { Category } from "../models/category";
 import { FunkoPop } from "../models/funkopop";
 
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'upload',
@@ -39,10 +40,12 @@ export class UploadComponent implements OnInit {
   seriesExists: Boolean = false;
 
   categoryExists: Boolean = false;
+  
 
   unableToUploadFunkoPopMessage: String = "Unable to upload funko pop. Please try again later";
   unableToAddNewCategoryMessage: String = "Unable to add new category. Please try again later";
   unableToAddNewSeriesMessage: String = 'Unable to add new series. Please try again later';
+
 
   constructor( private apiService: FunkollectionApiService, private _helperService: HelperService, private _funkoPopModel: FunkoPop) { 
   }
@@ -224,6 +227,12 @@ export class UploadComponent implements OnInit {
         res => {
           if(res["statusCode"] == 200){
             this._helperService.removeErrorFromMessages(this.unableToUploadFunkoPopMessage);
+            swal({
+              title: 'Success!',
+              type: 'success',
+              text: 'Pop! Vinyl has been successfully uploaded.',
+              width: 600,
+            })
           }
           
         },
