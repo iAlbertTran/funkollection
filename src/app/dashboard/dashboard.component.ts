@@ -11,6 +11,7 @@ import { FunkoPop } from '../models/funkopop';
 export class DashboardComponent implements OnInit {
 
   getFunkoPopFailedMessage: String = 'Unable to retrieve Pop! Vinyls';
+  addToCollectionFailedMessage: String = 'Unable to add Pop! Vinyl to your collection.';
   funkopops = [];
   constructor(private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
@@ -55,7 +56,6 @@ export class DashboardComponent implements OnInit {
       this.funkopops.push(popJSON);
     }
 
-    console.log(this.funkopops);
   }
 
   showOverlay(id: string){
@@ -77,5 +77,28 @@ export class DashboardComponent implements OnInit {
     popOverlay.className="pop-overlay";
     popOptions.className  = "animated faster fadeOutDown";
     popName.className = "pop-overlay-name animated faster fadeOutUp";
+  }
+
+  addToCollection(id: string){
+    this.apiService.addToCollection(id).subscribe(
+      res => { 
+        let addButton = document.getElementById(id + '-collection-button');
+        console.log(res);
+        if(res['statusCode'] == 200){
+          addButton.className = "fas fa-plus-circle text-color-teal";
+        }
+        else{
+          addButton.className = "fas fa-plus-circle";
+        }
+      },
+      err => {
+
+        let addButton = document.getElementById(id + '-collection-button');
+        addButton.className = "fas fa-plus-circle";
+        
+        this._helperService.addErrorToMessages(this.addToCollectionFailedMessage);
+      }
+
+    );
   }
 }

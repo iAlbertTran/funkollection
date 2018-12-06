@@ -37,6 +37,11 @@ html{
 
 }
 
+
+.text-color-teal{
+    color: #44C8BA !important;
+}
+
 @media only screen and (max-width: 480px) {
     .content{
         padding: 0;

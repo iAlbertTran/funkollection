@@ -9,9 +9,9 @@
         
                         <div id='{{ individualpop.id }}-overlay-name' class="pop-overlay-name">{{ individualpop.name }}</div>
                         <div id='{{ individualpop.id }}-overlay-options'>
-                            <i class="fas fa-info-circle" (click)="showPopInfo(individualpop)"></i>
-                            <i class="fas fa-plus-circle" (click)="addToCollection(individualpop)"></i>
-                            <i class="fab fa-gratipay" (click)="addToWishlist(individualpop)"></i>
+                            <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle" (click)="showPopInfo(individualpop)"></i>
+                            <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" (click)="addToCollection(individualpop.id)"></i>
+                            <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" (click)="addToWishlist(individualpop.id)"></i>
                         </div>
                     </div>
                 </div>

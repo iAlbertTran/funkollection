@@ -32,8 +32,7 @@ export class FunkollectionApiService {
 
   getAuthHeadersWithToken(): HttpHeaders {
 
-    var token = this.getAccessToken();
-    console.log(token);
+    let token = this.getAccessToken();
   
     let headers = new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -45,12 +44,10 @@ export class FunkollectionApiService {
 
   getAuthTokenHeader(): HttpHeaders {
 
-    var token = this.getAccessToken();
-
+    let token = this.getAccessToken();
     let headers = new HttpHeaders({ 
       'Authorization': `Bearer ${token}`
     });
-    
     return headers;
   }
 
@@ -69,7 +66,7 @@ export class FunkollectionApiService {
 
 
   getAllFunkoPops(){
-    var api_headers = this.getAuthTokenHeader();
+    let api_headers = this.getAuthTokenHeader();
     return this.http.get(`${this.funkopopURL}`, { headers: api_headers });
   }
 
@@ -79,13 +76,13 @@ export class FunkollectionApiService {
   }
 
   getFunkoPopImage(name: String){
-    var api_headers = this.getAuthTokenHeader();
+    let api_headers = this.getAuthTokenHeader();
     return this.http.get(`${this.funkopopURL}/${name}`, { headers: api_headers });
   }
 
   getUserFunkoPops(){
-    var api_headers = this.getAuthTokenHeader();
-    var user = sessionStorage.getItem("LoggedInUser");
+    let api_headers = this.getAuthTokenHeader();
+    let user = sessionStorage.getItem("LoggedInUser");
 
     return this.http.get(`${this.funkopopURL}/${user}`, { headers: api_headers });
   }
@@ -96,7 +93,7 @@ export class FunkollectionApiService {
 
   uploadFunkoPop(funkopop: FormData) {
 
-    var api_headers = this.getAuthTokenHeader();
+    let api_headers = this.getAuthTokenHeader();
 
     return this.http.post(`${this.funkopopURL}/upload`, funkopop, { headers: api_headers });
   }
@@ -107,20 +104,20 @@ export class FunkollectionApiService {
 
   getSeries (): Observable<Series[]> {
 
-    var auth_headers = this.getAuthHeadersWithToken();
+    let auth_headers = this.getAuthHeadersWithToken();
     return this.http.get<Series[]>(`${this.baseURL}/series`, {headers: auth_headers})
       .pipe();
   }
 
   addSeries(series: string) {
 
-    var auth_headers = this.getAuthHeadersWithToken();
+    let auth_headers = this.getAuthHeadersWithToken();
     return this.http.post(`${this.baseURL}/series`, {series: series}, {headers: auth_headers});
   }
 
   getCategoriesForSeries(seriesID: string): Observable<Series[]> {
 
-    var auth_headers = this.getAuthHeadersWithToken();
+    let auth_headers = this.getAuthHeadersWithToken();
 
     return this.http.get<Category[]>(`${this.baseURL}/${ seriesID }/categories`, {headers: auth_headers})
       .pipe();
@@ -128,10 +125,16 @@ export class FunkollectionApiService {
 
   addCategoryForSeries(seriesID: string, category: string) {
 
-    var auth_headers = this.getAuthHeadersWithToken();
+    let auth_headers = this.getAuthHeadersWithToken();
     return this.http.post(`${this.baseURL}/category`, {seriesID: seriesID, category: category}, {headers: auth_headers});
   }
 
+  addToCollection(popID: string){
+    let auth_headers = this.getAuthTokenHeader();
+    let user = sessionStorage.getItem("LoggedInUser");
+    return this.http.post(`${this.baseURL}/users/${user}/collection/add/${popID}`, null, {headers: auth_headers});
+
+  }
 
 
 
