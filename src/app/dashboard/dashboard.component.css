@@ -13,16 +13,36 @@
 
 .funkopop-grid{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: flex-start;
-    flex-wrap: wrap;
     overflow-y: scroll;
 
 }
 
+.funkopop-grid .pop-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+
+.series-container .series-title{
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    background: #1C1C1E;
+    color: #ffffff;
+
+    margin: 10px 0;
+
+    border-radius: 5px;
+}
+
 .individual-funkopop{
-    width: 300px;
-    height: 300px;
+    width: 310px;
+    height: 310px;
     margin: 5px;
     padding: 20px;
     
@@ -37,12 +57,16 @@
     position: relative;
 
     background: #ffffff;
+
+    border-radius: 5px;
 }
 
 .individual-funkopop img{
     width: 100%;
 
     position: absolute;
+
+    border-radius: 5px;
 }
 
 .pop-overlay{
@@ -63,6 +87,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
+    border-radius: 5px;
 }
 
 .pop-overlay i{
@@ -90,4 +116,15 @@
 
 .opacity{
     opacity: 1;
+}
+
+@media only screen and (max-width: 480px) {
+
+    .series-container .series-title{
+        text-align: center;
+        padding: 10px 0;
+        margin: 0;
+
+        border-radius: 0;
+    }
 }

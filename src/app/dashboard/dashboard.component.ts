@@ -11,7 +11,7 @@ import { FunkoPop } from '../models/funkopop';
 export class DashboardComponent implements OnInit {
 
   getFunkoPopFailedMessage: String = 'Unable to retrieve Pop! Vinyls';
-  funkopops: FunkoPop[];
+  funkopops = [];
   constructor(private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
   ngOnInit() {
@@ -27,7 +27,8 @@ export class DashboardComponent implements OnInit {
             popArray.sort((a,b) => {
               return a.series.localeCompare(b.series) || a.category.localeCompare(b.category) || a.number - b.number || a.name.localeCompare(b.name);
             });
-            this.funkopops = popArray;
+            //this.funkopops = popArray;
+            this.sortBySeries(popArray);
           }
         },
         err => {
@@ -35,6 +36,26 @@ export class DashboardComponent implements OnInit {
         }
 
       );
+  }
+
+  sortBySeries(popArray: FunkoPop[]){
+    
+    while(popArray != null && popArray.length > 0){
+      let popJSON = {};
+      let series = popArray[0].series;
+      let popsInSeries = popArray.filter((pop) => {
+        return pop.series == series;
+      });
+      
+      let popCount = popsInSeries.length;
+      popArray.splice(0, popCount);
+      popJSON['seriesName'] = series;
+      popJSON['popList'] = popsInSeries;
+      
+      this.funkopops.push(popJSON);
+    }
+
+    console.log(this.funkopops);
   }
 
   showOverlay(id: string){

@@ -1,16 +1,21 @@
 <div class="content">
     <div class="funkopop-grid">
-        <div class="individual-funkopop" *ngFor="let funkopop of funkopops" (mouseover)="showOverlay(funkopop.id)" (mouseout)="hideOverlay(funkopop.id)">
-            <img src="http://localhost:8000/api/funkopop/{{funkopop.image}}" />
-            <div id="{{funkopop.id}}-pop-overlay" class='pop-overlay'>
-
-                <div id='{{funkopop.id}}-overlay-name' class="pop-overlay-name">{{funkopop.name}}</div>
-                <div id='{{funkopop.id}}-overlay-options'>
-                    <i class="fas fa-info-circle" (click)="showPopInfo(funkopop)"></i>
-                    <i class="fas fa-plus-circle" (click)="addToCollection(funkopop)"></i>
-                    <i class="fab fa-gratipay" (click)="addToWishlist(funkopop)"></i>
+        <div class="series-container" *ngFor="let funkopop of funkopops">
+            <div class='series-title'>Pop! {{ funkopop.seriesName }}</div>
+            <div class="pop-list">
+                <div class="individual-funkopop" *ngFor="let individualpop of funkopop.popList" (mouseover)="showOverlay(individualpop.id)" (mouseout)="hideOverlay(individualpop.id)">
+                    <img src="http://localhost:8000/api/funkopop/{{ individualpop.image }}" />
+                    <div id="{{ individualpop.id }}-pop-overlay" class='pop-overlay'>
+        
+                        <div id='{{ individualpop.id }}-overlay-name' class="pop-overlay-name">{{ individualpop.name }}</div>
+                        <div id='{{ individualpop.id }}-overlay-options'>
+                            <i class="fas fa-info-circle" (click)="showPopInfo(individualpop)"></i>
+                            <i class="fas fa-plus-circle" (click)="addToCollection(individualpop)"></i>
+                            <i class="fab fa-gratipay" (click)="addToWishlist(individualpop)"></i>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div>  
         </div>
     </div>
 </div>
