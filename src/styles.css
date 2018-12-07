@@ -38,12 +38,12 @@ html{
 }
 
 
-.text-color-teal{
-    color: #44C8BA !important;
+.text-color-green{
+    color: lightgreen !important;
 }
 
 .text-color-red{
-    color: red !important;
+    color: lightcoral !important;
 }
 
 @media only screen and (max-width: 480px) {
