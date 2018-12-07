@@ -3,6 +3,8 @@ import { FunkollectionApiService } from '../services/funkollection-api.service';
 import { HelperService } from '../services/helper.service';
 import { FunkoPop } from '../models/funkopop';
 
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,25 +13,67 @@ import { FunkoPop } from '../models/funkopop';
 export class DashboardComponent implements OnInit {
 
   getFunkoPopFailedMessage: String = 'Unable to retrieve Pop! Vinyls';
-  addToCollectionFailedMessage: String = 'Unable to add Pop! Vinyl to your collection.';
+  addFailedMessage: String = 'Unable to add Pop! Vinyl to your';
+  removeFailedMessage: String = 'Unable to remove Pop! Vinyl from your';
+
   funkopops = [];
+  collection = [];
+  wishlist = [];
+
   constructor(private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
   ngOnInit() {
-    this.getUserPops();
+    this.refreshDashboard();
   }
 
-  getUserPops(){
+  refreshDashboard(){
+    this.getAllPops();
+    this.getUserCollection();
+    this.getUserWishlist();
+  }
+  getAllPops(){
     this.apiService.getAllFunkoPops()
       .subscribe(
         res => { 
           if(res['statusCode'] == 200){
+
             var popArray = res['funkopops'];
+            
             popArray.sort((a,b) => {
               return a.series.localeCompare(b.series) || a.category.localeCompare(b.category) || a.number - b.number || a.name.localeCompare(b.name);
             });
-            //this.funkopops = popArray;
+
             this.sortBySeries(popArray);
+          }
+        },
+        err => {
+          this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
+        }
+
+      );
+  }
+
+  getUserCollection(){
+    this.apiService.getUserCollection()
+      .subscribe(
+        res => { 
+          if(res['statusCode'] == 200){
+            this.collection = res['funkopops'];
+          }
+        },
+        err => {
+          this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
+        }
+
+      );
+  }
+
+  getUserWishlist(){
+    this.apiService.getUserWishlist()
+      .subscribe(
+        res => { 
+          if(res['statusCode'] == 200){
+            this.wishlist = res['funkopops'];
           }
         },
         err => {
@@ -59,44 +103,97 @@ export class DashboardComponent implements OnInit {
   }
 
   showOverlay(id: string){
-    let popOverlay = document.getElementById(id + '-pop-overlay');
-    let popOptions = document.getElementById(id + '-overlay-options');
-    let popName = document.getElementById(id + '-overlay-name');
+    
+    $(`#${id}-pop-overlay`).addClass('opacity');
+    $(`#${id}-overlay-options`).addClass('animated faster fadeInUp');
+    $(`#${id}-overlay-name`).addClass('animated faster fadeInDown');
 
-    popOverlay.className = "pop-overlay opacity";
-    popOptions.className  = "animated faster fadeInUp";
-    popName.className = "pop-overlay-name animated faster fadeInDown";
-  
   }
 
   hideOverlay(id: string){
-    let popOverlay = document.getElementById(id + '-pop-overlay');
-    let popOptions = document.getElementById(id + '-overlay-options');
-    let popName = document.getElementById(id + '-overlay-name');
 
-    popOverlay.className="pop-overlay";
-    popOptions.className  = "animated faster fadeOutDown";
-    popName.className = "pop-overlay-name animated faster fadeOutUp";
+    $(`#${id}-pop-overlay`).removeClass('opacity');
+    $(`#${id}-overlay-options`).removeClass('animated faster fadeInUp');
+    $(`#${id}-overlay-name`).removeClass('animated faster fadeInDown');
   }
 
   addToCollection(id: string){
-    this.apiService.addToCollection(id).subscribe(
+    $(`#${id}-collection-button`).addClass('animated faster pulse');
+
+    setTimeout(() => {
+      $(`#${id}-collection-button`).removeClass('animated faster pulse');
+    }, 500);
+
+    if(this.collection.includes(id)){
+      this.removeFromCollection(id);
+    }
+
+    else{
+
+      this.apiService.addToCollection(id).subscribe(
+        res => { 
+          this.getUserCollection();
+        },
+        err => {
+          this.getUserCollection();
+          this._helperService.addErrorToMessages(`${this.addFailedMessage} collection.`);
+        }
+
+      );
+    }
+  }
+
+  removeFromCollection(id: string){
+
+    this.apiService.removeFromCollection(id).subscribe(
       res => { 
-        let addButton = document.getElementById(id + '-collection-button');
-        console.log(res);
-        if(res['statusCode'] == 200){
-          addButton.className = "fas fa-plus-circle text-color-teal";
-        }
-        else{
-          addButton.className = "fas fa-plus-circle";
-        }
+        this.getUserCollection();
+
       },
       err => {
+        this.getUserCollection();
+        this._helperService.addErrorToMessages(`${this.removeFailedMessage} collection.`);
+      }
 
-        let addButton = document.getElementById(id + '-collection-button');
-        addButton.className = "fas fa-plus-circle";
-        
-        this._helperService.addErrorToMessages(this.addToCollectionFailedMessage);
+    );
+  }
+
+  addToWishlist(id: string){
+    $(`#${id}-wishlist-button`).addClass('animated faster pulse');
+
+    setTimeout(() => {
+      $(`#${id}-wishlist-button`).removeClass('animated faster pulse');
+    }, 500);
+
+    if(this.wishlist.includes(id)){
+      this.removeFromWishlist(id);
+    }
+
+    else{
+
+      this.apiService.addToWishlist(id).subscribe(
+        res => { 
+          this.getUserWishlist();
+        },
+        err => {
+          this.getUserWishlist();
+          this._helperService.addErrorToMessages(`${this.removeFailedMessage} wishlist.`);
+        }
+
+      );
+    }
+  }
+
+  removeFromWishlist(id: string){
+
+    this.apiService.removeFromWishlist(id).subscribe(
+      res => { 
+        this.getUserWishlist();
+
+      },
+      err => {
+        this.getUserWishlist();
+        this._helperService.addErrorToMessages(`${this.removeFailedMessage} wishlist.`);
       }
 
     );
