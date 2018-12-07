@@ -129,10 +129,44 @@ export class FunkollectionApiService {
     return this.http.post(`${this.baseURL}/category`, {seriesID: seriesID, category: category}, {headers: auth_headers});
   }
 
+  getUserCollection(){
+    let auth_headers = this.getAuthTokenHeader();
+    let user = sessionStorage.getItem("LoggedInUser");
+    return this.http.get(`${this.baseURL}/users/${user}/collection`, {headers: auth_headers});
+  }
+
   addToCollection(popID: string){
     let auth_headers = this.getAuthTokenHeader();
     let user = sessionStorage.getItem("LoggedInUser");
     return this.http.post(`${this.baseURL}/users/${user}/collection/add/${popID}`, null, {headers: auth_headers});
+
+  }
+
+  removeFromCollection(popID: string){
+    let auth_headers = this.getAuthTokenHeader();
+    let user = sessionStorage.getItem("LoggedInUser");
+    return this.http.post(`${this.baseURL}/users/${user}/collection/remove/${popID}`, null, {headers: auth_headers});
+
+  }
+
+
+  getUserWishlist(){
+    let auth_headers = this.getAuthTokenHeader();
+    let user = sessionStorage.getItem("LoggedInUser");
+    return this.http.get(`${this.baseURL}/users/${user}/wishlist`, {headers: auth_headers});
+  }
+
+  addToWishlist(popID: string){
+    let auth_headers = this.getAuthTokenHeader();
+    let user = sessionStorage.getItem("LoggedInUser");
+    return this.http.post(`${this.baseURL}/users/${user}/wishlist/add/${popID}`, null, {headers: auth_headers});
+
+  }
+
+  removeFromWishlist(popID: string){
+    let auth_headers = this.getAuthTokenHeader();
+    let user = sessionStorage.getItem("LoggedInUser");
+    return this.http.post(`${this.baseURL}/users/${user}/wishlist/remove/${popID}`, null, {headers: auth_headers});
 
   }
 
