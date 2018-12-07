@@ -96,6 +96,9 @@
     margin: 10px;
 
     color: #ffffff;
+
+    transition-property: color;
+    transition-duration: 0.5s;
 }
 
 .pop-overlay i:hover{
