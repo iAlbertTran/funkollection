@@ -46,6 +46,23 @@ html{
     color: lightcoral !important;
 }
 
+
+.swal2-container .more-info-modal .swal2-header{
+    flex-direction: column-reverse;
+}
+
+.pop-modal-information{
+    font-size: 18px;
+}
+
+.pop-modal-information div{
+    margin: 5px 0;
+}
+
+.more-info-type{
+    font-weight: bold;
+}
+
 @media only screen and (max-width: 480px) {
     .content{
         padding: 0;
