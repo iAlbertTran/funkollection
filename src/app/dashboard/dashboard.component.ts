@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FunkollectionApiService } from '../services/funkollection-api.service';
 import { HelperService } from '../services/helper.service';
 import { FunkoPop } from '../models/funkopop';
-
+import swal from 'sweetalert2';
 import * as $ from 'jquery';
 
 @Component({
@@ -197,5 +197,32 @@ export class DashboardComponent implements OnInit {
       }
 
     );
+  }
+
+  showPopInfo(funkopop: FunkoPop){
+
+    $(`#${funkopop.id}-info-button`).addClass('animated faster pulse');
+
+    swal({
+      title: funkopop.name,
+      imageUrl: `http://localhost:8000/api/funkopop/${funkopop.image}`,
+      imageAlt: funkopop.name,
+      showCloseButton: true,
+      customClass: 'more-info-modal',
+      html: `
+      <div class='pop-modal-information'>
+        <div><span class='more-info-type'>Series:</span> Pop! ${funkopop.series}</div>
+        <div><span class='more-info-type'>Category:</span> ${funkopop.category}</div>
+        <div><span class='more-info-type'># In Series:</span> ${funkopop.number}</div>
+      </div>
+      `,
+      confirmButtonText: 'Find out more!',
+      confirmButtonColor: '#44C8BA'
+    }).then((result) => {
+      if(result.value){
+        //go to funkopop/:popname
+      }
+    });
+  }
   }
 }
