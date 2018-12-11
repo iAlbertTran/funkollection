@@ -207,7 +207,7 @@ export class DashboardComponent implements OnInit {
       title: funkopop.name,
       imageUrl: `http://localhost:8000/api/funkopop/${funkopop.image}`,
       imageAlt: funkopop.name,
-      showCloseButton: true,
+      focusConfirm: false,
       customClass: 'more-info-modal',
       html: `
       <div class='pop-modal-information'>

@@ -47,6 +47,26 @@ html{
 }
 
 
+/* CUSTOM CSS FOR SWAL2 MODALS ON DASHBOARD */
+.swal2-container .more-info-modal{
+    padding: 0;
+}
+
+.swal2-container .swal2-popup .swal2-title{
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    background: #1C1C1E;
+    color: #44C8BA;
+    padding: 20px 0;
+}
+
+.swal2-container .swal2-popup .swal2-actions{
+    margin: 0;
+    padding: 10px 0;
+}
+
+
 .swal2-container .more-info-modal .swal2-header{
     flex-direction: column-reverse;
 }
@@ -62,6 +82,9 @@ html{
 .more-info-type{
     font-weight: bold;
 }
+
+
+
 
 @media only screen and (max-width: 480px) {
     .content{
