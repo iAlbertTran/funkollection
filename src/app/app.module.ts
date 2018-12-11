@@ -24,7 +24,6 @@ import{ FunkollectionApiService } from './services/funkollection-api.service';
 
 import { LoginModel } from './models/loginModel';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
 const appRoutes: Routes = [
   { path: 'Home', redirectTo: '', pathMatch: 'full' },
   { path: '', 
