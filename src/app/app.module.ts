@@ -35,9 +35,9 @@ const appRoutes: Routes = [
         { path: '', pathMatch: 'full', redirectTo: 'Dashboard'},
         { path: 'Dashboard', component: DashboardComponent}, 
         { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] }, 
+        { path: 'funko/:series/:category/:name', component: FunkopopComponent},
       ]
   },
-  {path: 'funko/:series/:category/:name', component: FunkopopComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'reset-password', component: ResetPasswordComponent}  
