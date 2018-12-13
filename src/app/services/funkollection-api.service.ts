@@ -70,9 +70,9 @@ export class FunkollectionApiService {
     return this.http.get(`${this.funkopopURL}`, { headers: api_headers });
   }
 
-  getFunkoPop(name: string){
-
-    return this.http.get(`${this.funkopopURL}/name`);
+  getFunkoPop(series: string, category: string, name: string){
+    let api_headers = this.getAuthTokenHeader();
+    return this.http.get(`${this.funkopopURL}/${series}/${category}/${name}`, { headers: api_headers });
   }
 
   getFunkoPopImage(name: String){
