@@ -88,6 +88,12 @@
     margin: 10px 0;
 }
 
+.flip-card .pop-back-options{
+    width: 75%;
+    display: flex;
+    justify-content: space-around;
+}
+
 .opacity{
     opacity: 1;
 }

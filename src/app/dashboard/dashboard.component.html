@@ -16,7 +16,7 @@
                                 <div><span class='more-info-type'>Category:</span> {{ individualpop.category }}</div>
                                 <div><span class='more-info-type'># In Series:</span> {{ individualpop.number }}</div>
                             </div>
-                            <div id='{{ individualpop.id }}-overlay-options'>
+                            <div id='{{ individualpop.id }}-back-options' class="pop-back-options">
                                 <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle more-info-button" (click)="moreInformation(individualpop)"></i>
                                 <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(individualpop.id)" (click)="addToCollection(individualpop.id)"></i>
                                 <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(individualpop.id)" (click)="addToWishlist(individualpop.id)"></i>

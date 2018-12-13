@@ -49,4 +49,5 @@
     color: white;
     transform: rotateY(180deg);
     z-index: 1;
+    padding: 10px;
   }
