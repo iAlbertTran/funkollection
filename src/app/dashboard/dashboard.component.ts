@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router }      from '@angular/router';
 import { FunkollectionApiService } from '../services/funkollection-api.service';
 import { HelperService } from '../services/helper.service';
 import { FunkoPop } from '../models/funkopop';
@@ -20,7 +21,7 @@ export class DashboardComponent implements OnInit {
   collection = [];
   wishlist = [];
 
-  constructor(private apiService: FunkollectionApiService, private _helperService: HelperService) { }
+  constructor(public router: Router, private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
   ngOnInit() {
     this.refreshDashboard();
@@ -221,9 +222,13 @@ export class DashboardComponent implements OnInit {
       confirmButtonColor: '#44C8BA'
     }).then((result) => {
       if(result.value){
-        //go to funkopop/:popname
+        console.log(funkopop);
+        let series: string = funkopop.series.toString().replace(/ /g, '-').toLowerCase();
+        let category = funkopop.category.toString().replace(/ /g, '-').toLowerCase();
+        let name = funkopop.name.replace(/ /g, '-').toLowerCase();
+
+        this.router.navigate([`funko/${series}/${category}/${name}`]);
       }
     });
-  }
   }
 }
