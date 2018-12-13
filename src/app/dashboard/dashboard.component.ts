@@ -9,7 +9,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css', '../../assets/css/flip-card.css']
 })
 export class DashboardComponent implements OnInit {
 
@@ -103,21 +103,6 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  showOverlay(id: string){
-    
-    $(`#${id}-pop-overlay`).addClass('opacity');
-    $(`#${id}-overlay-options`).addClass('animated faster fadeInUp');
-    $(`#${id}-overlay-name`).addClass('animated faster fadeInDown');
-
-  }
-
-  hideOverlay(id: string){
-
-    $(`#${id}-pop-overlay`).removeClass('opacity');
-    $(`#${id}-overlay-options`).removeClass('animated faster fadeInUp');
-    $(`#${id}-overlay-name`).removeClass('animated faster fadeInDown');
-  }
-
   addToCollection(id: string){
     $(`#${id}-collection-button`).addClass('animated faster pulse');
 
@@ -200,35 +185,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  showPopInfo(funkopop: FunkoPop){
+  moreInformation(funkopop: FunkoPop){
+    let series: string = funkopop.series.toString().replace(/ /g, '-').toLowerCase();
+    let category = funkopop.category.toString().replace(/ /g, '-').toLowerCase();
+    let name = funkopop.name.replace(/ /g, '-').toLowerCase();
 
-    $(`#${funkopop.id}-info-button`).addClass('animated faster pulse');
-
-    swal({
-      title: funkopop.name,
-      imageUrl: `http://localhost:8000/api/funkopop/${funkopop.image}`,
-      imageAlt: funkopop.name,
-      focusConfirm: false,
-      showCloseButton: true,
-      customClass: 'more-info-modal',
-      html: `
-      <div class='pop-modal-information'>
-        <div><span class='more-info-type'>Series:</span> Pop! ${funkopop.series}</div>
-        <div><span class='more-info-type'>Category:</span> ${funkopop.category}</div>
-        <div><span class='more-info-type'># In Series:</span> ${funkopop.number}</div>
-      </div>
-      `,
-      confirmButtonText: 'Find out more!',
-      confirmButtonColor: '#44C8BA'
-    }).then((result) => {
-      if(result.value){
-        console.log(funkopop);
-        let series: string = funkopop.series.toString().replace(/ /g, '-').toLowerCase();
-        let category = funkopop.category.toString().replace(/ /g, '-').toLowerCase();
-        let name = funkopop.name.replace(/ /g, '-').toLowerCase();
-
-        this.router.navigate([`funko/${series}/${category}/${name}`]);
-      }
-    });
+    this.router.navigate([`funko/${series}/${category}/${name}`]);
   }
 }

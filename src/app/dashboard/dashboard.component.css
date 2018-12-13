@@ -40,37 +40,12 @@
     border-radius: 3px;
 }
 
-.individual-funkopop{
-    width: 300px;
-    height: 300px;
-    margin: 3px;
-    padding: 20px;
-    
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    position: relative;
-
-    background: #ffffff;
-
-    border-radius: 3px;
-}
-
-.individual-funkopop img{
+.flip-card img{
     width: 100%;
-
-    position: absolute;
-
     border-radius: 5px;
 }
 
-.overlay-border{
-    border: 5px solid #44C8BA;
+.flip-card-back{
     width: 100%;
     height: 100%;
 
@@ -79,29 +54,11 @@
     justify-content: flex-start;
     align-items: center;
 
-    border-radius: 3px;
-}
-
-.pop-overlay{
-    width: 100%;
-    height: 100%;
     background: rgba(0, 0, 0, 0.75) url(../../assets/transparent-bgs/stardust.png);
-    
-    padding: 10px; 
 
-    position: absolute;
-    
-    opacity: 0;
-
-    transition-property: opacity;
-    transition-duration: 0.25s;
-
-    
-
-    border-radius: 3px;
 }
 
-.pop-overlay i{
+.flip-card i{
     font-size: 50px;
     margin: 10px;
 
@@ -111,18 +68,24 @@
     transition-duration: 0.5s;
 }
 
-.pop-overlay i:hover{
+.flip-card i:hover{
     cursor: pointer;
 }
 
-.pop-overlay .pop-overlay-name{
+.flip-card .pop-back-name{
     color: #44C8BA;
     font-weight: bold;
     font-size: 28px;
-    margin: 40px 0;
+    margin: 10px 0;
 
     width: 100%;
     text-align: center;
+}
+
+.flip-card .pop-back-information{
+    font-size: 14px;
+
+    margin: 10px 0;
 }
 
 .opacity{
@@ -130,11 +93,11 @@
 }
 
 
-.pop-overlay .more-info-button{
+.flip-card-back .more-info-button{
     color: #82CFFD;
 }
 
-.pop-overlay .more-info-button:hover{
+.flip-card-back .more-info-button:hover{
     color: #B0E2FF;
 }
 

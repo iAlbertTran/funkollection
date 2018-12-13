@@ -3,13 +3,21 @@
         <div class="series-container" *ngFor="let funkopop of funkopops">
             <div class='series-title'>Pop! {{ funkopop.seriesName }}</div>
             <div class="pop-list">
-                <div class="individual-funkopop" *ngFor="let individualpop of funkopop.popList" (mouseover)="showOverlay(individualpop.id)" (mouseout)="hideOverlay(individualpop.id)">
-                    <img src="http://localhost:8000/api/funkopop/{{ individualpop.image }}" />
-                    <div id="{{ individualpop.id }}-pop-overlay" class='pop-overlay'>
-                        <div class='overlay-border'>
-                            <div id='{{ individualpop.id }}-overlay-name' class="pop-overlay-name">{{ individualpop.name }}</div>
+
+                <div class="flip-card" *ngFor="let individualpop of funkopop.popList">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="http://localhost:8000/api/funkopop/{{ individualpop.image }}" style="width:100%">
+                        </div>
+                        <div class="flip-card-back">
+                            <div id='{{ individualpop.id }}-overlay-name' class="pop-back-name">{{ individualpop.name }}</div>
+                            <div class='pop-back-information'>
+                                <div><span class='more-info-type'>Series:</span> Pop! {{ individualpop.series }}</div>
+                                <div><span class='more-info-type'>Category:</span> {{ individualpop.category }}</div>
+                                <div><span class='more-info-type'># In Series:</span> {{ individualpop.number }}</div>
+                            </div>
                             <div id='{{ individualpop.id }}-overlay-options'>
-                                <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle more-info-button" (click)="showPopInfo(individualpop)"></i>
+                                <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle more-info-button" (click)="moreInformation(individualpop)"></i>
                                 <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(individualpop.id)" (click)="addToCollection(individualpop.id)"></i>
                                 <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(individualpop.id)" (click)="addToWishlist(individualpop.id)"></i>
                             </div>
