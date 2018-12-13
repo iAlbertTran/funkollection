@@ -24,6 +24,8 @@ import{ FunkollectionApiService } from './services/funkollection-api.service';
 
 import { LoginModel } from './models/loginModel';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FunkopopComponent } from './funkopop/funkopop.component';
+import { FunkoPop } from './models/funkopop';
 const appRoutes: Routes = [
   { path: 'Home', redirectTo: '', pathMatch: 'full' },
   { path: '', 
@@ -35,6 +37,7 @@ const appRoutes: Routes = [
         { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] }, 
       ]
   },
+  {path: 'funko/:series/:category/:name', component: FunkopopComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'reset-password', component: ResetPasswordComponent}  
@@ -47,7 +50,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     ResetPasswordComponent,
-    DashboardComponent
+    DashboardComponent,
+    FunkopopComponent
   ],
   imports: [
     BrowserModule,
