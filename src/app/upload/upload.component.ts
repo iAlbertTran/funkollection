@@ -239,8 +239,9 @@ export class UploadComponent implements OnInit {
               width: 600,
             }).then((result) => {
               if(result.value){
-                this.currentForm.reset();
-                this.imageSrc = '../../assets/diy_male.jpg';
+                //this.currentForm.reset();
+                //this.imageSrc = '../../assets/diy_male.jpg';
+                window.location.reload();
               }
               else{
                 this.myRoute.navigate(["/Dashboard"]);
