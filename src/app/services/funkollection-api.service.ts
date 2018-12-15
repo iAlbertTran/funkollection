@@ -102,6 +102,13 @@ export class FunkollectionApiService {
     return this.http.delete(`${this.funkopopURL}/name`);
   }
 
+  getPopsInSeries(series: string): Observable<FunkoPop[]> {
+
+    let auth_headers = this.getAuthHeadersWithToken();
+    return this.http.get<FunkoPop[]>(`${this.funkopopURL}/series/${series}`, {headers: auth_headers})
+      .pipe();
+  }
+
   getSeries (): Observable<Series[]> {
 
     let auth_headers = this.getAuthHeadersWithToken();
@@ -145,7 +152,7 @@ export class FunkollectionApiService {
   removeFromCollection(popID: string){
     let auth_headers = this.getAuthTokenHeader();
     let user = sessionStorage.getItem("LoggedInUser");
-    return this.http.post(`${this.baseURL}/users/${user}/collection/remove/${popID}`, null, {headers: auth_headers});
+    return this.http.delete(`${this.baseURL}/users/${user}/collection/remove/${popID}`, {headers: auth_headers});
 
   }
 
@@ -166,7 +173,7 @@ export class FunkollectionApiService {
   removeFromWishlist(popID: string){
     let auth_headers = this.getAuthTokenHeader();
     let user = sessionStorage.getItem("LoggedInUser");
-    return this.http.post(`${this.baseURL}/users/${user}/wishlist/remove/${popID}`, null, {headers: auth_headers});
+    return this.http.delete(`${this.baseURL}/users/${user}/wishlist/remove/${popID}`, {headers: auth_headers});
 
   }
 
