@@ -1,7 +1,30 @@
-<div class='content'>
-  <div class='info-card' *ngIf='basicInfo != null'>
+<div class='content' *ngIf='basicInfo != null'>
+  <div class='info-card'>
     <div class='image-container'>
       <img src="http://localhost:8000/api/funkopop/{{ basicInfo.image }}" />
     </div>
+    <div class="info-text">
+      <h5 class='pop-name'>{{ basicInfo.name }}</h5>
+      <h6>Series - Pop! {{ basicInfo.seriesName }}</h6>
+      <h6>Category - {{ basicInfo.categoryName }}</h6>
+      <h6>Number - {{ basicInfo.number }}</h6>
+      <div class='add-buttons'>
+          <i id='{{ basicInfo.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(basicInfo.id)" (click)="addToCollection(basicInfo.id)"></i>
+          <i id='{{ basicInfo.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(basicInfo.id)" (click)="addToWishlist(basicInfo.id)"></i>
+      </div>
+    </div>
+  </div>
+
+  <h4 class='more-in'>More in Pop! {{ basicInfo.seriesName }}</h4>
+  <div class='more-in-series' *ngIf='seriespops != null'>
+    <div class='series-pops'>
+      <div class='individual-series-pop' *ngFor='let funkopop of seriespops'>
+          <img src="http://localhost:8000/api/funkopop/{{ funkopop.image }}" />
+      </div>
+    </div>
+  </div>
+
+  <h4 class='more-in'>More in {{ basicInfo.categoryName }}</h4>
+  <div class='more-in-category'>
   </div>
 </div>
