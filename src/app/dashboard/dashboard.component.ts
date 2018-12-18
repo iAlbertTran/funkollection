@@ -24,7 +24,6 @@ export class DashboardComponent implements OnInit {
   constructor(public router: Router, private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
   ngOnInit() {
-    console.log(this.collection);
     this.refreshDashboard();
   }
 
@@ -61,7 +60,6 @@ export class DashboardComponent implements OnInit {
         res => { 
           if(res['statusCode'] == 200){
             this.collection = res['funkopops'];
-            console.log(this.collection);
           }
         },
         err => {
