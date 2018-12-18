@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, UrlSerializer } from '@angular/router';
 import { UploadComponent } from './upload/upload.component';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -25,15 +25,24 @@ import{ FunkollectionApiService } from './services/funkollection-api.service';
 import { LoginModel } from './models/loginModel';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FunkopopComponent } from './funkopop/funkopop.component';
-import { FunkoPop } from './models/funkopop';
+import { DefaultUrlSerializer, UrlTree } from '@angular/router';
+
+export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
+    parse(url: string): UrlTree {
+
+        return super.parse(url.toLowerCase()); 
+
+    }
+}
+
 const appRoutes: Routes = [
-  { path: 'Home', redirectTo: '', pathMatch: 'full' },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: '', 
       component: HomeComponent,
       canActivate: [AuthGuard],
       children: [
         { path: '', pathMatch: 'full', redirectTo: 'Dashboard'},
-        { path: 'Dashboard', component: DashboardComponent}, 
+        { path: 'dashboard', component: DashboardComponent}, 
         { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] }, 
         { path: 'funko/:series/:category/:name', component: FunkopopComponent},
       ]
@@ -63,7 +72,13 @@ const appRoutes: Routes = [
       {enableTracing: true}
     )
   ],
-  providers: [AuthGuard, AuthService, HelperService, FunkollectionApiService, LoginModel],
+  providers: [AuthGuard, 
+    AuthService, 
+    HelperService, 
+    FunkollectionApiService, 
+    LoginModel, 
+    { provide: UrlSerializer, useClass: LowerCaseUrlSerializer}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
