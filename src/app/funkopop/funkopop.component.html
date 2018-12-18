@@ -1,16 +1,33 @@
 <div class='content' *ngIf='basicInfo != null'>
   <div class='info-card'>
+    
+    <h5 class='pop-name-mobile'>{{ basicInfo.name }}</h5>
+
     <div class='image-container'>
       <img src="http://localhost:8000/api/funkopop/{{ basicInfo.image }}" />
     </div>
     <div class="info-text">
-      <h5 class='pop-name'>{{ basicInfo.name }}</h5>
-      <h6>Series -</h6>
-      <h6> Pop! {{ basicInfo.seriesName }} </h6>
-      <h6>Category -</h6>
-      <h6>{{ basicInfo.categoryName }}</h6>
-      <h6>Number -</h6>
-      <h6>{{ basicInfo.number }}</h6>
+
+      <h5 class='pop-name-desktop'>{{ basicInfo.name }}</h5>
+    
+      <div class='series-info'>
+          <h6>Series</h6>
+          <h6 class='info-separator'>&nbsp; - &nbsp;</h6>
+          <h6>Pop! {{ basicInfo.seriesName }} </h6>
+      </div>
+
+      <div class='category-info'>
+          <h6>Category</h6>
+          <h6 class='info-separator'>&nbsp; - &nbsp;</h6>
+          <h6>{{ basicInfo.categoryName }}</h6>
+      </div>
+
+      <div class='number-info'>
+          <h6>Number</h6>
+          <h6 class='info-separator'>&nbsp; - &nbsp;</h6>
+          <h6>{{ basicInfo.number }}</h6>
+      </div> 
+
       <div class='add-buttons'>
           <i id='{{ basicInfo.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(basicInfo.id)" (click)="addToCollection(basicInfo.id)"></i>
           <i id='{{ basicInfo.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(basicInfo.id)" (click)="addToWishlist(basicInfo.id)"></i>
