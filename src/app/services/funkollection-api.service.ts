@@ -122,6 +122,13 @@ export class FunkollectionApiService {
     return this.http.post(`${this.baseURL}/series`, {series: series}, {headers: auth_headers});
   }
 
+  getPopsInCategory(category: string): Observable<FunkoPop[]> {
+
+    let auth_headers = this.getAuthHeadersWithToken();
+    return this.http.get<FunkoPop[]>(`${this.funkopopURL}/category/${category}`, {headers: auth_headers})
+      .pipe();
+  }
+
   getCategoriesForSeries(seriesID: string): Observable<Series[]> {
 
     let auth_headers = this.getAuthHeadersWithToken();
