@@ -244,7 +244,7 @@ export class UploadComponent implements OnInit {
                 window.location.reload();
               }
               else{
-                this.myRoute.navigate(["/Dashboard"]);
+                this.myRoute.navigate(["/dashboard"]);
               }
             });
           }
