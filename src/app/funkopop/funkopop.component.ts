@@ -50,6 +50,7 @@ export class FunkopopComponent implements OnInit {
           }
           else{
             this.getPopsInSeries(this.basicInfo.series);
+            this.getPopsInCategory(this.basicInfo.category);
           }
         }
       },
@@ -90,13 +91,38 @@ export class FunkopopComponent implements OnInit {
       );
   }
 
+  getPopsInCategory(category: string){
+    this.apiService.getPopsInCategory(category)
+      .subscribe(
+        res => { 
+          if(res['statusCode'] == 200){
+            this.categorypops = res['funkopops'].filter( element => {
+              
+              element.series = this._helperService.replaceSpecialCharacters(element.series);
+              element.category = this._helperService.replaceSpecialCharacters(element.category);
+              element.name = this._helperService.replaceSpecialCharacters(element.name);
+
+              return element.name != this.basicInfo.name;
+            });
+          }
+        },
+        err => {
+        }
+
+      );
+  }
+
   getPopsInSeries(series: string){
-    console.log(series);
     this.apiService.getPopsInSeries(series)
       .subscribe(
         res => { 
           if(res['statusCode'] == 200){
             this.seriespops = res['funkopops'].filter( element => {
+
+              element.series = this._helperService.replaceSpecialCharacters(element.series);
+              element.category = this._helperService.replaceSpecialCharacters(element.category);
+              element.name = this._helperService.replaceSpecialCharacters(element.name);
+
               return element.name != this.basicInfo.name;
             });
           }
