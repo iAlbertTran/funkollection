@@ -5,9 +5,12 @@
     </div>
     <div class="info-text">
       <h5 class='pop-name'>{{ basicInfo.name }}</h5>
-      <h6>Series - Pop! {{ basicInfo.seriesName }}</h6>
-      <h6>Category - {{ basicInfo.categoryName }}</h6>
-      <h6>Number - {{ basicInfo.number }}</h6>
+      <h6>Series -</h6>
+      <h6> Pop! {{ basicInfo.seriesName }} </h6>
+      <h6>Category -</h6>
+      <h6>{{ basicInfo.categoryName }}</h6>
+      <h6>Number -</h6>
+      <h6>{{ basicInfo.number }}</h6>
       <div class='add-buttons'>
           <i id='{{ basicInfo.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(basicInfo.id)" (click)="addToCollection(basicInfo.id)"></i>
           <i id='{{ basicInfo.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(basicInfo.id)" (click)="addToWishlist(basicInfo.id)"></i>
@@ -15,16 +18,21 @@
     </div>
   </div>
 
-  <h4 class='more-in'>More in Pop! {{ basicInfo.seriesName }}</h4>
-  <div class='more-in-series' *ngIf='seriespops != null'>
+  <h4 class='more-in' *ngIf='categorypops != null && categorypops.length > 0'>More in {{ basicInfo.categoryName }}</h4>
+  <div class='more-in-category' *ngIf='categorypops != null && categorypops.length > 0'>
+      <div class='category-pops'>
+        <div routerLink="/funko/{{funkopop.series}}/{{funkopop.category}}/{{funkopop.name}}" class='individual-category-pop' *ngFor='let funkopop of categorypops'>
+            <img src="http://localhost:8000/api/funkopop/{{ funkopop.image }}" />
+        </div>
+      </div>
+  </div>
+
+  <h4 class='more-in' *ngIf='seriespops != null && seriespops.length > 0'>More in Pop! {{ basicInfo.seriesName }}</h4>
+  <div class='more-in-series' *ngIf='seriespops != null && seriespops.length > 0'>
     <div class='series-pops'>
-      <div class='individual-series-pop' *ngFor='let funkopop of seriespops'>
+      <div routerLink="/funko/{{funkopop.series}}/{{funkopop.category}}/{{funkopop.name}}" class='individual-series-pop' *ngFor='let funkopop of seriespops'>
           <img src="http://localhost:8000/api/funkopop/{{ funkopop.image }}" />
       </div>
     </div>
-  </div>
-
-  <h4 class='more-in'>More in {{ basicInfo.categoryName }}</h4>
-  <div class='more-in-category'>
   </div>
 </div>
