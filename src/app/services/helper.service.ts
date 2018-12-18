@@ -58,5 +58,17 @@ export class HelperService {
         this.hideErrorMessages();
     }
 
+
+
+    replaceSpecialCharacters(phrase: string){
+        phrase = phrase.replace(/ \&? ?/g, '-');
+        phrase = phrase.replace(/\(/g, '');
+        phrase = phrase.replace(/\)/g, '');
+        phrase = phrase.replace(/\&/g, '');
+        phrase = phrase.replace(/\:/g, '');
+
+        return phrase;
+    }
+
     
 }
