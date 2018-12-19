@@ -29,8 +29,8 @@
       </div> 
 
       <div class='add-buttons'>
-          <i id='{{ basicInfo.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(basicInfo.id)" (click)="addToCollection(basicInfo.id)"></i>
-          <i id='{{ basicInfo.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(basicInfo.id)" (click)="addToWishlist(basicInfo.id)"></i>
+          <i id='{{ basicInfo.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(basicInfo.id)" (click)="addToCollection(basicInfo.id, basicInfo.name)"></i>
+          <i id='{{ basicInfo.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(basicInfo.id)" (click)="addToWishlist(basicInfo.id, basicInfo.name)"></i>
       </div>
     </div>
   </div>

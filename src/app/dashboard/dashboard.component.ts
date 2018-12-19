@@ -13,9 +13,11 @@ import * as $ from 'jquery';
 })
 export class DashboardComponent implements OnInit {
 
-  getFunkoPopFailedMessage: String = 'Unable to retrieve Pop! Vinyls';
-  addFailedMessage: String = 'Unable to add Pop! Vinyl to your';
-  removeFailedMessage: String = 'Unable to remove Pop! Vinyl from your';
+  getFunkoPopFailedMessage: string = 'Unable to retrieve any Pop! Vinyls ';
+  addFailedMessage: String = 'Unable to add ';
+  removeFailedMessage: String = 'Unable to remove ';
+  addSuccess: String = 'Successfully added ';
+  removeSuccess: String = 'Successfully removed ';
 
   funkopops = [];
   collection = [];
@@ -105,7 +107,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  addToCollection(id: string){
+  addToCollection(id: string, name: string){
     $(`#${id}-collection-button`).addClass('animated faster pulse');
 
     setTimeout(() => {
@@ -113,7 +115,7 @@ export class DashboardComponent implements OnInit {
     }, 500);
 
     if(this.collection.includes(id)){
-      this.removeFromCollection(id);
+      this.removeFromCollection(id, name);
     }
 
     else{
@@ -121,32 +123,34 @@ export class DashboardComponent implements OnInit {
       this.apiService.addToCollection(id).subscribe(
         res => { 
           this.getUserCollection();
+          this._helperService.addSuccessToMessages(`${this.addSuccess} ${name} to collection!`);
         },
         err => {
           this.getUserCollection();
-          this._helperService.addErrorToMessages(`${this.addFailedMessage} collection.`);
+          this._helperService.addErrorToMessages(`${this.addFailedMessage} ${name} to collection!`);
         }
 
       );
     }
   }
 
-  removeFromCollection(id: string){
+  removeFromCollection(id: string, name: string){
 
     this.apiService.removeFromCollection(id).subscribe(
       res => { 
         this.getUserCollection();
+        this._helperService.addSuccessToMessages(`${this.removeSuccess} ${name} from collection!`);
 
       },
       err => {
         this.getUserCollection();
-        this._helperService.addErrorToMessages(`${this.removeFailedMessage} collection.`);
+        this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from collection!`);
       }
 
     );
   }
 
-  addToWishlist(id: string){
+  addToWishlist(id: string, name: string){
     $(`#${id}-wishlist-button`).addClass('animated faster pulse');
 
     setTimeout(() => {
@@ -154,7 +158,7 @@ export class DashboardComponent implements OnInit {
     }, 500);
 
     if(this.wishlist.includes(id)){
-      this.removeFromWishlist(id);
+      this.removeFromWishlist(id, name);
     }
 
     else{
@@ -162,32 +166,37 @@ export class DashboardComponent implements OnInit {
       this.apiService.addToWishlist(id).subscribe(
         res => { 
           this.getUserWishlist();
+          this._helperService.addSuccessToMessages(`${this.addSuccess} ${name} to wishlist!`);
+
         },
         err => {
           this.getUserWishlist();
-          this._helperService.addErrorToMessages(`${this.removeFailedMessage} wishlist.`);
+          this._helperService.addErrorToMessages(`${this.addFailedMessage} ${name} to wishlist!`);
         }
 
       );
     }
   }
 
-  removeFromWishlist(id: string){
+  removeFromWishlist(id: string, name: string){
 
     this.apiService.removeFromWishlist(id).subscribe(
       res => { 
         this.getUserWishlist();
+        this._helperService.addSuccessToMessages(`${this.removeSuccess} ${name} from wishlist!`);
 
       },
       err => {
         this.getUserWishlist();
-        this._helperService.addErrorToMessages(`${this.removeFailedMessage} wishlist.`);
+        this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from wishlist.`);
       }
 
     );
   }
 
   moreInformation(funkopop: FunkoPop){
+    this._helperService.removeAllErrors();
+    this._helperService.removeAllSuccess();
     let series: string = funkopop.series.toString().replace(/ /g, '-').toLowerCase();
     let category = funkopop.category.toString().replace(/ /g, '-').toLowerCase();
     let name = funkopop.name.replace(/ /g, '-').toLowerCase();

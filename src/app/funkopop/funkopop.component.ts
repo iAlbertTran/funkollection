@@ -21,9 +21,11 @@ export class FunkopopComponent implements OnInit {
   seriespops = null;
   categorypops = null;
 
-  getFunkoPopFailedMessage: string = 'Unable to retrieve information on Pop! Vinyl.';
-  addFailedMessage: String = 'Unable to add Pop! Vinyl to your';
-  removeFailedMessage: String = 'Unable to remove Pop! Vinyl from your';
+  getFunkoPopFailedMessage: string = 'Unable to retrieve information on ';
+  addFailedMessage: String = 'Unable to add ';
+  removeFailedMessage: String = 'Unable to remove ';
+  addSuccess: String = 'Successfully added ';
+  removeSuccess: String = 'Successfully removed ';
   
   constructor(private route: ActivatedRoute, private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
@@ -46,7 +48,7 @@ export class FunkopopComponent implements OnInit {
           this.basicInfo = res['funkopop'];
           
           if(this.basicInfo == null){
-            this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
+            this._helperService.addErrorToMessages(`${this.getFunkoPopFailedMessage} ${this.name}`);
           }
           else{
             this.getPopsInSeries(this.basicInfo.series);
@@ -55,7 +57,7 @@ export class FunkopopComponent implements OnInit {
         }
       },
       err => {
-        this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
+        this._helperService.addErrorToMessages(`${this.getFunkoPopFailedMessage} ${this.name}`);
       }
 
     );
@@ -70,7 +72,7 @@ export class FunkopopComponent implements OnInit {
           }
         },
         err => {
-          this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
+          this._helperService.addErrorToMessages(`${this.getFunkoPopFailedMessage} ${this.name}`);
         }
 
       );
@@ -85,7 +87,7 @@ export class FunkopopComponent implements OnInit {
           }
         },
         err => {
-          this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
+          this._helperService.addErrorToMessages(`${this.getFunkoPopFailedMessage} ${this.name}`);
         }
 
       );
@@ -133,7 +135,7 @@ export class FunkopopComponent implements OnInit {
       );
   }
 
-  addToCollection(id: string){
+  addToCollection(id: string, name: string){
     $(`#${id}-collection-button`).addClass('animated faster pulse');
 
     setTimeout(() => {
@@ -141,7 +143,7 @@ export class FunkopopComponent implements OnInit {
     }, 500);
 
     if(this.collection.includes(id)){
-      this.removeFromCollection(id);
+      this.removeFromCollection(id, name);
     }
 
     else{
@@ -149,32 +151,33 @@ export class FunkopopComponent implements OnInit {
       this.apiService.addToCollection(id).subscribe(
         res => { 
           this.getUserCollection();
+          this._helperService.addSuccessToMessages(`${this.addSuccess} ${name} to collection!`);
         },
         err => {
           this.getUserCollection();
-          this._helperService.addErrorToMessages(`${this.addFailedMessage} collection.`);
+          this._helperService.addErrorToMessages(`${this.addFailedMessage} ${name} to  collection.`);
         }
 
       );
     }
   }
 
-  removeFromCollection(id: string){
+  removeFromCollection(id: string, name: string){
 
     this.apiService.removeFromCollection(id).subscribe(
       res => { 
         this.getUserCollection();
-
+        this._helperService.addSuccessToMessages(`${this.removeSuccess} ${name} from  collection!`);
       },
       err => {
         this.getUserCollection();
-        this._helperService.addErrorToMessages(`${this.removeFailedMessage} collection.`);
+        this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  collection.`);
       }
 
     );
   }
 
-  addToWishlist(id: string){
+  addToWishlist(id: string, name: string){
     $(`#${id}-wishlist-button`).addClass('animated faster pulse');
 
     setTimeout(() => {
@@ -182,7 +185,7 @@ export class FunkopopComponent implements OnInit {
     }, 500);
 
     if(this.wishlist.includes(id)){
-      this.removeFromWishlist(id);
+      this.removeFromWishlist(id, name);
     }
 
     else{
@@ -190,26 +193,27 @@ export class FunkopopComponent implements OnInit {
       this.apiService.addToWishlist(id).subscribe(
         res => { 
           this.getUserWishlist();
+          this._helperService.addSuccessToMessages(`${this.addSuccess} ${name} to  wishlist!`);
         },
         err => {
           this.getUserWishlist();
-          this._helperService.addErrorToMessages(`${this.removeFailedMessage} wishlist.`);
+          this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} to  wishlist.`);
         }
 
       );
     }
   }
 
-  removeFromWishlist(id: string){
+  removeFromWishlist(id: string, name: string){
 
     this.apiService.removeFromWishlist(id).subscribe(
       res => { 
         this.getUserWishlist();
-
+        this._helperService.addSuccessToMessages(`${this.removeSuccess} ${name} from  wishlist!`);
       },
       err => {
         this.getUserWishlist();
-        this._helperService.addErrorToMessages(`${this.removeFailedMessage} wishlist.`);
+        this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
       }
 
     );
