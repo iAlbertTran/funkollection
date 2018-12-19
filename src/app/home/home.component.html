@@ -8,8 +8,8 @@
               Funkollection
           </div>
           <ul class="nav-options-container">
-            <li [routerLink]="['']" (click)="_helperService.removeAllErrors()"><i class="fas fa-home"></i> Home</li>
-            <li [routerLink]="['/upload']" (click)="_helperService.removeAllErrors()"><i class="fas fa-upload"></i> Upload</li>
+            <li [routerLink]="['']" (click)="_helperService.removeAllErrors(); _helperService.removeAllSuccess()"><i class="fas fa-home"></i> Home</li>
+            <li [routerLink]="['/upload']" (click)="_helperService.removeAllErrors(); _helperService.removeAllSuccess()"><i class="fas fa-upload"></i> Upload</li>
           </ul>
     </div>
     <div class="logout-container" (click)="logout()">
@@ -18,7 +18,7 @@
   </div>
   
   <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" [routerLink]="['']" (click)="_helperService.removeAllErrors(); _helperService.removeAllSuccess()">
       <i class="far fa-smile-beam"></i>
       Funkollection
     </a>
