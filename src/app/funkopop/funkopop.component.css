@@ -3,6 +3,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
+    background: #ffffff url(../../assets/transparent-bgs/retina-wood.png);
 }
 
 
@@ -13,6 +15,7 @@
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    background: #ffffff;
 }
 
 .image-container{
@@ -69,6 +72,8 @@
     margin-bottom: 0;
 
     padding: 5px;
+
+    color: #1C1C1E;
 }
 
 .more-in-series, .more-in-category{
@@ -81,10 +86,8 @@
     overflow-x: scroll;
     overflow-y: hidden;
 
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
 }
+
 
 .series-pops, .category-pops{
     display: flex;
@@ -106,12 +109,15 @@
     transition: all .2s ease-in-out;
 
     background: #ffffff;
-}
 
-.individual-series-pop:hover, .individual-category-pop:hover{
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+
+    margin: 0 3px;
+}
+
+.individual-series-pop:hover, .individual-category-pop:hover{
 
     cursor: pointer;
 
