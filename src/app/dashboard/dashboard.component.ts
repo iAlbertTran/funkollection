@@ -28,25 +28,25 @@ export class DashboardComponent implements OnInit {
   }
 
   refreshDashboard(){
-    this.getRandomPops();
+    this.getRandomPops(20);
     this.getUserCollection();
     this.getUserWishlist();
   }
-  getRandomPops(){
-    this.apiService.getRandomFunkoPops()
+  getRandomPops(count : number){
+    this.apiService.getRandomFunkoPops(count)
       .subscribe(
         res => { 
           if(res['statusCode'] == 200){
 
-            this.funkopops = res['funkopops'];
-            /*
-            var popArray = res['funkopops'];
-            
-            popArray.sort((a,b) => {
-              return a.series.localeCompare(b.series) || a.category.localeCompare(b.category) || a.number - b.number || a.name.localeCompare(b.name);
-            });
-
-            this.sortBySeries(popArray);*/
+            //this.funkopops = res['funkopops'];
+            let pops = res['funkopops'];
+            let size = 0;
+            setInterval(() =>{
+              if(size == pops.length)
+                return;
+              this.funkopops.push(pops[size]);
+              ++size;
+            }, 150);
           }
         },
         err => {

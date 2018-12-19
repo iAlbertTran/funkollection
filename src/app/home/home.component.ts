@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router } from '@angular/router'; // Router
 import { AuthService } from '../auth.service';
 import { HelperService } from '../services/helper.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: []
 })
 export class HomeComponent implements OnInit {
 
@@ -13,6 +15,9 @@ export class HomeComponent implements OnInit {
   title = 'funkollection';
   isLoggedIn: boolean = false;
   showMenu: boolean = false;
+
+  private previousPath: string = ''
+
   ngOnInit(){
     this.isLoggedIn = this.authService.isLoggednIn();
   }
@@ -41,5 +46,4 @@ export class HomeComponent implements OnInit {
       });
 
   }
-
 }

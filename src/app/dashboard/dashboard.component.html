@@ -1,25 +1,23 @@
 <div class="content">
     <div class="funkopop-grid">
         <h3 class='dashboard-text'>Thank you for visiting, check out these random Pop! Vinyls!</h3>
-        <div class="series-container">
-            <div class="pop-list">
+        <div class="pop-list">
 
-                <div class="flip-card" *ngFor="let individualpop of funkopops">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="http://localhost:8000/api/funkopop/{{ individualpop.image }}" style="width:100%">
-                        </div>
-                        <div class="flip-card-back">
-                            <div id='{{ individualpop.id }}-overlay-name' class="pop-back-name">{{ individualpop.name }}</div>
-                            <div id='{{ individualpop.id }}-back-options' class="pop-back-options">
-                                <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle more-info-button" (click)="moreInformation(individualpop)"></i>
-                                <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(individualpop.id)" (click)="addToCollection(individualpop.id)"></i>
-                                <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(individualpop.id)" (click)="addToWishlist(individualpop.id)"></i>
-                            </div>
+            <div #flipCard (window:resize)="0" class="flip-card animated fadeInUp faster" *ngFor="let individualpop of funkopops" [ngStyle]="{'height.px': flipCard.offsetWidth }">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="http://localhost:8000/api/funkopop/{{ individualpop.image }}" style="width:100%">
+                    </div>
+                    <div class="flip-card-back">
+                        <div id='{{ individualpop.id }}-overlay-name' class="pop-back-name">{{ individualpop.name }}</div>
+                        <div id='{{ individualpop.id }}-back-options' class="pop-back-options">
+                            <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle more-info-button" (click)="moreInformation(individualpop)"></i>
+                            <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(individualpop.id)" (click)="addToCollection(individualpop.id)"></i>
+                            <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(individualpop.id)" (click)="addToWishlist(individualpop.id)"></i>
                         </div>
                     </div>
                 </div>
-            </div>  
-        </div>
+            </div>
+        </div>  
     </div>
 </div>
