@@ -33,6 +33,9 @@
     margin-right: 5px;
 }
 
+.navbar-light .navbar-brand:focus{
+    color: #44C8BA;
+}
 
 .menu-brand{
     color: #44C8BA;
