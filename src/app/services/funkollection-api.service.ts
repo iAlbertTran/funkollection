@@ -11,14 +11,16 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { LoginModel } from '../models/loginModel';
 
-import { AuthService } from '../auth.service';
-
 
 @Injectable()
 export class FunkollectionApiService {
 
   baseURL = 'http://localhost:8000/api';
   funkopopURL = this.baseURL + '/funkopop';
+
+  ebayBaseURL = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=AlbertTr-funkolle-PRD-18dd99240-e24114f0&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=`
+    
+  ebayBaseURLending = `&paginationInput.entriesPerPage=50`;
 
 
   constructor(private http: HttpClient) {
@@ -62,9 +64,8 @@ export class FunkollectionApiService {
   getAccessToken() {
     return sessionStorage.getItem("access_token")
   }
-
-
-
+  
+  // FUNKOLLECTION API CALLS
   getAllFunkoPops(){
     let api_headers = this.getAuthTokenHeader();
     return this.http.get(`${this.funkopopURL}`, { headers: api_headers });
@@ -221,6 +222,16 @@ export class FunkollectionApiService {
   logoutUser(){
     let api_headers = this.getAuthHeadersWithToken();
     return this.http.post(`${this.baseURL}/account/logout`, null, {headers: api_headers});
+  }
+
+
+  //EBAY API CALLS
+  getEbayListings(searchText: string){
+    let encodedSearchText = encodeURIComponent(searchText);
+
+    console.log(encodedSearchText);
+    return this.http.get(`${this.ebayBaseURL}${encodedSearchText}${this.ebayBaseURLending}`);
+
   }
 
 }

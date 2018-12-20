@@ -51,6 +51,7 @@ export class FunkopopComponent implements OnInit {
             this._helperService.addErrorToMessages(`${this.getFunkoPopFailedMessage} ${this.name}`);
           }
           else{
+            this.getEbayListings();
             this.getPopsInSeries(this.basicInfo.series);
             this.getPopsInCategory(this.basicInfo.category);
           }
@@ -100,11 +101,16 @@ export class FunkopopComponent implements OnInit {
           if(res['statusCode'] == 200){
             this.categorypops = res['funkopops'].filter( element => {
               
-              element.series = this._helperService.replaceSpecialCharacters(element.series);
-              element.category = this._helperService.replaceSpecialCharacters(element.category);
-              element.name = this._helperService.replaceSpecialCharacters(element.name);
+              if(element.name != this.basicInfo.name){
+                element.series = this._helperService.replaceSpecialCharacters(element.series);
+                element.category = this._helperService.replaceSpecialCharacters(element.category);
+                element.name = this._helperService.replaceSpecialCharacters(element.name); 
 
-              return element.name != this.basicInfo.name;
+                return true;
+              }
+
+              
+              return false;
             });
           }
         },
@@ -121,11 +127,16 @@ export class FunkopopComponent implements OnInit {
           if(res['statusCode'] == 200){
             this.seriespops = res['funkopops'].filter( element => {
 
-              element.series = this._helperService.replaceSpecialCharacters(element.series);
-              element.category = this._helperService.replaceSpecialCharacters(element.category);
-              element.name = this._helperService.replaceSpecialCharacters(element.name);
+              if(element.name != this.basicInfo.name){
+                element.series = this._helperService.replaceSpecialCharacters(element.series);
+                element.category = this._helperService.replaceSpecialCharacters(element.category);
+                element.name = this._helperService.replaceSpecialCharacters(element.name); 
 
-              return element.name != this.basicInfo.name;
+                return true;
+              }
+
+              
+              return false;
             });
           }
         },
@@ -219,4 +230,19 @@ export class FunkopopComponent implements OnInit {
     );
   }
 
+
+  getEbayListings(){
+    let searchText = `${this.basicInfo.categoryName} ${this.basicInfo.name} ${this.basicInfo.number}`;
+
+    this.apiService.getEbayListings(searchText).subscribe(
+      res => { 
+        //this._helperService.addSuccessToMessages(`${this.removeSuccess} ${name} from  wishlist!`);
+      },
+      err => {
+        //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
+      }
+
+    );
+
+  }
 }
