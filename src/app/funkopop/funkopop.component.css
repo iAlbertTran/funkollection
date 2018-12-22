@@ -71,21 +71,20 @@
     margin-top: 10px;
     margin-bottom: 0;
 
-    padding: 5px;
+    padding: 5px 5px 5px 0;
 
     color: #1C1C1E;
 }
 
 .more-in-series, .more-in-category{
     width: 100%;
-
+    height: 227.5px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     
     overflow-x: scroll;
     overflow-y: hidden;
-
 }
 
 
@@ -94,6 +93,7 @@
     justify-content: flex-start;
     align-items: center;
 
+    padding: 0 25px;
 }
 
 .individual-series-pop, .individual-category-pop{
@@ -184,6 +184,17 @@
 
     .pop-name-desktop{
         display: none;
+    }
+
+
+    .more-in-series, .more-in-category{
+        height: auto;
+
+    }
+
+    .series-pops, .category-pops{
+    
+        padding: 0;
     }
 }
 
