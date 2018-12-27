@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
                 return;
               this.funkopops.push(pops[size]);
               ++size;
-            }, 150);
+            }, 50);
           }
         },
         err => {
