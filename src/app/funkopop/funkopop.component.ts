@@ -21,6 +21,8 @@ export class FunkopopComponent implements OnInit {
   seriespops = null;
   categorypops = null;
 
+  availableEbayListings = null;
+
   getFunkoPopFailedMessage: string = 'Unable to retrieve information on ';
   addFailedMessage: String = 'Unable to add ';
   removeFailedMessage: String = 'Unable to remove ';
@@ -51,7 +53,7 @@ export class FunkopopComponent implements OnInit {
             this._helperService.addErrorToMessages(`${this.getFunkoPopFailedMessage} ${this.name}`);
           }
           else{
-            this.getEbayListings();
+            this.getEbayListings(10);
             this.getPopsInSeries(this.basicInfo.series);
             this.getPopsInCategory(this.basicInfo.category);
           }
@@ -231,12 +233,14 @@ export class FunkopopComponent implements OnInit {
   }
 
 
-  getEbayListings(){
+  getEbayListings(count: number){
     let searchText = `${this.basicInfo.categoryName} ${this.basicInfo.name} ${this.basicInfo.number}`;
 
-    this.apiService.getEbayListings(searchText).subscribe(
+    this.apiService.getEbayListings(searchText, count).subscribe(
       res => { 
-        //this._helperService.addSuccessToMessages(`${this.removeSuccess} ${name} from  wishlist!`);
+        this.availableEbayListings = res['findItemsByKeywordsResponse'][0].searchResult[0].item;
+        console.log(this.availableEbayListings);
+        console.log(res);
       },
       err => {
         //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);

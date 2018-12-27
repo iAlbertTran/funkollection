@@ -18,9 +18,12 @@ export class FunkollectionApiService {
   baseURL = 'http://localhost:8000/api';
   funkopopURL = this.baseURL + '/funkopop';
 
+  //An api to bypass CORS issues when accessing 3rd party apis.
+  CORS_anywhere = 'https://cors-anywhere.herokuapp.com/';
   ebayBaseURL = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=AlbertTr-funkolle-PRD-18dd99240-e24114f0&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=`
-    
-  ebayBaseURLending = `&paginationInput.entriesPerPage=50`;
+  
+  ebay_US_ONLY = '&itemFilter.name=LocatedIn&itemFilter.value=US'
+  ebayBaseURLending = `&paginationInput.entriesPerPage=`;
 
 
   constructor(private http: HttpClient) {
@@ -226,11 +229,11 @@ export class FunkollectionApiService {
 
 
   //EBAY API CALLS
-  getEbayListings(searchText: string){
+  getEbayListings(searchText: string, count: number){
     let encodedSearchText = encodeURIComponent(searchText);
 
     console.log(encodedSearchText);
-    return this.http.get(`${this.ebayBaseURL}${encodedSearchText}${this.ebayBaseURLending}`);
+    return this.http.get(`${this.CORS_anywhere}${this.ebayBaseURL}${encodedSearchText}${this.ebayBaseURLending}${count}${this.ebay_US_ONLY}`);
 
   }
 
