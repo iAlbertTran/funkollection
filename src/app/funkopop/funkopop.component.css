@@ -127,6 +127,12 @@
     width: 100%;
 }
 
+.ebay-table-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
 .available-ebay-listings{
     overflow-x: scroll;
     width: 100%;
@@ -151,7 +157,7 @@ tr a:active{
 
 /* Zebra striping */
 tr:nth-of-type(even) { 
-background: #282B2D; 
+    background: #282B2D; 
 }
 
 tr:nth-of-type(odd) { 

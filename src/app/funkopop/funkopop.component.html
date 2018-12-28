@@ -36,7 +36,13 @@
   </div>
 
   <div class='available-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0'>
-    <h4>Available Ebay Listings for <i>{{ ebaySearchText }}</i></h4>
+    <div class='ebay-table-header'>
+      <h4>Available Ebay Listings for <i>{{ ebaySearchText }}</i></h4>
+      <div>
+          <i>See past listings </i> 
+          <i class="fas fa-arrow-right"></i>
+      </div>
+    </div>
     <table>
       <tr class='column-headings'>
         <th></th>
