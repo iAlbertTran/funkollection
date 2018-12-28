@@ -27,6 +27,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FunkopopComponent } from './funkopop/funkopop.component';
 import { DefaultUrlSerializer, UrlTree } from '@angular/router';
 
+// Import your library
+import { CountdownTimerModule } from 'ngx-countdown-timer';
+
 export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     parse(url: string): UrlTree {
 
@@ -60,10 +63,11 @@ const appRoutes: Routes = [
     HomeComponent,
     ResetPasswordComponent,
     DashboardComponent,
-    FunkopopComponent
+    FunkopopComponent,
   ],
   imports: [
     BrowserModule,
+    CountdownTimerModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
