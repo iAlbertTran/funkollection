@@ -37,6 +37,14 @@ export class FunkopopComponent implements OnInit {
       this.series = params.get("series");
       this.category = params.get("category");
       this.name = params.get("name");
+      
+      this.basicInfo = null;
+      this.collection = [];
+      this.wishlist = [];
+      this.seriespops = null;
+      this.categorypops = null;
+      this.availableEbayListings = null;
+      this.ebaySearchText = null;
 
       this.getInfo();
       this.getUserCollection();
@@ -54,7 +62,7 @@ export class FunkopopComponent implements OnInit {
             this._helperService.addErrorToMessages(`${this.getFunkoPopFailedMessage} ${this.name}`);
           }
           else{
-            this.getEbayListings(10);
+            this.getEbayListings(25);
             this.getPopsInSeries(this.basicInfo.series);
             this.getPopsInCategory(this.basicInfo.category);
           }
@@ -235,7 +243,7 @@ export class FunkopopComponent implements OnInit {
 
 
   getEbayListings(count: number){
-    let searchText = `${this.basicInfo.categoryName} ${this.basicInfo.name} ${this.basicInfo.number}`;
+    let searchText = `Funko ${this.basicInfo.name} ${this.basicInfo.number}`;
 
     this.ebaySearchText = searchText;
 
@@ -244,6 +252,9 @@ export class FunkopopComponent implements OnInit {
 
         let ebayListings = res['findItemsByKeywordsResponse'][0].searchResult[0].item;
 
+        if(ebayListings == null){
+          return;
+        }
 
         ebayListings.forEach((listing) => {
           listing.sellingStatus[0].convertedCurrentPrice[0].__value__ = parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__).toFixed(2);
