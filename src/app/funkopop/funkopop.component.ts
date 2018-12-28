@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { FunkollectionApiService } from '../services/funkollection-api.service';
 import { HelperService } from '../services/helper.service';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-funkopop',
@@ -22,6 +22,7 @@ export class FunkopopComponent implements OnInit {
   categorypops = null;
 
   availableEbayListings = null;
+  ebaySearchText = null;
 
   getFunkoPopFailedMessage: string = 'Unable to retrieve information on ';
   addFailedMessage: String = 'Unable to add ';
@@ -236,9 +237,22 @@ export class FunkopopComponent implements OnInit {
   getEbayListings(count: number){
     let searchText = `${this.basicInfo.categoryName} ${this.basicInfo.name} ${this.basicInfo.number}`;
 
+    this.ebaySearchText = searchText;
+
     this.apiService.getEbayListings(searchText, count).subscribe(
       res => { 
-        this.availableEbayListings = res['findItemsByKeywordsResponse'][0].searchResult[0].item;
+
+        let ebayListings = res['findItemsByKeywordsResponse'][0].searchResult[0].item;
+
+
+        ebayListings.forEach((listing) => {
+          listing.sellingStatus[0].convertedCurrentPrice[0].__value__ = parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__).toFixed(2);
+          
+          let location = listing.location[0].split(',');
+          listing.location[0] = `${location[0]}, ${location[1]}`;
+          listing.location.push(location[2]);
+        });
+        this.availableEbayListings = ebayListings;
         console.log(this.availableEbayListings);
         console.log(res);
       },
