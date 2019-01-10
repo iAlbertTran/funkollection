@@ -182,6 +182,10 @@ th, td {
     min-width: 100px;
 }
 
+.past-listings-btn:hover{
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 767px) {
 
     .content{
@@ -300,6 +304,11 @@ only screen and (max-width: 480px)  {
 	td:nth-of-type(2):before { content: "Title"; }
 	td:nth-of-type(3):before { content: "Location"; }
     td:nth-of-type(4):before { content: "Current Price"; }
-    td:nth-of-type(5):before { content: "Shipping"; }
+    td:nth-of-type(5):before { content: "Ends In"; }
+
+    .sold-ebay-listings td:nth-of-type(2):before { content: "Title"; }
+	.sold-ebay-listings td:nth-of-type(3):before { content: "Location"; }
+    .sold-ebay-listings td:nth-of-type(4):before { content: "Sold Price"; }
+    .sold-ebay-listings td:nth-of-type(5):before { content: "Sold Date"; }
 
 }
