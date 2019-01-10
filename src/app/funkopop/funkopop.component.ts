@@ -17,6 +17,7 @@ export class FunkopopComponent implements OnInit {
   category: string;
   name: string;
   basicInfo = null;
+  estimatedValue = 0;
 
   collection = [];
   wishlist = [];
@@ -65,6 +66,7 @@ export class FunkopopComponent implements OnInit {
           }
           else{
             this.getEbayListings(25);
+            this.getEstimatedValue();
             this.getPopsInSeries(this.basicInfo.series);
             this.getPopsInCategory(this.basicInfo.category);
           }
@@ -243,6 +245,36 @@ export class FunkopopComponent implements OnInit {
     );
   }
 
+  getEstimatedValue(){
+    let searchText = `Funko ${this.basicInfo.name} ${this.basicInfo.number}`;
+
+    this.ebaySearchText = searchText;
+
+    this.apiService.getCompletedEbayListings(searchText, 1000).subscribe(
+      res => { 
+        let ebayListings = res['findCompletedItemsResponse'][0].searchResult[0].item;
+
+        if(ebayListings == null){
+          return;
+        }
+
+        ebayListings.forEach((listing) => {
+          
+          this.estimatedValue += parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__);
+          
+        });
+
+        this.estimatedValue /= ebayListings.length;
+
+        console.log(this.estimatedValue);
+      },
+      err => {
+        //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
+      }
+
+    );
+  }
+
 
   getEbayListings(count: number){
     let searchText = `Funko ${this.basicInfo.name} ${this.basicInfo.number}`;
@@ -257,6 +289,8 @@ export class FunkopopComponent implements OnInit {
         if(ebayListings == null){
           return;
         }
+
+        this.showCompletedListings = false;
 
         ebayListings.forEach((listing) => {
           listing.sellingStatus[0].convertedCurrentPrice[0].__value__ = parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__).toFixed(2);
@@ -278,7 +312,6 @@ export class FunkopopComponent implements OnInit {
   }
 
   getCompletedListings(count: number){
-    console.log(count);
     let searchText = `Funko ${this.basicInfo.name} ${this.basicInfo.number}`;
 
     this.ebaySearchText = searchText;
