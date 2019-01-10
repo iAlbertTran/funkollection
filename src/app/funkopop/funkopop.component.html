@@ -39,7 +39,7 @@
     <div class='ebay-table-header'>
       <h4>Available Ebay Listings for <i>{{ ebaySearchText }}</i></h4>
       <div class='past-listings-btn' (click)='getCompletedListings(25)'>
-          <i>See past listings </i> 
+          <i>Sales History </i> 
           <i class="fas fa-arrow-right"></i>
       </div>
     </div>
@@ -83,8 +83,8 @@
   <div class='available-ebay-listings sold-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && showCompletedListings'>
     <div class='ebay-table-header'>
       <h4> Ebay sales history for <i>{{ ebaySearchText }}</i></h4>
-      <div class='past-listings-btn' (click)='getCompletedListings(25)'>
-          <i>See past listings </i> 
+      <div class='past-listings-btn' (click)='getEbayListings(25)'>
+          <i>Current listings </i> 
           <i class="fas fa-arrow-right"></i>
       </div>
     </div>
