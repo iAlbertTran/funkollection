@@ -35,10 +35,10 @@
     </div>
   </div>
 
-  <div class='available-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0'>
+  <div class='available-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && !showCompletedListings'>
     <div class='ebay-table-header'>
       <h4>Available Ebay Listings for <i>{{ ebaySearchText }}</i></h4>
-      <div>
+      <div class='past-listings-btn' (click)='getCompletedListings(25)'>
           <i>See past listings </i> 
           <i class="fas fa-arrow-right"></i>
       </div>
@@ -75,6 +75,50 @@
         </td>
         <td class='listing-countdown'>
           <countdown-timer [end]="ebayListing.listingInfo[0].endTime[0]"></countdown-timer>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class='available-ebay-listings sold-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && showCompletedListings'>
+    <div class='ebay-table-header'>
+      <h4> Ebay sales history for <i>{{ ebaySearchText }}</i></h4>
+      <div class='past-listings-btn' (click)='getCompletedListings(25)'>
+          <i>See past listings </i> 
+          <i class="fas fa-arrow-right"></i>
+      </div>
+    </div>
+    <table>
+      <tr class='column-headings'>
+        <th></th>
+        <th>Title</th> 
+        <th>Location</th>
+        <th>Sold Price</th>
+        <th>Sold Date</th>
+      </tr>
+      <tr *ngFor='let ebayListing of availableEbayListings'>
+        <td class='image-column'><img src='{{ ebayListing.galleryURL }}' /></td>
+        <td>
+          <a class='listing-title' href='{{ ebayListing.viewItemURL }}' target='_blank'>
+            <span *ngIf="ebayListing.listingInfo[0].listingType[0] != 'Auction'">[Buy it Now]<br/></span>
+            <span *ngIf="ebayListing.listingInfo[0].listingType[0] == 'Auction'">[Auction]<br/></span>
+            {{ ebayListing.title }}
+          </a>
+          
+        </td>
+        <td>
+          {{ ebayListing.location[0] }}
+          <br/>
+          {{ ebayListing.location[1] }}
+        </td>
+        <td>
+          ${{ ebayListing.sellingStatus[0].convertedCurrentPrice[0].__value__ }} 
+          {{ ebayListing.sellingStatus[0].convertedCurrentPrice[0]['@currencyId']}} 
+          <br/>
+          + Shipping
+        </td>
+        <td class='listing-countdown'>
+          {{ convertToReadableDate(ebayListing.listingInfo[0].endTime[0]) }}
         </td>
       </tr>
     </table>
