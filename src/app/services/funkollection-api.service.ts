@@ -21,8 +21,11 @@ export class FunkollectionApiService {
   //An api to bypass CORS issues when accessing 3rd party apis.
   CORS_anywhere = 'https://cors-anywhere.herokuapp.com/';
   ebayBaseURL = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=AlbertTr-funkolle-PRD-18dd99240-e24114f0&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=`
-  
-  ebay_US_ONLY = '&itemFilter.name=LocatedIn&itemFilter.value=US'
+  ebayCompletedBaseURL = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=AlbertTr-funkolle-PRD-18dd99240-e24114f0&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=`
+
+  ebay_US_ONLY = '&itemFilter.name=LocatedIn&itemFilter.value=US';
+  ebay_SoldItemsOnly = '&itemFilter.name=SoldItemsOnly&itemFilter.value=true';
+  ebay_SortByEndDate = '&sortOrder=EndTimeSoonest';
   ebayBaseURLending = `&paginationInput.entriesPerPage=`;
 
 
@@ -233,7 +236,15 @@ export class FunkollectionApiService {
     let encodedSearchText = encodeURIComponent(searchText);
 
     console.log(encodedSearchText);
-    return this.http.get(`${this.CORS_anywhere}${this.ebayBaseURL}${encodedSearchText}${this.ebayBaseURLending}${count}${this.ebay_US_ONLY}`);
+    return this.http.get(`${this.CORS_anywhere}${this.ebayBaseURL}${encodedSearchText}${this.ebayBaseURLending}${count}${this.ebay_US_ONLY}${this.ebay_SortByEndDate}`);
+
+  }
+
+  getCompletedEbayListings(searchText: string, count: number){
+    let encodedSearchText = encodeURIComponent(searchText);
+
+    console.log(encodedSearchText);
+    return this.http.get(`${this.CORS_anywhere}${this.ebayCompletedBaseURL}${encodedSearchText}${this.ebayBaseURLending}${count}${this.ebay_US_ONLY}${this.ebay_SoldItemsOnly}${this.ebay_SortByEndDate}`);
 
   }
 

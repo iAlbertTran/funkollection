@@ -11,6 +11,8 @@ import * as moment from 'moment';
 })
 export class FunkopopComponent implements OnInit {
 
+  showCompletedListings: boolean = false;
+
   series: string;
   category: string;
   name: string;
@@ -273,5 +275,42 @@ export class FunkopopComponent implements OnInit {
 
     );
 
+  }
+
+  getCompletedListings(count: number){
+    console.log(count);
+    let searchText = `Funko ${this.basicInfo.name} ${this.basicInfo.number}`;
+
+    this.ebaySearchText = searchText;
+
+    this.apiService.getCompletedEbayListings(searchText, count).subscribe(
+      res => { 
+        let ebayListings = res['findCompletedItemsResponse'][0].searchResult[0].item;
+
+        console.log(ebayListings);
+        if(ebayListings == null){
+          return;
+        }
+
+        this.showCompletedListings = true;
+
+        ebayListings.forEach((listing) => {
+          listing.sellingStatus[0].convertedCurrentPrice[0].__value__ = parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__).toFixed(2);
+          
+          let location = listing.location[0].split(',');
+          listing.location[0] = `${location[0]}, ${location[1]}`;
+          listing.location.push(location[2]);
+        });
+        this.availableEbayListings = ebayListings;
+      },
+      err => {
+        //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
+      }
+
+    );
+  }
+
+  convertToReadableDate(dateString: string){
+    return moment(dateString);
   }
 }
