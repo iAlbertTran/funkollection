@@ -40,9 +40,9 @@
 
   <div class='available-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && !showCompletedListings'>
     <div class='ebay-table-header'>
-      <h4>Available Ebay Listings for <i>{{ ebaySearchText }}</i></h4>
+      <h4>Available eBay listings for <i>{{ ebaySearchText }}</i></h4>
       <div class='past-listings-btn' (click)='getCompletedListings(25)'>
-          <i>Sales History </i> 
+          <i>See sales history </i> 
           <i class="fas fa-arrow-right"></i>
       </div>
     </div>
@@ -54,7 +54,7 @@
         <th>Current Price</th>
         <th>Ends in</th>
       </tr>
-      <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInUp'>
+      <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInRight'>
         <td class='image-column'><img src='{{ ebayListing.galleryURL }}' /></td>
         <td>
           <a class='listing-title' href='{{ ebayListing.viewItemURL }}' target='_blank'>
@@ -92,9 +92,9 @@
 
   <div class='available-ebay-listings sold-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && showCompletedListings'>
     <div class='ebay-table-header'>
-      <h4> Ebay sales history for <i>{{ ebaySearchText }}</i></h4>
+      <h4> e0Bay sales history for <i>{{ ebaySearchText }}</i></h4>
       <div class='past-listings-btn' (click)='getEbayListings(25)'>
-          <i>Current listings </i> 
+          <i>See current listings </i> 
           <i class="fas fa-arrow-right"></i>
       </div>
     </div>
@@ -106,7 +106,7 @@
         <th>Sold Price</th>
         <th>Sold Date</th>
       </tr>
-      <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInUp'>
+      <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInRight'>
         <td class='image-column'><img src='{{ ebayListing.galleryURL }}' /></td>
         <td>
           <a class='listing-title' href='{{ ebayListing.viewItemURL }}' target='_blank'>

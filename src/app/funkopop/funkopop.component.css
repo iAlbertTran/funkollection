@@ -134,7 +134,6 @@
 }
 .available-ebay-listings{
     width: 100%;
-    max-width: 1250px;
     margin-top: 20px;
 }
 
@@ -164,7 +163,7 @@ tr:nth-of-type(odd) {
 }
 
 table .image-column img{
-    width: 100px;
+    width: 50px;
 
 }
 
@@ -265,6 +264,9 @@ th, td {
 @media 
 only screen and (max-width: 480px)  {
 
+    table{
+        margin-top: 0;
+    }
 	/* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr { 
 		display: block; 
@@ -313,4 +315,16 @@ only screen and (max-width: 480px)  {
     .sold-ebay-listings td:nth-of-type(4):before { content: "Sold Price"; }
     .sold-ebay-listings td:nth-of-type(5):before { content: "Sold Date"; }
 
+    .ebay-table-header{
+        flex-direction: column;
+        background: #1C1C1E;
+        color: #ffffff;
+        padding: 10px;
+
+    }
+    .ebay-table-header h4{
+        text-align: center;
+        color: #44C8BA;
+        font-size: 16px;
+    }
 }
