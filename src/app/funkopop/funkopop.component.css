@@ -81,7 +81,6 @@
     justify-content: flex-start;
     align-items: center;
     
-    overflow-x: scroll;
     overflow-y: hidden;
 }
 
@@ -134,17 +133,17 @@
     
 }
 .available-ebay-listings{
-    overflow-x: scroll;
     width: 100%;
+    max-width: 1250px;
     margin-top: 20px;
 }
 
 table { 
     width: 100%; 
     border-collapse: collapse; 
-    font-size: 12px;
     color: #ffffff;
     margin-top: 20px;
+    font-size: 14px;
 }
 
 tr a{
@@ -165,7 +164,7 @@ tr:nth-of-type(odd) {
 }
 
 table .image-column img{
-    width: 50px;
+    width: 100px;
 
 }
 
@@ -175,7 +174,6 @@ th{
 
 th, td {
     padding: 5px 10px;
-    border-top: 1px solid #1C1C1E;
   }
 
 .listing-countdown{
@@ -241,6 +239,10 @@ th, td {
 
     .pop-name-desktop{
         display: none;
+    }
+
+    table { 
+        font-size: 12px;
     }
 
 

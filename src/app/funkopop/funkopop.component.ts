@@ -263,9 +263,9 @@ export class FunkopopComponent implements OnInit {
           this.estimatedValue += parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__);
           
         });
-
-        this.estimatedValue /= ebayListings.length;
-
+          
+        this.estimatedValue = Math.round( this.estimatedValue / ebayListings.length);
+        
         console.log(this.estimatedValue);
       },
       err => {
@@ -285,7 +285,7 @@ export class FunkopopComponent implements OnInit {
       res => { 
 
         let ebayListings = res['findItemsByKeywordsResponse'][0].searchResult[0].item;
-
+        
         if(ebayListings == null){
           return;
         }
@@ -299,9 +299,8 @@ export class FunkopopComponent implements OnInit {
           listing.location[0] = `${location[0]}, ${location[1]}`;
           listing.location.push(location[2]);
         });
-        this.availableEbayListings = ebayListings;
-        console.log(this.availableEbayListings);
-        console.log(res);
+
+        this.slowAddListings(ebayListings);
       },
       err => {
         //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
@@ -320,7 +319,6 @@ export class FunkopopComponent implements OnInit {
       res => { 
         let ebayListings = res['findCompletedItemsResponse'][0].searchResult[0].item;
 
-        console.log(ebayListings);
         if(ebayListings == null){
           return;
         }
@@ -334,7 +332,8 @@ export class FunkopopComponent implements OnInit {
           listing.location[0] = `${location[0]}, ${location[1]}`;
           listing.location.push(location[2]);
         });
-        this.availableEbayListings = ebayListings;
+        
+        this.slowAddListings(ebayListings);
       },
       err => {
         //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
@@ -343,7 +342,19 @@ export class FunkopopComponent implements OnInit {
     );
   }
 
+  slowAddListings(ebayListings){
+    let size = 0;
+    this.availableEbayListings = [];
+    setInterval(() =>{
+      if(size == ebayListings.length)
+        return;
+      this.availableEbayListings.push(ebayListings[size]);
+      ++size;
+    }, 50);
+  }
+
   convertToReadableDate(dateString: string){
-    return moment(dateString);
+    let soldDate = `${moment(dateString).format('MMM DD YYYY')} at ${moment(dateString).format('hh:mm:ss A')}`;
+    return [moment(dateString).format('MMM DD YYYY'), moment(dateString).format('hh:mm:ss A')];
   }
 }
