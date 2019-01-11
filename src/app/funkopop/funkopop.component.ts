@@ -300,7 +300,7 @@ export class FunkopopComponent implements OnInit {
           listing.location.push(location[2]);
         });
 
-        this.slowAddListings(ebayListings);
+        this.availableEbayListings = ebayListings;
       },
       err => {
         //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
@@ -333,24 +333,13 @@ export class FunkopopComponent implements OnInit {
           listing.location.push(location[2]);
         });
         
-        this.slowAddListings(ebayListings);
+        this.availableEbayListings = ebayListings;
       },
       err => {
         //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
       }
 
     );
-  }
-
-  slowAddListings(ebayListings){
-    let size = 0;
-    this.availableEbayListings = [];
-    setInterval(() =>{
-      if(size == ebayListings.length)
-        return;
-      this.availableEbayListings.push(ebayListings[size]);
-      ++size;
-    }, 50);
   }
 
   convertToReadableDate(dateString: string){

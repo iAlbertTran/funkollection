@@ -37,6 +37,26 @@
       </div>
     </div>
   </div>
+  
+
+  <h4 class='more-in' *ngIf='categorypops != null && categorypops.length > 0'>More in {{ basicInfo.categoryName }}</h4>
+  <div class='more-in-category' *ngIf='categorypops != null && categorypops.length > 0'>
+      <div class='category-pops'>
+        <div routerLink="/funko/{{funkopop.series}}/{{funkopop.category}}/{{funkopop.name}}" class='individual-category-pop' *ngFor='let funkopop of categorypops'>
+            <img src="http://localhost:8000/api/funkopop/{{ funkopop.image }}" />
+        </div>
+      </div>
+  </div>
+
+  <h4 class='more-in' *ngIf='seriespops != null && seriespops.length > 0'>More in Pop! {{ basicInfo.seriesName }}</h4>
+  <div class='more-in-series' *ngIf='seriespops != null && seriespops.length > 0'>
+    <div class='series-pops'>
+      <div routerLink="/funko/{{funkopop.series}}/{{funkopop.category}}/{{funkopop.name}}" class='individual-series-pop' *ngFor='let funkopop of seriespops'>
+          <img src="http://localhost:8000/api/funkopop/{{ funkopop.image }}" />
+      </div>
+    </div>
+  </div>
+
 
   <div class='available-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && !showCompletedListings'>
     <div class='ebay-table-header'>
@@ -54,7 +74,7 @@
         <th>Current Price</th>
         <th>Ends in</th>
       </tr>
-      <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInUp'>
+      <tr *ngFor='let ebayListing of availableEbayListings'>
         <td class='image-column'><img src='{{ ebayListing.galleryURL }}' /></td>
         <td>
           <a class='listing-title' href='{{ ebayListing.viewItemURL }}' target='_blank'>
@@ -106,7 +126,7 @@
         <th>Sold Price</th>
         <th>Sold Date</th>
       </tr>
-      <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInUp'>
+      <tr *ngFor='let ebayListing of availableEbayListings'>
         <td class='image-column'><img src='{{ ebayListing.galleryURL }}' /></td>
         <td>
           <a class='listing-title' href='{{ ebayListing.viewItemURL }}' target='_blank'>
@@ -134,24 +154,5 @@
         </td>
       </tr>
     </table>
-  </div>
-
-
-  <h4 class='more-in' *ngIf='categorypops != null && categorypops.length > 0'>More in {{ basicInfo.categoryName }}</h4>
-  <div class='more-in-category' *ngIf='categorypops != null && categorypops.length > 0'>
-      <div class='category-pops'>
-        <div routerLink="/funko/{{funkopop.series}}/{{funkopop.category}}/{{funkopop.name}}" class='individual-category-pop' *ngFor='let funkopop of categorypops'>
-            <img src="http://localhost:8000/api/funkopop/{{ funkopop.image }}" />
-        </div>
-      </div>
-  </div>
-
-  <h4 class='more-in' *ngIf='seriespops != null && seriespops.length > 0'>More in Pop! {{ basicInfo.seriesName }}</h4>
-  <div class='more-in-series' *ngIf='seriespops != null && seriespops.length > 0'>
-    <div class='series-pops'>
-      <div routerLink="/funko/{{funkopop.series}}/{{funkopop.category}}/{{funkopop.name}}" class='individual-series-pop' *ngFor='let funkopop of seriespops'>
-          <img src="http://localhost:8000/api/funkopop/{{ funkopop.image }}" />
-      </div>
-    </div>
   </div>
 </div>
