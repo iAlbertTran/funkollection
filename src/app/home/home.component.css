@@ -1,6 +1,6 @@
 .navbar{
-    background: #1C1C1E;
-    color: #F8F9FD;
+    background: #1A181B;
+    color: #ffffff;
 
     display: flex;
     justify-content: space-between;
@@ -10,7 +10,7 @@
 }
 
 .navbar-brand{
-    color: #44C8BA;
+    color: #ffffff;
     font-size: 18px;
     text-transform: uppercase;
 
@@ -25,7 +25,7 @@
 }
 
 .navbar-brand:hover{
-    color: #F8F9FD;
+    color: #3CA5AD;
 }
 
 .navbar-brand i{
@@ -34,11 +34,11 @@
 }
 
 .navbar-light .navbar-brand:focus{
-    color: #44C8BA;
+    color: #ffffff;
 }
 
 .menu-brand{
-    color: #44C8BA;
+    color: #3CA5AD;
     font-size: 18px;
     text-transform: uppercase;
 
@@ -85,7 +85,7 @@
     position: fixed;
     height: 100%;
     width: 250px;
-    background: #1C1C1E;
+    background: #1A181B;
     z-index: 10000;
 
     right: 0;
@@ -96,7 +96,7 @@
     -moz-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
     box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
 
-    color: #9EA1A6;
+    color: #ffffff;
 
     padding: 20px;
 
@@ -126,7 +126,7 @@
 
 .close-menu-container i:hover{
     cursor: pointer;
-    color: #44C8BA;
+    color: #3CA5AD;
 }
 
 .nav-options-container{
@@ -149,7 +149,7 @@
 
 .nav-options-container li:hover{
     cursor: pointer;
-    color: #44C8BA;
+    color: #3CA5AD;
 }
 
 .nav-options-container li i{
@@ -164,8 +164,8 @@
     height: 50px;
     font-size: 24px;
 
-    background: #44C8BA;
-    color: #1C1C1E;
+    background: #3CA5AD;
+    color: #1A181B;
 
     display: flex;
     justify-content: center;
@@ -177,7 +177,7 @@
 
 .logout-container:hover{
     cursor: pointer;
-    color: #F8F9FD;
+    color: #f9f9f9;
 }
 
 .logout-container p{

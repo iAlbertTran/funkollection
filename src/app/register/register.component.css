@@ -8,7 +8,7 @@
     align-items: center;
     padding: 10px;
 
-    background: #1C1C1E url(../../assets/transparent-bgs/inspiration-geometry.png);
+    background: #1A181B url(../../assets/transparent-bgs/inspiration-geometry.png);
 
     margin: 0;
 }
@@ -19,16 +19,16 @@
 }
 
 .login-button{
-    border: 1px solid #44C8BA;
-    color: #44C8BA !important;
-    background: #1C1C1E;
+    border: 1px solid ;
+    color: #3ca5ad !important;
+    background: #353535;
 
     text-transform: uppercase;
 }
 
 .login-button:hover{
-    background: #44C8BA;
-    color: #F8F9FD !important;
+    background: #3ca5ad;
+    color: #f9f9f9 !important;
 }
 
 .signup-container{
@@ -64,7 +64,7 @@
 
 
 .step, .connector{
-    background: #9EA1A6;
+    background: #353535;
 }
 
 .step{
@@ -88,12 +88,12 @@
 }
 
 .step-icon{
-    color: #F8F9FD;
+    color: #f9f9f9;
     font-size: 25px;
 }
 
 .step-one{
-    background: #44C8BA;
+    background: #3ca5ad;
 }
 
 .connector-progress-bar{
@@ -114,7 +114,7 @@
 
 .label{
     margin-top: 5px;
-    color: #44C8BA;
+    color: #3ca5ad;
     font-weight: bold;
     width: 150px;
 
@@ -128,19 +128,19 @@
 
     padding: 5% 10%;
     border-radius: 5px;
-    color: #F2F2F2;
+    color: #f9f9f9;
     font-weight: bold;
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
 
     position: absolute;
     width: 100%;
 
-    border: 1px solid #44C8BA;
+    border: 1px solid #3ca5ad;
     background: #1C1C1E;
 }
 
 .next-btn, .prev-btn{
-    border: 1px solid #44C8BA;
+    border: 1px solid #3ca5ad;
 }
 
 .button-container{
@@ -149,13 +149,13 @@
 }
 
 .button-container button:hover{
-    background: #44C8BA;
+    background: #3ca5ad;
     color: #F8F9FD;
 }
 
 .button-container button{
     background: #1C1C1E;
-    color: #44C8BA;
+    color: #3ca5ad;
 
     transition-property: background-color, color, opacity;
     transition-duration: 0.15s;
@@ -172,7 +172,7 @@
     font-size: 25px;
     width: 50px;
     height: 50px;
-    border: 2px solid #44C8BA;
+    border: 2px solid #3ca5ad;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -185,7 +185,7 @@
 }
 
 #passwordAlert, #emailTakenAlert, #userNameTakenAlert{
-    color: #44C8BA;
+    color: #3ca5ad;
 }
 
 .verifyPassword-form-group{
@@ -201,7 +201,7 @@
 }
 
 .fill-background{
-    background-color: #44C8BA;
+    background-color: #3ca5ad;
 }
 
 .empty-background{
@@ -255,7 +255,7 @@
 .reviewForm i{
     font-size: 20px;
     margin-right: 20px;
-    color: #44C8BA;
+    color: #3ca5ad;
 }
 
 .reviewForm h6{

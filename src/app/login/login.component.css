@@ -22,11 +22,11 @@
 
     padding: 20px;
 
-    background: #1C1C1E;
+    background: #1a181b;
 }
 
 .left-container h3{
-    color: #44C8BA ;
+    color: #3ca5ad;
     margin-bottom: 30px;
     text-align: left;
     max-width: 400px;
@@ -52,19 +52,19 @@
 
     border-radius: 3px;
     background: transparent;
-    color: #F8F9FD;
+    color: 353535;
 
     border: none;
-    border-bottom: 1px solid #9EA1A6;
+    border-bottom: 1px solid #353535;
     border-radius: 0;
     padding: 10px 0;
 }
 
 .login-container button{
-    background: #44C8BA;
-    color: #ffffff;
+    background: #3ca5ad;
+    color: #353535;
     
-
+    font-weight: bold;
     border: none;
     margin-bottom: 20px;
 }
@@ -92,7 +92,7 @@
     justify-content: center;
     align-items: center;
 
-    background: #44C8BA url(../../assets/transparent-bgs/robots.png);
+    background: #3ca5ad url(../../assets/transparent-bgs/robots.png);
 }
 
 .right-container *{
