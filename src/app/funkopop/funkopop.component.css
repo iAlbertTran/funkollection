@@ -2,42 +2,49 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
 
     background: #ffffff url(../../assets/transparent-bgs/retina-wood.png);
 }
 
+.specific-pop-info{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
 
 .info-card{
-    padding: 20px;
 
     display: flex;
+    flex-direction: column;
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     background: #ffffff;
+
+    width: 30%;
 }
 
 .image-container{
-    width: 300px;
-    border-right: 2px solid rgba(0,0,0,0.2);
+    width: 100%;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    padding: 10px
 }
 
 .image-container img{
-    width: 300px;
-    padding: 20px;
+    width: 100%;
 }
 
 .info-text{
-    padding: 20px;
+    padding: 10px;
 }
 
-.pop-name-desktop, .pop-name-mobile{
-    margin-bottom: 20px;
-}
-
-.pop-name-mobile{
-    display: none;
+.pop-name{
+    width: 100%;
+    padding: 10px;
+    background: #3ca5ad;
+    color: #ffffff;
 }
 
 .info-card i{
@@ -61,6 +68,17 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+
+.info-container{
+    width: 75%;
+    padding: 0 10px;
+
+    overflow-y: scroll;
+}
+
+.more-pops-container{
+    width: 100%;
 }
 
 .more-in{
@@ -134,7 +152,6 @@
 }
 .available-ebay-listings{
     width: 100%;
-    margin-top: 20px;
 }
 
 table { 
@@ -142,15 +159,15 @@ table {
     border-collapse: collapse; 
     color: #ffffff;
     margin-top: 20px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 tr a{
-    color: #44C8BA;
+    color: #3ca5ad;
 }
 
 tr a:active{
-    color: #44C8BA;
+    color: #3ca5ad;
 }
 
 /* Zebra striping */
@@ -230,14 +247,10 @@ th, td {
         margin-bottom: 10px;
     }
 
-    .pop-name-mobile{
+    .pop-name{
         display: block;
         text-align: center;
         margin: 10px 0;
-    }
-
-    .pop-name-desktop{
-        display: none;
     }
 
     table { 
