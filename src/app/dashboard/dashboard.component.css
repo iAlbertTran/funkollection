@@ -55,10 +55,7 @@
     outline-style: solid;
     outline-width: 15px;
     outline-color: transparent;
-    transition-property: outline-color;
-    transition-duration: 0.5s;
 
-    transition: z-index 0.5s step-end, outline-color 0.5s ease;
 }
 
 .individual-card:hover{
@@ -66,7 +63,6 @@
     
     outline-color: #353535;
 
-    transition: z-index 0.5s step-start, outline-color 0.5s ease;
 }
 
 .individual-card .image-container{
@@ -93,11 +89,9 @@
 
     padding: 5px; 
     margin-top: 30px;
+    margin-bottom: 20px;
 
     outline: 15px solid #353535;
-
-    transition-property: opacity;
-    transition-duration: 0.5s;
 
     opacity: 0;
     
@@ -185,7 +179,7 @@
 
 
 .basic-info .more-info-button{
-    color: #82CFFD;
+    color: #82CFFD !important;
 }
 
 .basic-info .more-info-button:hover{
