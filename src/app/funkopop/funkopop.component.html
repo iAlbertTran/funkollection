@@ -11,19 +11,19 @@
         
         <div class='series-info'>
             <h6>Series</h6>
-            <h6 class='info-separator'>&nbsp; - &nbsp;</h6>
+            <h6 class='info-separator'>&nbsp; : &nbsp;</h6>
             <h6>Pop! {{ basicInfo.seriesName }} </h6>
         </div>
   
         <div class='category-info'>
             <h6>Category</h6>
-            <h6 class='info-separator'>&nbsp; - &nbsp;</h6>
+            <h6 class='info-separator'>&nbsp; : &nbsp;</h6>
             <h6>{{ basicInfo.categoryName }}</h6>
         </div>
   
         <div class='number-info'>
             <h6>Number</h6>
-            <h6 class='info-separator'>&nbsp; - &nbsp;</h6>
+            <h6 class='info-separator'>&nbsp; : &nbsp;</h6>
             <h6>{{ basicInfo.number }}</h6>
         </div> 
   
@@ -44,6 +44,7 @@
               <i>See sales history </i> 
               <i class="fas fa-arrow-right"></i>
           </div>
+          <p class="table-info-notes"><i>U.S. listings only. Shipping cost not included.</i></p>
         </div>
         <table>
           <tr class='column-headings'>
@@ -73,14 +74,15 @@
             </td>
             <td>
               {{ ebayListing.location[0] }}
+              <!-- Country -->
+              <!--
               <br/>
               {{ ebayListing.location[1] }}
+              -->
             </td>
             <td>
               ${{ ebayListing.sellingStatus[0].convertedCurrentPrice[0].__value__ }} 
               {{ ebayListing.sellingStatus[0].convertedCurrentPrice[0]['@currencyId']}}
-              <br/>
-              + Shipping
             </td>
             <td class='listing-countdown'>
               <countdown-timer [end]="ebayListing.listingInfo[0].endTime[0]"></countdown-timer>
@@ -95,6 +97,7 @@
               <i>See current listings </i> 
               <i class="fas fa-arrow-right"></i>
           </div>
+          <p class="table-info-notes"><i>U.S. listings only. Shipping cost not included.</i></p>
         </div>
         <table>
           <tr class='column-headings'>
@@ -116,14 +119,15 @@
             </td>
             <td>
               {{ ebayListing.location[0] }}
+              <!-- Country -->
+              <!--
               <br/>
               {{ ebayListing.location[1] }}
+              -->
             </td>
             <td>
               ${{ ebayListing.sellingStatus[0].convertedCurrentPrice[0].__value__ }} 
               {{ ebayListing.sellingStatus[0].convertedCurrentPrice[0]['@currencyId']}} 
-              <br/>
-              + Shipping
             </td>
             <td class='listing-countdown'>
               <span *ngFor='let datePartial of convertToReadableDate(ebayListing.listingInfo[0].endTime[0])' style="margin: 1px;">

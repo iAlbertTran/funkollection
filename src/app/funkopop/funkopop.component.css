@@ -11,6 +11,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+
+
 }
 
 
@@ -23,7 +25,8 @@
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     background: #ffffff;
 
-    width: 30%;
+    border: 15px solid #1C1C1E;
+    width: 300px;
 }
 
 .image-container{
@@ -37,14 +40,16 @@
 }
 
 .info-text{
-    padding: 10px;
+    padding-top: 20px;
+    background: #1C1C1E;
+    color: #ffffff;
 }
 
 .pop-name{
     width: 100%;
-    padding: 10px;
-    background: #3ca5ad;
-    color: #ffffff;
+    padding-bottom: 10px;
+    background: #1C1C1E;
+    color: #3ca5ad;
 }
 
 .info-card i{
@@ -67,12 +72,12 @@
 .series-info, .category-info, .number-info{
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .info-container{
-    width: 75%;
-    padding: 0 10px;
+    width: calc(100% - 300px);
+    padding-left: 10px;
 
     overflow-y: scroll;
 }
@@ -144,12 +149,19 @@
     width: 100%;
 }
 
+.table-info-notes{
+    font-size: 12px;
+    margin-left: 5px;
+    margin-bottom: 0;
+}
+
 .ebay-table-header{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-end;
     
 }
+
 .available-ebay-listings{
     width: 100%;
 }
@@ -216,6 +228,15 @@ th, td {
         padding: 10px;
     }
 
+    .specific-pop-info{
+        flex-direction: column;
+    }
+
+    .info-container{
+        width: 100%;
+        padding: 0;
+    }
+
     .info-card .image-container{
         border-right: none;
         border-bottom: 2px solid rgba(0,0,0,0.2);
@@ -231,7 +252,8 @@ th, td {
         width: 100%;
 
         flex-direction: column;
-        padding: 5px;
+
+        margin-bottom: 20px;
     }
 
     .info-card .image-container img{
@@ -239,8 +261,14 @@ th, td {
         width: 275px;
     }
 
+    
+
     .info-separator{
         display: none;
+    }
+
+    .info-text{
+        text-align: center;
     }
 
     .series-info, .category-info, .number-info{
@@ -260,7 +288,6 @@ th, td {
     .pop-name{
         display: block;
         text-align: center;
-        margin: 10px 0;
     }
 
     table { 
@@ -340,6 +367,7 @@ only screen and (max-width: 480px)  {
 
     .ebay-table-header{
         flex-direction: column;
+        align-items: flex-start;
         background: #1C1C1E;
         color: #ffffff;
         padding: 10px;
@@ -349,5 +377,9 @@ only screen and (max-width: 480px)  {
         text-align: center;
         color: #44C8BA;
         font-size: 16px;
+    }
+
+    .ebay-table-header .table-info-notes{
+        margin: 10px 0 0 0 ;
     }
 }
