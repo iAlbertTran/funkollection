@@ -196,8 +196,18 @@ th, td {
     min-width: 100px;
 }
 
+.past-listings-btn{
+    background: #3ca5ad;
+    padding: 10px;
+    color: #ffffff;
+
+    transition-property: background;
+    transition-duration: 0.5s;
+}
+
 .past-listings-btn:hover{
     cursor: pointer;
+    background: #44C8BA;
 }
 
 @media only screen and (max-width: 767px) {

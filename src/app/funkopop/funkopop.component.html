@@ -1,6 +1,6 @@
 <div class='content' *ngIf='basicInfo != null'>
   <div class='specific-pop-info'>
-    <div class='info-card'>
+    <div class='info-card animated bounceInLeft'>
   
       <h5 class='pop-name'>{{ basicInfo.name }}</h5>
   
@@ -40,8 +40,7 @@
     <div class="info-container">
       <div class='available-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && !showCompletedListings'>
         <div class='ebay-table-header'>
-          <h5>Available eBay listings for <i>{{ ebaySearchText }}</i></h5>
-          <div class='past-listings-btn' (click)='getCompletedListings(25)'>
+          <div class='past-listings-btn animated fadeIn' (click)='getCompletedListings(25)'>
               <i>See sales history </i> 
               <i class="fas fa-arrow-right"></i>
           </div>
@@ -92,7 +91,6 @@
     
       <div class='available-ebay-listings sold-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && showCompletedListings'>
         <div class='ebay-table-header'>
-          <h4> e0Bay sales history for <i>{{ ebaySearchText }}</i></h4>
           <div class='past-listings-btn' (click)='getEbayListings(25)'>
               <i>See current listings </i> 
               <i class="fas fa-arrow-right"></i>
