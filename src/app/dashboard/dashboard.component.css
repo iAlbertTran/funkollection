@@ -45,17 +45,28 @@
 
     margin: 3px;
 
+    Z-index: 1;
+
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
 
-    position: relative;
 
+    outline-style: solid;
+    outline-width: 15px;
+    outline-color: transparent;
+    transition-property: outline-color;
+    transition-duration: 0.5s;
+
+    transition: z-index 0.5s step-end, outline-color 0.5s ease;
 }
 
 .individual-card:hover{
     z-index: 2;
     
+    outline-color: #353535;
+
+    transition: z-index 0.5s step-start, outline-color 0.5s ease;
 }
 
 .individual-card .image-container{
@@ -80,7 +91,10 @@
     justify-content: space-around;
     align-items: center;
 
-    background: #f9f9f9;
+    padding: 5px; 
+    margin-top: 30px;
+
+    outline: 15px solid #353535;
 
     transition-property: opacity;
     transition-duration: 0.5s;
@@ -90,6 +104,10 @@
     -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
+
+    background: #353535;
+    color: #ffffff;
+
 }   
 
 .individual-card:hover .basic-info{
@@ -135,6 +153,7 @@
     font-size: 20px;
 
     margin: 0 5px;
+    color: #3ca5ad;
 }
 
 
@@ -145,13 +164,19 @@
     margin: 10px 0;
 
     padding: 10px;
+
+    
     
 }
 
-.individual-card .pop-back-options{
-    width: 75%;
+.individual-card .pop-info-options{
+    width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+}
+
+.individual-card .pop-info-options i{
+    color: #f9f9f9;
 }
 
 .opacity{
