@@ -3,16 +3,16 @@
         <h3 class='dashboard-text animated fadeIn'>Random Pop! Vinyls</h3>
         <div class="pop-list">
 
-            <div #individualCard (window:resize)="0" class="individual-card animated fadeInUp faster" *ngFor="let individualpop of funkopops" [ngStyle]="{'height.px': individualCard.offsetWidth }">
+            <div #individualCard class="individual-card animated fadeInUp faster" *ngFor="let individualpop of funkopops">
                 <div class="card-container">
-                    <div class='image-container' [ngStyle]="{'height.px': individualCard.offsetWidth}">
+                    <div #imageContainer class='image-container' [ngStyle]="{'height.px': individualCard.offsetWidth}">
                         <img src="http://localhost:8000/api/funkopop/{{ individualpop.image }}" style="width:100%">
                     </div>
                     <div class="basic-info">
                         <div id='{{ individualpop.id }}-overlay-name' class="pop-info-name">{{ individualpop.name }}</div>
                         <div id='{{ individualpop.id }}-overlay-series' class="pop-info-series">
                                 <i class="fas fa-caret-right"></i>
-                            Series: Pop! {{ individualpop.series }}</div>
+                            Series: {{ individualpop.series }}</div>
                         <div id='{{ individualpop.id }}-overlay-category' class="pop-info-category">
                             <i class="fas fa-caret-right"></i>
                             Category: {{ individualpop.category }}</div>
