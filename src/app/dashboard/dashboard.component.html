@@ -6,7 +6,7 @@
             <div #individualCard class="individual-card animated fadeInUp faster" *ngFor="let individualpop of funkopops">
                 <div class="card-container">
                     <div #imageContainer class='image-container' [ngStyle]="{'height.px': individualCard.offsetWidth}">
-                        <img src="http://localhost:8000/api/funkopop/{{ individualpop.image }}" style="width:100%">
+                        <img src="{{apiService.baseURL}}/funkopop/{{ individualpop.image }}" style="width:100%">
                     </div>
                     <div class="basic-info">
                         <div id='{{ individualpop.id }}-overlay-name' class="pop-info-name">{{ individualpop.name }}</div>
