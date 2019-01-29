@@ -1,0 +1,84 @@
+/* Taken from https://www.w3schools.com/howto/howto_css_flip_card.asp */
+.flip-card {
+  background-color: transparent;
+  width: calc((100% / 5) - 6px);
+  /* 
+    Use https://stackoverflow.com/questions/46301181/angular2-set-element-height-same-as-width
+    To make height = width
+  */
+  perspective: 1000px;
+
+  margin: 3px;
+  
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  transition: transform 0.3s;
+  transform-style: preserve-3d;
+  
+
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #ffffff;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.flip-card-back {
+  background-color: #1C1C1E;
+  color: white;
+  transform: rotateY(180deg);
+  z-index: 1;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 1025px) {
+
+  .flip-card{
+    width: calc((100% / 4) - 6px);
+  }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+
+  .flip-card{
+    width: calc((100% / 3) - 6px);
+  }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 481px) {
+
+  .flip-card{
+    width: calc((100% / 2) - 6px);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+
+  .flip-card{
+    width: 300px;
+  }
+}

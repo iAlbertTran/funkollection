@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
   unableToCheckUsernameAvailability: String = 'Unable to check availability of username. Please try again later.';
   unableToRegisterMessage: String = 'Unable to register user. Please try again later.';
 
-  constructor(private _registerModel: RegisterModel, private _helperService: HelperService, private _apiService: FunkollectionApiService) { 
+  constructor(private _registerModel: RegisterModel, public _helperService: HelperService, private _apiService: FunkollectionApiService) { 
   }
 
   ngOnInit() {

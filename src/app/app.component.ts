@@ -9,7 +9,7 @@ import { HelperService } from './services/helper.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private authService: AuthService, private _helperService: HelperService){}
+  constructor(private authService: AuthService, public _helperService: HelperService){}
   title = 'funkollection';
 
 

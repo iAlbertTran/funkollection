@@ -12,7 +12,7 @@ import { HelperService } from '../services/helper.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public authService: AuthService, private _helperService: HelperService, public router: Router, private _loginModel: LoginModel) { }
+  constructor(public authService: AuthService, public _helperService: HelperService, public router: Router, private _loginModel: LoginModel) { }
 
   username: string;
   password: string;

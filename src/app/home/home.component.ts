@@ -11,7 +11,7 @@ import { HelperService } from '../services/helper.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthService, private _helperService: HelperService, private _route: Router){}
+  constructor(private authService: AuthService, public _helperService: HelperService, private _route: Router){}
   title = 'funkollection';
   isLoggedIn: boolean = false;
   showMenu: boolean = false;
