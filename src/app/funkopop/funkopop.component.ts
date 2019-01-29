@@ -266,7 +266,6 @@ export class FunkopopComponent implements OnInit {
           
         this.estimatedValue = Math.round( this.estimatedValue / ebayListings.length);
         
-        console.log(this.estimatedValue);
       },
       err => {
         //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);

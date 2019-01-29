@@ -4,7 +4,7 @@
     justify-content: flex-start;
     align-items: flex-start;
 
-    background: #ffffff url(../../assets/transparent-bgs/retina-wood.png);
+    background: #282B2D;
 }
 
 .specific-pop-info{
@@ -12,7 +12,11 @@
     justify-content: flex-start;
     align-items: flex-start;
 
+    width: 100%;
+}
 
+::-webkit-scrollbar{
+    display: none;
 }
 
 
@@ -94,7 +98,7 @@
 
     padding: 5px 5px 5px 0;
 
-    color: #1C1C1E;
+    color: #ffffff;
 }
 
 .more-in-series, .more-in-category{
@@ -164,6 +168,7 @@
 
 .available-ebay-listings{
     width: 100%;
+    overflow-x: hidden;
 }
 
 table { 
@@ -184,7 +189,7 @@ tr a:active{
 
 /* Zebra striping */
 tr:nth-of-type(even) { 
-    background: #282B2D; 
+    background: #262626; 
 }
 
 tr:nth-of-type(odd) { 
