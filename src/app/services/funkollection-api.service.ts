@@ -15,9 +15,10 @@ import { LoginModel } from '../models/loginModel';
 @Injectable()
 export class FunkollectionApiService {
 
-  //baseURL = 'http://localhost:8000/api';
+  baseURL = 'http://localhost:8000/api';
+  //baseURL = 'https://funkollection-api.herokuapp.com/api';
 
-  baseURL = 'https://funkollection-api.herokuapp.com/api';
+
   funkopopURL = this.baseURL + '/funkopop';
 
   //An api to bypass CORS issues when accessing 3rd party apis.
