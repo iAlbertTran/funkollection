@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,8 @@ import { DefaultUrlSerializer, UrlTree } from '@angular/router';
 
 // Import your library
 import { CountdownTimerModule } from 'ngx-countdown-timer';
+
+import { MDBBootstrapModule } from 'angular-bootstrap-md
 
 export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     parse(url: string): UrlTree {
@@ -66,6 +68,7 @@ const appRoutes: Routes = [
     FunkopopComponent,
   ],
   imports: [
+    MDBBootstrapModule.forRoot(),
     BrowserModule,
     CountdownTimerModule.forRoot(),
     HttpClientModule,
@@ -76,6 +79,7 @@ const appRoutes: Routes = [
       {enableTracing: true}
     )
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [AuthGuard, 
     AuthService, 
     HelperService, 
