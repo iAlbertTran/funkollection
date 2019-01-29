@@ -29,3 +29,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ##Deploying to GH-Pages
 
 Run: `ng build --prod --output-path docs`
+Make a copy of docs/index.html and rename to 404.html
