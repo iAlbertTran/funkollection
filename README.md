@@ -28,4 +28,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ##Deploying to GH-Pages
 
-Run: `ng build --prod --output-path docs`
+Run: `ng build --prod --output-path docs --base-href Funkollection`
+Go into Docs/index.html and in the header, change base to:  `<base href="/Funkollection/">`
