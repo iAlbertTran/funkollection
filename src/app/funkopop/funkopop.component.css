@@ -1,6 +1,5 @@
 .content{
     display: flex;
-    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 
@@ -9,10 +8,9 @@
 
 .specific-pop-info{
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-
-    width: 100%;
 }
 
 ::-webkit-scrollbar{
@@ -31,6 +29,8 @@
 
     border: 15px solid #1C1C1E;
     width: 300px;
+
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
 }
 
 .image-container{
@@ -53,7 +53,8 @@
     width: 100%;
     padding-bottom: 10px;
     background: #1C1C1E;
-    color: #3ca5ad;
+    color: #2dde98;
+    font-weight: bold;
 }
 
 .info-card i{
@@ -88,7 +89,21 @@
 
 .more-pops-container{
     width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
+
+.more-pops-container .more-pops{
+    width: 100%;
+
+    margin-top: 20px;
+
+    border: 1px solid #32393c;
+}
+
 
 .more-in{
     width: 100%;
@@ -98,65 +113,43 @@
 
     padding: 5px 5px 5px 0;
 
-    color: #ffffff;
+    color: #ffed68;
+    text-align: center;
 }
 
 .more-in-series, .more-in-category{
-    width: 100%;
-    height: 227.5px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    
-    overflow-y: hidden;
+
+    margin: 20px 0;
 }
 
 
 .series-pops, .category-pops{
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-    padding: 0 25px;
-}
-
-.individual-series-pop, .individual-category-pop{
-    width: 175px;
-    height: 175px;
-    display: flex;
     justify-content: center;
     align-items: center;
 
-    padding: 0 10px;
-    
 
-    transition: all .2s ease-in-out;
+}
 
+.more-in-series .more-carousel-item, .more-in-category .more-carousel-item{
+    width: 200px;
+    height: 200px;
     background: #ffffff;
-
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-
-    margin: 0 3px;
 }
 
-.individual-series-pop:hover, .individual-category-pop:hover{
-
+.more-in-series .more-carousel-item:hover, .more-in-category .more-carousel-item:hover{
     cursor: pointer;
-
-    transform: scale(1.3);
-    
-}
-
-.individual-series-pop img, .individual-category-pop img{
-    width: 100%;
 }
 
 .table-info-notes{
     font-size: 12px;
     margin-left: 5px;
     margin-bottom: 0;
+    color: #ffed68;
+}
+
+.table-info-notes i{
+    padding-left: 10px;
 }
 
 .ebay-table-header{
@@ -180,7 +173,7 @@ table {
 }
 
 tr a{
-    color: #3ca5ad;
+    color: #ffffff;
 }
 
 tr a:active{
@@ -189,7 +182,7 @@ tr a:active{
 
 /* Zebra striping */
 tr:nth-of-type(even) { 
-    background: #262626; 
+    background: rgba(31,36,39,1); 
 }
 
 tr:nth-of-type(odd) { 
@@ -213,10 +206,15 @@ th, td {
     min-width: 100px;
 }
 
+.listing-title:hover{
+    color: #65e4f5
+}
+
 .past-listings-btn{
-    background: #3ca5ad;
+    background: #00aeff;
     padding: 10px;
     color: #ffffff;
+    font-weight: bold;
 
     transition-property: background;
     transition-duration: 0.5s;
@@ -224,17 +222,41 @@ th, td {
 
 .past-listings-btn:hover{
     cursor: pointer;
-    background: #44C8BA;
+    background: rgba(0, 174, 255, 0.5);
+}
+
+.buy-it-now{
+    color: #00aeff;
+    padding: 10px 10px 0 0;
+    font-size: 15px;
+}
+
+.auction{
+    color: #ff4f81;
+    padding: 10px 10px 0 0;
+    font-size: 15px;
+}
+
+.best-offer{
+    color: #44C8BA;
+    padding: 10px 10px 0 0;
+    font-size: 15px;
+}
+
+.center-loading{
+    display: flex;
+    justify-content: center;
 }
 
 @media only screen and (max-width: 767px) {
 
     .content{
         padding: 10px;
+        flex-direction: column;
     }
 
     .specific-pop-info{
-        flex-direction: column;
+        width: 100%;
     }
 
     .info-container{
@@ -274,6 +296,11 @@ th, td {
 
     .info-text{
         text-align: center;
+    }
+
+
+    .more-pops-container{
+        flex-direction: row;
     }
 
     .series-info, .category-info, .number-info{
@@ -316,8 +343,11 @@ th, td {
     https://css-tricks.com/responsive-data-tables/
     for responsive table design
 */
-@media 
-only screen and (max-width: 480px)  {
+@media only screen and (max-width: 480px)  {
+
+    .more-pops-container{
+        flex-direction: column;
+    }
 
     table{
         margin-top: 0;

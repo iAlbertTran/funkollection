@@ -23,6 +23,7 @@ export class FunkopopComponent implements OnInit {
   wishlist = [];
   seriespops = null;
   categorypops = null;
+  otherPopsInCategory = [];
 
   availableEbayListings = null;
   ebaySearchText = null;
@@ -67,7 +68,6 @@ export class FunkopopComponent implements OnInit {
           else{
             this.getEbayListings(25);
             this.getEstimatedValue();
-            this.getPopsInSeries(this.basicInfo.series);
             this.getPopsInCategory(this.basicInfo.category);
           }
         }
@@ -117,6 +117,9 @@ export class FunkopopComponent implements OnInit {
             this.categorypops = res['funkopops'].filter( element => {
               
               if(element.name != this.basicInfo.name){
+
+                this.otherPopsInCategory.push(element.name);
+                
                 element.series = this._helperService.replaceSpecialCharacters(element.series);
                 element.category = this._helperService.replaceSpecialCharacters(element.category);
                 element.name = this._helperService.replaceSpecialCharacters(element.name); 
@@ -127,9 +130,11 @@ export class FunkopopComponent implements OnInit {
               
               return false;
             });
+            this.getPopsInSeries(this.basicInfo.series);
           }
         },
         err => {
+          this.getPopsInSeries(this.basicInfo.series);
         }
 
       );
@@ -139,10 +144,11 @@ export class FunkopopComponent implements OnInit {
     this.apiService.getPopsInSeries(series)
       .subscribe(
         res => { 
+          this.otherPopsInCategory.forEach(element => console.log(element));
           if(res['statusCode'] == 200){
             this.seriespops = res['funkopops'].filter( element => {
 
-              if(element.name != this.basicInfo.name){
+              if(element.name != this.basicInfo.name && !this.otherPopsInCategory.includes(element.name)){
                 element.series = this._helperService.replaceSpecialCharacters(element.series);
                 element.category = this._helperService.replaceSpecialCharacters(element.category);
                 element.name = this._helperService.replaceSpecialCharacters(element.name); 
@@ -276,6 +282,7 @@ export class FunkopopComponent implements OnInit {
 
 
   getEbayListings(count: number){
+    this.availableEbayListings = null;
     let searchText = `Funko ${this.basicInfo.name} ${this.basicInfo.number}`;
 
     this.ebaySearchText = searchText;
@@ -310,6 +317,7 @@ export class FunkopopComponent implements OnInit {
   }
 
   getCompletedListings(count: number){
+    this.availableEbayListings = null;
     let searchText = `Funko ${this.basicInfo.name} ${this.basicInfo.number}`;
 
     this.ebaySearchText = searchText;
