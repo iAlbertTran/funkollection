@@ -30,7 +30,7 @@ import { DefaultUrlSerializer, UrlTree } from '@angular/router';
 // Import your library
 import { CountdownTimerModule } from 'ngx-countdown-timer';
 
-import { MDBBootstrapModule } from 'angular-bootstrap-md
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     parse(url: string): UrlTree {

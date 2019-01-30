@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
   collection = [];
   wishlist = [];
 
+  loading = true;
+
   constructor(public router: Router, private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
   ngOnInit() {
@@ -43,6 +45,7 @@ export class DashboardComponent implements OnInit {
             //this.funkopops = res['funkopops'];
             let pops = res['funkopops'];
             let size = 0;
+
             setInterval(() =>{
               if(size == pops.length)
                 return;
