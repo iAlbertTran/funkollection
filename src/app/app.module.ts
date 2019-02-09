@@ -31,6 +31,8 @@ import { DefaultUrlSerializer, UrlTree } from '@angular/router';
 import { CountdownTimerModule } from 'ngx-countdown-timer';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CollectionComponent } from './collection/collection.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     parse(url: string): UrlTree {
@@ -66,6 +68,8 @@ const appRoutes: Routes = [
     ResetPasswordComponent,
     DashboardComponent,
     FunkopopComponent,
+    CollectionComponent,
+    WishlistComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
