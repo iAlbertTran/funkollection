@@ -10,6 +10,8 @@
           <ul class="nav-options-container">
             <li [routerLink]="['']" (click)="_helperService.removeAllErrors(); _helperService.removeAllSuccess(); closeMenuDrawer()"><i class="fas fa-home"></i> Home</li>
             <li [routerLink]="['/upload']" (click)="_helperService.removeAllErrors(); _helperService.removeAllSuccess(); closeMenuDrawer()"><i class="fas fa-upload"></i> Upload</li>
+            <li [routerLink]="['/collection']" (click)="_helperService.removeAllErrors(); _helperService.removeAllSuccess(); closeMenuDrawer()"><i class="fas fa-plus"></i> Collection</li>
+            <li [routerLink]="['/wishlist']" (click)="_helperService.removeAllErrors(); _helperService.removeAllSuccess(); closeMenuDrawer()"><i class="fas fa-heart"></i> Wishlist</li>
           </ul>
     </div>
     <div class="logout-container" (click)="logout()">

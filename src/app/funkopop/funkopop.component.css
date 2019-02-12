@@ -81,10 +81,7 @@
 }
 
 .info-container{
-    width: calc(100% - 300px);
-    padding-left: 10px;
-
-    overflow-y: scroll;
+    width: 100%;
 }
 
 .more-pops-container{
@@ -139,6 +136,19 @@
 
 .more-in-series .more-carousel-item:hover, .more-in-category .more-carousel-item:hover{
     cursor: pointer;
+}
+
+
+.right-column-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: calc(100% - 300px);
+    padding-left: 10px;
+
+    overflow-y: scroll;
 }
 
 .table-info-notes{
@@ -259,9 +269,13 @@ th, td {
         width: 100%;
     }
 
-    .info-container{
+    .right-column-container{
         width: 100%;
         padding: 0;
+    }
+
+    .right-column-container canvas{
+        margin: 20px 0;
     }
 
     .info-card .image-container{

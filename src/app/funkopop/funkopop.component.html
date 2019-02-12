@@ -68,115 +68,117 @@
           
     </div>
   </div>
-  <div class="info-container" [class.centerLoading]='availableEbayListings == null || availableEbayListings.length <= 0'>
-    <img src='assets/loading.gif' *ngIf='availableEbayListings == null || availableEbayListings.length <= 0'/>
-    <div class='available-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && !showCompletedListings'>
-      <div class='ebay-table-header'>
-        <div class='past-listings-btn animated fadeIn' (click)='getCompletedListings(25)'>
-            <i>See sales history </i> 
-            <i class="fas fa-arrow-right"></i>
+  <div class='right-column-container'>
+    <canvas #saleChart id="saleChart" width="350" height="100"></canvas>
+    <div class="info-container" [class.centerLoading]='availableEbayListings == null || availableEbayListings.length <= 0'>    <img src='assets/loading.gif' *ngIf='availableEbayListings == null || availableEbayListings.length <= 0'/>
+      <div class='available-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && !showCompletedListings'>
+        <div class='ebay-table-header'>
+          <div class='past-listings-btn animated fadeIn' (click)='getCompletedListings(25)'>
+              <i>See sales history </i> 
+              <i class="fas fa-arrow-right"></i>
+          </div>
+          <p class="table-info-notes">
+            <i>U.S. listings only. Shipping cost not included.</i>
+            <i class="fas fa-shopping-cart buy-it-now"></i> Buy It Now
+            <i class="fas fa-gavel auction"></i> Auction 
+            <i class="fas fa-hand-holding-usd best-offer"></i> Best Offer
+            </p>
         </div>
-        <p class="table-info-notes">
-          <i>U.S. listings only. Shipping cost not included.</i>
-          <i class="fas fa-shopping-cart buy-it-now"></i> Buy It Now
-          <i class="fas fa-gavel auction"></i> Auction 
-          <i class="fas fa-hand-holding-usd best-offer"></i> Best Offer
-          </p>
-      </div>
-      <table>
-        <tr class='column-headings'>
-          <th></th>
-          <th>Title</th> 
-          <th>Location</th>
-          <th>Current Price</th>
-          <th>Ends in</th>
-        </tr>
-        <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInRight'>
-          <td class='image-column'><img src='{{ ebayListing.galleryURL }}' /></td>
-          <td>
-            <a class='listing-title' href='{{ ebayListing.viewItemURL }}' target='_blank'>
-              {{ ebayListing.title }}
-              <br/>
-            </a>
-            <span *ngIf="ebayListing.listingInfo[0].listingType[0] != 'Auction'">
-                <i class="fas fa-shopping-cart buy-it-now"></i>
-                <span *ngIf='ebayListing.listingInfo[0].bestOfferEnabled[0] == "true"'><i class="fas fa-hand-holding-usd best-offer" data-toggle="tooltip" data-placement="top" title="Best Offer"></i></span>
+        <table>
+          <tr class='column-headings'>
+            <th></th>
+            <th>Title</th> 
+            <th>Location</th>
+            <th>Current Price</th>
+            <th>Ends in</th>
+          </tr>
+          <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInRight'>
+            <td class='image-column'><img src='{{ ebayListing.galleryURL }}' /></td>
+            <td>
+              <a class='listing-title' href='{{ ebayListing.viewItemURL }}' target='_blank'>
+                {{ ebayListing.title }}
                 <br/>
-              </span>
-              <span *ngIf="ebayListing.listingInfo[0].listingType[0] == 'Auction'">
-                <i class="fas fa-gavel auction"></i>
-                <span *ngIf='ebayListing.listingInfo[0].bestOfferEnabled[0] == "true"'><i class="fas fa-hand-holding-usd best-offer"></i></span>
-              </span>
-          </td>
-          <td>
-            {{ ebayListing.location[0] }}
-            <!-- Country -->
-            <!--
-            <br/>
-            {{ ebayListing.location[1] }}
-            -->
-          </td>
-          <td>
-            ${{ ebayListing.sellingStatus[0].convertedCurrentPrice[0].__value__ }} 
-            {{ ebayListing.sellingStatus[0].convertedCurrentPrice[0]['@currencyId']}}
-          </td>
-          <td class='listing-countdown'>
-            <countdown-timer [end]="ebayListing.listingInfo[0].endTime[0]"></countdown-timer>
-          </td>
-        </tr>
-      </table>
-    </div>
-  
-    <div class='available-ebay-listings sold-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && showCompletedListings'>
-      <div class='ebay-table-header'>
-        <div class='past-listings-btn' (click)='getEbayListings(25)'>
-            <i>See current listings </i> 
-            <i class="fas fa-arrow-right"></i>
-        </div>
-        <p class="table-info-notes">
-          <i>U.S. listings only. Shipping cost not included.</i>
-          <i class="fas fa-shopping-cart buy-it-now"></i> Buy It Now
-          <i class="fas fa-gavel auction"></i> Auction 
-          <i class="fas fa-hand-holding-usd best-offer"></i> Best Offer
-        </p>
+              </a>
+              <span *ngIf="ebayListing.listingInfo[0].listingType[0] != 'Auction'">
+                  <i class="fas fa-shopping-cart buy-it-now"></i>
+                  <span *ngIf='ebayListing.listingInfo[0].bestOfferEnabled[0] == "true"'><i class="fas fa-hand-holding-usd best-offer" data-toggle="tooltip" data-placement="top" title="Best Offer"></i></span>
+                  <br/>
+                </span>
+                <span *ngIf="ebayListing.listingInfo[0].listingType[0] == 'Auction'">
+                  <i class="fas fa-gavel auction"></i>
+                  <span *ngIf='ebayListing.listingInfo[0].bestOfferEnabled[0] == "true"'><i class="fas fa-hand-holding-usd best-offer"></i></span>
+                </span>
+            </td>
+            <td>
+              {{ ebayListing.location[0] }}
+              <!-- Country -->
+              <!--
+              <br/>
+              {{ ebayListing.location[1] }}
+              -->
+            </td>
+            <td>
+              ${{ ebayListing.sellingStatus[0].convertedCurrentPrice[0].__value__ }} 
+              {{ ebayListing.sellingStatus[0].convertedCurrentPrice[0]['@currencyId']}}
+            </td>
+            <td class='listing-countdown'>
+              <countdown-timer [end]="ebayListing.listingInfo[0].endTime[0]"></countdown-timer>
+            </td>
+          </tr>
+        </table>
       </div>
-      <table>
-        <tr class='column-headings'>
-          <th></th>
-          <th>Title</th> 
-          <th>Location</th>
-          <th>Sold Price</th>
-          <th>Sold Date</th>
-        </tr>
-        <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInRight'>
-          <td class='image-column'><img src='{{ ebayListing.galleryURL }}' /></td>
-          <td>
-            <a class='listing-title' href='{{ ebayListing.viewItemURL }}' target='_blank'>
-              {{ ebayListing.title }}
-            </a>
-            <span *ngIf="ebayListing.listingInfo[0].listingType[0] != 'Auction'"><br/><i class="fas fa-shopping-cart buy-it-now"></i></span>
-            <span *ngIf="ebayListing.listingInfo[0].listingType[0] == 'Auction'"><br/><i class="fas fa-gavel auction"></i></span>
-            
-          </td>
-          <td>
-            {{ ebayListing.location[0] }}
-            <!-- Country -->
-            <!--
-            <br/>
-            {{ ebayListing.location[1] }}
-            -->
-          </td>
-          <td>
-            ${{ ebayListing.sellingStatus[0].convertedCurrentPrice[0].__value__ }} 
-            {{ ebayListing.sellingStatus[0].convertedCurrentPrice[0]['@currencyId']}} 
-          </td>
-          <td class='listing-countdown'>
-            <span *ngFor='let datePartial of convertToReadableDate(ebayListing.listingInfo[0].endTime[0])' style="margin: 1px;">
-              {{ datePartial }}
-            </span>
-          </td>
-        </tr>
-      </table>
+    
+      <div class='available-ebay-listings sold-ebay-listings' *ngIf='availableEbayListings != null && availableEbayListings.length > 0 && showCompletedListings'>
+        <div class='ebay-table-header'>
+          <div class='past-listings-btn' (click)='getEbayListings(25)'>
+              <i>See current listings </i> 
+              <i class="fas fa-arrow-right"></i>
+          </div>
+          <p class="table-info-notes">
+            <i>U.S. listings only. Shipping cost not included.</i>
+            <i class="fas fa-shopping-cart buy-it-now"></i> Buy It Now
+            <i class="fas fa-gavel auction"></i> Auction 
+            <i class="fas fa-hand-holding-usd best-offer"></i> Best Offer
+          </p>
+        </div>
+        <table>
+          <tr class='column-headings'>
+            <th></th>
+            <th>Title</th> 
+            <th>Location</th>
+            <th>Sold Price</th>
+            <th>Sold Date</th>
+          </tr>
+          <tr *ngFor='let ebayListing of availableEbayListings' class='animated bounceInRight'>
+            <td class='image-column'><img src='{{ ebayListing.galleryURL }}' /></td>
+            <td>
+              <a class='listing-title' href='{{ ebayListing.viewItemURL }}' target='_blank'>
+                {{ ebayListing.title }}
+              </a>
+              <span *ngIf="ebayListing.listingInfo[0].listingType[0] != 'Auction'"><br/><i class="fas fa-shopping-cart buy-it-now"></i></span>
+              <span *ngIf="ebayListing.listingInfo[0].listingType[0] == 'Auction'"><br/><i class="fas fa-gavel auction"></i></span>
+              
+            </td>
+            <td>
+              {{ ebayListing.location[0] }}
+              <!-- Country -->
+              <!--
+              <br/>
+              {{ ebayListing.location[1] }}
+              -->
+            </td>
+            <td>
+              ${{ ebayListing.sellingStatus[0].convertedCurrentPrice[0].__value__ }} 
+              {{ ebayListing.sellingStatus[0].convertedCurrentPrice[0]['@currencyId']}} 
+            </td>
+            <td class='listing-countdown'>
+              <span *ngFor='let datePartial of convertToReadableDate(ebayListing.listingInfo[0].endTime[0])' style="margin: 1px;">
+                {{ datePartial }}
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

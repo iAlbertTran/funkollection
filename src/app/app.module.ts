@@ -49,8 +49,10 @@ const appRoutes: Routes = [
       canActivate: [AuthGuard],
       children: [
         { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
-        { path: 'dashboard', component: DashboardComponent}, 
-        { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] }, 
+        { path: 'dashboard', component: DashboardComponent},
+        { path: 'collection', component: CollectionComponent}, 
+        { path: 'wishlist', component: WishlistComponent}, 
+        { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] },
         { path: 'funko/:series/:category/:name', component: FunkopopComponent},
       ]
   },

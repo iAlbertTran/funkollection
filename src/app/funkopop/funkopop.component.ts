@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { FunkollectionApiService } from '../services/funkollection-api.service';
 import { HelperService } from '../services/helper.service';
 import * as moment from 'moment';
+import {Chart} from 'chart.js';
 
 @Component({
   selector: 'app-funkopop',
@@ -33,6 +34,10 @@ export class FunkopopComponent implements OnInit {
   removeFailedMessage: String = 'Unable to remove ';
   addSuccess: String = 'Successfully added ';
   removeSuccess: String = 'Successfully removed ';
+
+  @ViewChild('saleChart') saleChart;
+
+  chartDataset = [];
   
   constructor(private route: ActivatedRoute, private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
@@ -264,11 +269,26 @@ export class FunkopopComponent implements OnInit {
           return;
         }
 
+
         ebayListings.forEach((listing) => {
           
           this.estimatedValue += parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__);
-          
+
+          if(moment().diff(listing.listingInfo[0].endTime[0], 'days') <= 90){
+            this.chartDataset.push(
+              {
+                x: this.convertToReadableDate(listing.listingInfo[0].endTime[0])[0],
+                y: listing.sellingStatus[0].convertedCurrentPrice[0].__value__
+              }
+            );
+          }
         });
+        
+        console.log(this.chartDataset);
+
+        setTimeout(() => {
+          this.initializeLineChart();
+        }, 500);
           
         this.estimatedValue = Math.round( this.estimatedValue / ebayListings.length);
         
@@ -363,5 +383,54 @@ export class FunkopopComponent implements OnInit {
   convertToReadableDate(dateString: string){
     let soldDate = `${moment(dateString).format('MMM DD YYYY')} at ${moment(dateString).format('hh:mm:ss A')}`;
     return [moment(dateString).format('MMM DD YYYY'), moment(dateString).format('hh:mm:ss A')];
+  }
+
+
+  initializeLineChart(){
+    console.log(this.chartDataset);
+    let saleChart = document.getElementById("saleChart");
+    let myChart = new Chart(saleChart, {
+      type: 'line',
+      data: {
+        datasets: [{
+          data: this.chartDataset,
+          borderColor: 'rgba(45, 222, 152, 0.4)',
+          backgroundColor: 'rgba(45, 222, 152, 0.1)',
+          pointBackgroundColor:  'rgb(45, 222, 152)'
+        }]
+      },
+      options: {
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItems, data) {
+                return "$" + parseFloat(tooltipItems.yLabel).toFixed(2);
+            }
+          }
+        },
+        title: {
+          display: true,
+          fontColor: '#ffed68',
+          text: "Sales History (last 90 days)"
+        },
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              callback: function(value, index, values) {
+                return '$' + value;
+            }
+            }
+          }],
+          xAxes: [{
+            type: 'time',
+            time: {
+                unit: 'month'
+            }
+          }]
+        }
+      }
+  });
   }
 }
