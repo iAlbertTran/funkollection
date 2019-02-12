@@ -388,7 +388,7 @@ export class FunkopopComponent implements OnInit {
 
   initializeLineChart(){
     console.log(this.chartDataset);
-    let saleChart = document.getElementById("saleChart");
+    let saleChart = $("#saleChart");
     let myChart = new Chart(saleChart, {
       type: 'line',
       data: {
