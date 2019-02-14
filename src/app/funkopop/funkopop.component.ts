@@ -85,7 +85,7 @@ export class FunkopopComponent implements OnInit {
   }
 
   getUserCollection(){
-    this.apiService.getUserCollection()
+    this.apiService.getUserCollectionID()
       .subscribe(
         res => { 
           if(res['statusCode'] == 200){
@@ -100,7 +100,7 @@ export class FunkopopComponent implements OnInit {
   }
 
   getUserWishlist(){
-    this.apiService.getUserWishlist()
+    this.apiService.getUserWishlistID()
       .subscribe(
         res => { 
           if(res['statusCode'] == 200){

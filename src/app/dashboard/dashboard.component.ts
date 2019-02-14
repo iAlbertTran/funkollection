@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getUserCollection(){
-    this.apiService.getUserCollection()
+    this.apiService.getUserCollectionID()
       .subscribe(
         res => { 
           if(res['statusCode'] == 200){
@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getUserWishlist(){
-    this.apiService.getUserWishlist()
+    this.apiService.getUserWishlistID()
       .subscribe(
         res => { 
           if(res['statusCode'] == 200){
@@ -89,25 +89,6 @@ export class DashboardComponent implements OnInit {
         }
 
       );
-  }
-
-  sortBySeries(popArray: FunkoPop[]){
-    
-    while(popArray != null && popArray.length > 0){
-      let popJSON = {};
-      let series = popArray[0].series;
-      let popsInSeries = popArray.filter((pop) => {
-        return pop.series == series;
-      });
-      
-      let popCount = popsInSeries.length;
-      popArray.splice(0, popCount);
-      popJSON['seriesName'] = series;
-      popJSON['popList'] = popsInSeries;
-      
-      this.funkopops.push(popJSON);
-    }
-
   }
 
   addToCollection(id: string, name: string){

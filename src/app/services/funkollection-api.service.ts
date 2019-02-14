@@ -15,8 +15,8 @@ import { LoginModel } from '../models/loginModel';
 @Injectable()
 export class FunkollectionApiService {
 
-  //baseURL = 'http://localhost:8000/api';
-  baseURL = 'https://funkollection-api.herokuapp.com/api';
+  baseURL = 'http://localhost:8000/api';
+  //baseURL = 'https://funkollection-api.herokuapp.com/api';
 
 
   funkopopURL = this.baseURL + '/funkopop';
@@ -161,7 +161,13 @@ export class FunkollectionApiService {
   getUserCollection(){
     let auth_headers = this.getAuthTokenHeader();
     let user = sessionStorage.getItem("LoggedInUser");
-    return this.http.get(`${this.baseURL}/users/${user}/collection`, {headers: auth_headers});
+    return this.http.get(`${this.baseURL}/users/${user}/collection/all`, {headers: auth_headers});
+  }
+
+  getUserCollectionID(){
+    let auth_headers = this.getAuthTokenHeader();
+    let user = sessionStorage.getItem("LoggedInUser");
+    return this.http.get(`${this.baseURL}/users/${user}/collection/id`, {headers: auth_headers});
   }
 
   addToCollection(popID: string){
@@ -182,8 +188,15 @@ export class FunkollectionApiService {
   getUserWishlist(){
     let auth_headers = this.getAuthTokenHeader();
     let user = sessionStorage.getItem("LoggedInUser");
-    return this.http.get(`${this.baseURL}/users/${user}/wishlist`, {headers: auth_headers});
+    return this.http.get(`${this.baseURL}/users/${user}/wishlist/all`, {headers: auth_headers});
   }
+
+  getUserWishlistID(){
+    let auth_headers = this.getAuthTokenHeader();
+    let user = sessionStorage.getItem("LoggedInUser");
+    return this.http.get(`${this.baseURL}/users/${user}/wishlist/id`, {headers: auth_headers});
+  }
+  
 
   addToWishlist(popID: string){
     let auth_headers = this.getAuthTokenHeader();
