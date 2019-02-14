@@ -1,0 +1,261 @@
+.content{
+    display: flex;
+    justify-content: center;
+
+    background: #282B2D;
+
+    min-height: calc(100% + 175px) !important;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+.funkopop-grid{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.funkopop-grid .pop-list{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    width: 100%;
+}
+
+
+.dashboard-text{
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    background: #E05C60;
+    color: #ffffff;
+
+    margin: 10px 0;
+
+    border-radius: 3px;
+}
+
+.individual-card{
+    width: calc((100% / 6) - 6px);
+
+    margin: 3px;
+
+    Z-index: 1;
+
+
+    outline-style: solid;
+    outline-width: 15px;
+    outline-color: transparent;
+
+}
+
+.individual-card:hover{
+    z-index: 2;
+    
+    outline-color: #353535;
+
+    box-shadow: 0 0 80px #000;
+
+}
+
+.individual-card .image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+
+    
+}
+
+.individual-card img{
+    width: calc(100% - 20px);
+    border-radius: 5px;
+}
+
+.basic-info{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    visibility: hidden;
+
+
+    position: absolute;
+    outline: 15px solid #353535;
+
+
+    opacity: 0;
+    
+    -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
+
+    background: #353535;
+    color: #ffffff;
+
+}   
+
+.individual-card:hover .basic-info{
+    opacity: 1;
+    visibility: visible;
+}
+
+.individual-card i{
+    font-size: 35px;
+    margin: 10px;
+
+    color: #353535;
+
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+
+.individual-card i:hover{
+    cursor: pointer;
+}
+
+.individual-card .pop-info-name{
+    color: #E05C60;
+    font-weight: bold;
+    font-size: 16px;
+
+    width: 100%;
+
+    padding: 0 10px;
+
+}
+
+.individual-card .pop-info-series, .individual-card .pop-info-category{
+    font-size: 14px;
+    width: 100%;
+    padding: 0 10px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.individual-card .pop-info-series i, .individual-card .pop-info-category i{
+    font-size: 20px;
+
+    margin: 0 5px;
+    color: #3ca5ad;
+}
+
+.individual-card .pop-info-options{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.individual-card .pop-info-options i{
+    color: #f9f9f9;
+}
+
+.opacity{
+    opacity: 1;
+}
+
+
+.basic-info .more-info-button{
+    color: #82CFFD !important;
+}
+
+.basic-info .more-info-button:hover{
+    color: #B0E2FF;
+}
+
+
+
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+
+    .individual-card .pop-info-name{
+        font-size: 14px;
+    }
+
+    .individual-card i{
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 481px) {
+    .individual-card .pop-info-name{
+        font-size: 12px;
+    }
+
+    .individual-card i{
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+
+    .series-container .series-title{
+        text-align: center;
+        padding: 10px 0;
+        margin: 0;
+
+        border-radius: 0;
+    }
+
+    .individual-card .pop-info-name{
+        font-size: 12px;
+    }
+
+    .individual-card i{
+        font-size: 25px;
+    }
+
+    .funkopop-grid .pop-list{
+        justify-content: center;
+    }
+}
+
+
+@media only screen and (max-width: 1450px) and (min-width: 1201px) {
+
+    .individual-card{
+        width: calc((100% / 5) - 6px);
+    }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 1025px) {
+
+    .individual-card{
+      width: calc((100% / 4) - 6px);
+    }
+  }
+  
+  @media only screen and (max-width: 1024px) and (min-width: 768px) {
+  
+    .individual-card{
+      width: calc((100% / 3) - 6px);
+    }
+  }
+  
+  @media only screen and (max-width: 767px) and (min-width: 481px) {
+  
+    .individual-card{
+      width: calc((100% / 2) - 6px);
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+  
+    .individual-card{
+      width: 300px;
+    }
+  }

@@ -1,3 +1,28 @@
-<p>
-  wishlist works!
-</p>
+<div class="content">
+  <div class="funkopop-grid">
+      <div class="pop-list">
+
+          <div #individualCard class="individual-card animated fadeInUp faster" *ngFor="let individualpop of wishlist">
+              <div class="card-container">
+                  <div #imageContainer class='image-container' [ngStyle]="{'height.px': individualCard.offsetWidth}">
+                      <img src="{{apiService.baseURL}}/funkopop/{{ individualpop.image }}" style="width:100%">
+                  </div>
+                  <div class="basic-info">
+                      <div id='{{ individualpop.id }}-overlay-name' class="pop-info-name">{{ individualpop.name }}</div>
+                      <div id='{{ individualpop.id }}-overlay-series' class="pop-info-series">
+                              <i class="fas fa-caret-right"></i>
+                          Series: {{ individualpop.series }}</div>
+                      <div id='{{ individualpop.id }}-overlay-category' class="pop-info-category">
+                          <i class="fas fa-caret-right"></i>
+                          Category: {{ individualpop.category }}</div>
+                      <div id='{{ individualpop.id }}-back-options' class="pop-info-options">
+                          <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle more-info-button" (click)="moreInformation(individualpop)"></i>
+                          <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(individualpop.id)" (click)="addToCollection(individualpop.id, individualpop.name)"></i>
+                          <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(individualpop)" (click)="addToWishlist(individualpop.id, individualpop.name)"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>  
+  </div>
+</div>
