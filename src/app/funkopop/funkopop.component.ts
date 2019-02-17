@@ -27,6 +27,7 @@ export class FunkopopComponent implements OnInit {
   otherPopsInCategory = [];
 
   availableEbayListings = null;
+  completedListings = null;
   ebaySearchText = null;
 
   getFunkoPopFailedMessage: string = 'Unable to retrieve information on ';
@@ -53,6 +54,7 @@ export class FunkopopComponent implements OnInit {
       this.seriespops = null;
       this.categorypops = null;
       this.availableEbayListings = null;
+      this.completedListings = null;
       this.ebaySearchText = null;
 
       this.getInfo();
@@ -71,8 +73,9 @@ export class FunkopopComponent implements OnInit {
             this._helperService.addErrorToMessages(`${this.getFunkoPopFailedMessage} ${this.name}`);
           }
           else{
+            this.basicInfo.value = Math.round(this.basicInfo.value);
             this.getEbayListings(25);
-            this.getEstimatedValue();
+            this.getCompletedListings(25);
             this.getPopsInCategory(this.basicInfo.category);
           }
         }
@@ -256,50 +259,6 @@ export class FunkopopComponent implements OnInit {
     );
   }
 
-  getEstimatedValue(){
-    let searchText = `Funko ${this.basicInfo.name} ${this.basicInfo.number}`;
-
-    this.ebaySearchText = searchText;
-
-    this.apiService.getCompletedEbayListings(searchText, 1000).subscribe(
-      res => { 
-        let ebayListings = res['findCompletedItemsResponse'][0].searchResult[0].item;
-
-        if(ebayListings == null){
-          return;
-        }
-
-
-        ebayListings.forEach((listing) => {
-          
-          this.estimatedValue += parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__);
-
-          if(moment().diff(listing.listingInfo[0].endTime[0], 'days') <= 90){
-            this.chartDataset.push(
-              {
-                x: this.convertToReadableDate(listing.listingInfo[0].endTime[0])[0],
-                y: listing.sellingStatus[0].convertedCurrentPrice[0].__value__
-              }
-            );
-          }
-        });
-        
-        console.log(this.chartDataset);
-
-        setTimeout(() => {
-          this.initializeLineChart();
-        }, 500);
-          
-        this.estimatedValue = Math.round( this.estimatedValue / ebayListings.length);
-        
-      },
-      err => {
-        //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
-      }
-
-    );
-  }
-
 
   getEbayListings(count: number){
     this.availableEbayListings = null;
@@ -316,8 +275,6 @@ export class FunkopopComponent implements OnInit {
           return;
         }
 
-        this.showCompletedListings = false;
-
         ebayListings.forEach((listing) => {
           listing.sellingStatus[0].convertedCurrentPrice[0].__value__ = parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__).toFixed(2);
           
@@ -326,7 +283,7 @@ export class FunkopopComponent implements OnInit {
           listing.location.push(location[2]);
         });
 
-        this.slowAddListings(ebayListings);
+        this.availableEbayListings = ebayListings;
       },
       err => {
         //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
@@ -350,34 +307,34 @@ export class FunkopopComponent implements OnInit {
           return;
         }
 
-        this.showCompletedListings = true;
-
         ebayListings.forEach((listing) => {
           listing.sellingStatus[0].convertedCurrentPrice[0].__value__ = parseFloat(listing.sellingStatus[0].convertedCurrentPrice[0].__value__).toFixed(2);
           
           let location = listing.location[0].split(',');
           listing.location[0] = `${location[0]}, ${location[1]}`;
           listing.location.push(location[2]);
+          
+          listing.listingInfo[0].endTime[0] = this.convertToReadableDate(listing.listingInfo[0].endTime[0])[0];
+
+          if(moment().diff(listing.listingInfo[0].endTime[0], 'days') <= 90){
+            this.chartDataset.push(
+              {
+                x: listing.listingInfo[0].endTime[0],
+                y: listing.sellingStatus[0].convertedCurrentPrice[0].__value__
+              }
+            );
+          }
         });
+
+        setTimeout(() => { this.initializeLineChart()}, 500);
         
-        this.slowAddListings(ebayListings);
+        this.completedListings = ebayListings;
       },
       err => {
         //this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from  wishlist.`);
       }
 
     );
-  }
-
-  slowAddListings(ebayListings){
-    let size = 0;
-    this.availableEbayListings = [];
-    setInterval(() =>{
-      if(size == ebayListings.length)
-        return;
-      this.availableEbayListings.push(ebayListings[size]);
-      ++size;
-    }, 50);
   }
 
   convertToReadableDate(dateString: string){
@@ -387,7 +344,6 @@ export class FunkopopComponent implements OnInit {
 
 
   initializeLineChart(){
-    console.log(this.chartDataset);
     let saleChart = <HTMLCanvasElement> document.getElementById("saleChart");
     let myChart = new Chart(saleChart, {
       type: 'line',
@@ -432,5 +388,36 @@ export class FunkopopComponent implements OnInit {
         }
       }
   });
+  }
+
+  staggerListings(){
+
+    this.showCompletedListings = this.showCompletedListings ? false : true;
+
+    if(this.showCompletedListings){
+      let temp = this.completedListings;
+      this.completedListings = [];
+
+      let currIndex = 0;
+
+      setInterval(() =>{
+        if(currIndex == temp.length)
+          return;
+        this.completedListings.push(temp[currIndex]);
+        ++currIndex;
+      }, 50);
+    } else{
+      let temp = this.availableEbayListings;
+      this.availableEbayListings = [];
+
+      let currIndex = 0;
+
+      setInterval(() =>{
+        if(currIndex == temp.length)
+          return;
+        this.availableEbayListings.push(temp[currIndex]);
+        ++currIndex;
+      }, 50);
+    }
   }
 }
