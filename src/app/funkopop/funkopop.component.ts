@@ -346,7 +346,7 @@ export class FunkopopComponent implements OnInit {
   initializeLineChart(){
     let saleChart = <HTMLCanvasElement> document.getElementById("saleChart");
     let myChart = new Chart(saleChart, {
-      type: 'line',
+      type: 'scatter',
       data: {
         datasets: [{
           data: this.chartDataset,
@@ -357,9 +357,14 @@ export class FunkopopComponent implements OnInit {
       },
       options: {
         tooltips: {
+          custom: function(tooltip) {
+            if (!tooltip) return;
+            // disable displaying the color box;
+            tooltip.displayColors = false;
+          },
           callbacks: {
-            label: function(tooltipItems, data) {
-                return "$" + parseFloat(tooltipItems.yLabel).toFixed(2);
+            label: (tooltipItems, data) =>{
+                return [`${tooltipItems.xLabel}`, `$${parseFloat(tooltipItems.yLabel).toFixed(2)}`];
             }
           }
         },
@@ -373,10 +378,11 @@ export class FunkopopComponent implements OnInit {
         },
         scales: {
           yAxes: [{
+            gridLines: { color: "#32393c"},
             ticks: {
               callback: function(value, index, values) {
                 return '$' + value;
-            }
+            },
             }
           }],
           xAxes: [{
