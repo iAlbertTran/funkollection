@@ -15,7 +15,10 @@
                   <input type="password" [(ngModel)]="password" name="password" class="form-control" id="passwordinput" placeholder="Password" required>
                 </div>
               
-              <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+              <button type="submit" class="btn btn-primary" (click)="login()">
+                <img class='login-gif' src='assets/loading-white.gif' *ngIf='loggingIn'/>
+                  <span *ngIf='!loggingIn'>Login</span>
+                </button>
             </form>
             <div class="register-link">
                 <a [routerLink]="['/register']" (click)="_helperService.removeAllErrors()">Don't have an account?</a>

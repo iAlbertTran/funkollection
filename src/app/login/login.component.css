@@ -61,12 +61,17 @@
 }
 
 .login-container button{
-    background: #3ca5ad;
+    background: #3ca5ad !important;
     color: #353535;
     
     font-weight: bold;
     border: none;
     margin-bottom: 20px;
+    height: 45px;
+}
+
+.login-container button:active{
+    background: #36949B !important;
 }
 
 .login-container input::placeholder{
@@ -149,6 +154,10 @@ h3{
     color: #44C8BA;
     width: 100%;
     max-width: 400px;
+}
+
+.login-gif{
+    width: 25px;
 }
 
 @media only screen and (max-width: 480px) {

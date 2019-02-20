@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
+  loggingIn = false;
+
   isLoggedIn: boolean = false;
 
   loginFailedMessage: String = "Login failed. Please try again.";
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loggingIn = true;
     this._loginModel.username = this.username;
     this._loginModel.password = this.password;
 
@@ -44,8 +47,10 @@ export class LoginComponent implements OnInit {
             
             this.router.navigate([""]);
           }
+          this.loggingIn = false;
         },
         err => {
+          this.loggingIn = false;
           this._helperService.addErrorToMessages(this.loginFailedMessage);
       });
   }
