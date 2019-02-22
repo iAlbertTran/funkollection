@@ -15,8 +15,8 @@ import { LoginModel } from '../models/loginModel';
 @Injectable()
 export class FunkollectionApiService {
 
-  //baseURL = 'http://localhost:8000/api';
-  baseURL = 'https://funkollection-api.herokuapp.com/api';
+  baseURL = 'http://localhost:8000/api';
+  //baseURL = 'https://funkollection-api.herokuapp.com/api';
 
 
   funkopopURL = this.baseURL + '/funkopop';

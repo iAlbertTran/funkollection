@@ -21,6 +21,9 @@ export class CollectionComponent implements OnInit {
   collection = [];
   wishlist = [];
 
+  collectionValue = 0;
+  averageValue = 0;
+
   constructor(public router: Router, private apiService: FunkollectionApiService, private _helperService: HelperService) { }
 
   ngOnInit() {
@@ -36,7 +39,15 @@ export class CollectionComponent implements OnInit {
           if(res['statusCode'] == 200){
             let pops = res['funkopops'];
             let size = 0;
+            
+            let totalValue = 0
+            pops.forEach((ele) => {
+              totalValue += ele.value;
+            });
 
+            this.averageValue = Math.round(totalValue / pops.length);
+            this.collectionValue = Math.round(totalValue);
+            
             setInterval(() =>{
               if(size == pops.length)
                 return;
