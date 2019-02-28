@@ -1,6 +1,8 @@
 .content{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 
     background: #282B2D;
 
@@ -9,6 +11,85 @@
 
 ::-webkit-scrollbar { 
     display: none; 
+}
+
+.collection-info{
+    padding: 20px 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center ;
+
+    background: #1C1C1E;
+    margin: 15px 0;
+}
+
+#seriesChart{
+    max-width: 850px;
+    max-height: 300px;
+    min-height: 175px;
+    min-width: 350px;
+    padding: 0 20px;
+
+    width: 70%;
+    height: 500px;
+
+}
+
+.collection-value .collection-header{
+    font-weight: bold;
+    font-size: 18px;
+    color: #ffed68;
+    text-align: center;
+}
+
+
+.collection-info .top-five{
+    width: 30%;
+    min-width: 350px;
+    color: #ffed68;
+
+    border-left: 1px solid lightgrey;
+}
+
+.collection-info .top-five-header{
+    text-align: center;
+}
+
+.collection-info .top-five .top-pop{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.collection-info .top-five .top-pop:hover{
+    cursor: pointer;
+    background: #282B2D;
+}
+
+.collection-info .top-five .top-pop .top-pop-img-container{
+    height: 50px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.collection-info .top-five .top-pop img{
+    width: 50px;
+}
+
+.collection-info .top-five .top-pop .top-pop-text p{
+    margin: 0 0 0 10px;
+    color: lightgreen;
+    font-size: 14px;
+}
+
+.collection-info .top-five .top-pop .top-pop-text .top-pop-name{
+    color: lightblue;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .funkopop-grid{
@@ -27,16 +108,26 @@
 }
 
 
-.dashboard-text{
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    background: #E05C60;
+.pop-list .collection-value{
+    width: calc((100% / 6) - 6px);
+
+    margin: 3px;
+
+    Z-index: 1;
+
+
+    outline-style: solid;
+    outline-width: 15px;
+    outline-color: transparent;
+
+    background: #1C1C1E;
     color: #ffffff;
+    padding: 10px;
+}
 
-    margin: 10px 0;
-
-    border-radius: 3px;
+.pop-list .collection-value p{
+    margin: 10px 0 0 0;
+    padding-left: 5px;
 }
 
 .individual-card{
@@ -179,6 +270,14 @@
 
 
 
+@media only screen and (max-width: 768px) {
+    .collection-info{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 @media only screen and (max-width: 1024px) and (min-width: 768px) {
 
     .individual-card .pop-info-name{
@@ -226,35 +325,35 @@
 
 @media only screen and (max-width: 1450px) and (min-width: 1201px) {
 
-    .individual-card{
+    .individual-card, .pop-list .collection-value{
         width: calc((100% / 5) - 6px);
     }
 }
 
 @media only screen and (max-width: 1200px) and (min-width: 1025px) {
 
-    .individual-card{
+    .individual-card, .pop-list .collection-value{
       width: calc((100% / 4) - 6px);
     }
   }
   
   @media only screen and (max-width: 1024px) and (min-width: 768px) {
   
-    .individual-card{
+    .individual-card, .pop-list .collection-value{
       width: calc((100% / 3) - 6px);
     }
   }
   
   @media only screen and (max-width: 767px) and (min-width: 481px) {
   
-    .individual-card{
+    .individual-card, .pop-list .collection-value{
       width: calc((100% / 2) - 6px);
     }
   }
   
   @media only screen and (max-width: 480px) {
   
-    .individual-card{
+    .individual-card, .pop-list .collection-value{
       width: 300px;
     }
   }
