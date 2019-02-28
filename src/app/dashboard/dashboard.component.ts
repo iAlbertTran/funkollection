@@ -13,15 +13,7 @@ import * as $ from 'jquery';
 })
 export class DashboardComponent implements OnInit {
 
-  getFunkoPopFailedMessage: string = 'Unable to retrieve any Pop! Vinyls ';
-  addFailedMessage: String = 'Unable to add ';
-  removeFailedMessage: String = 'Unable to remove ';
-  addSuccess: String = 'Successfully added ';
-  removeSuccess: String = 'Successfully removed ';
-
   funkopops = [];
-  collection = [];
-  wishlist = [];
 
   loading = true;
 
@@ -33,8 +25,8 @@ export class DashboardComponent implements OnInit {
 
   refreshDashboard(){
     this.getRandomPops(20);
-    this.getUserCollection();
-    this.getUserWishlist();
+    this._helperService.getUserCollection();
+    this._helperService.getUserWishlist();
   }
   getRandomPops(count : number){
     this.apiService.getRandomFunkoPops(count)
@@ -55,136 +47,9 @@ export class DashboardComponent implements OnInit {
           }
         },
         err => {
-          this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
+          this._helperService.addErrorToMessages(this._helperService.getFunkoPopFailedMessage);
         }
 
       );
-  }
-
-  getUserCollection(){
-    this.apiService.getUserCollectionID()
-      .subscribe(
-        res => { 
-          if(res['statusCode'] == 200){
-            this.collection = res['funkopops'];
-          }
-        },
-        err => {
-          this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
-        }
-
-      );
-  }
-
-  getUserWishlist(){
-    this.apiService.getUserWishlistID()
-      .subscribe(
-        res => { 
-          if(res['statusCode'] == 200){
-            this.wishlist = res['funkopops'];
-          }
-        },
-        err => {
-          this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
-        }
-
-      );
-  }
-
-  addToCollection(id: string, name: string){
-    $(`#${id}-collection-button`).addClass('animated faster pulse');
-
-    setTimeout(() => {
-      $(`#${id}-collection-button`).removeClass('animated faster pulse');
-    }, 500);
-
-    if(this.collection.includes(id)){
-      this.removeFromCollection(id, name);
-    }
-
-    else{
-
-      this.apiService.addToCollection(id).subscribe(
-        res => { 
-          this.getUserCollection();
-          this._helperService.addSuccessToMessages(`${this.addSuccess} ${name} to collection!`);
-        },
-        err => {
-          this.getUserCollection();
-          this._helperService.addErrorToMessages(`${this.addFailedMessage} ${name} to collection!`);
-        }
-
-      );
-    }
-  }
-
-  removeFromCollection(id: string, name: string){
-
-    this.apiService.removeFromCollection(id).subscribe(
-      res => { 
-        this.getUserCollection();
-        this._helperService.addSuccessToMessages(`${this.removeSuccess} ${name} from collection!`);
-
-      },
-      err => {
-        this.getUserCollection();
-        this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from collection!`);
-      }
-
-    );
-  }
-
-  addToWishlist(id: string, name: string){
-    $(`#${id}-wishlist-button`).addClass('animated faster pulse');
-
-    setTimeout(() => {
-      $(`#${id}-wishlist-button`).removeClass('animated faster pulse');
-    }, 500);
-
-    if(this.wishlist.includes(id)){
-      this.removeFromWishlist(id, name);
-    }
-
-    else{
-
-      this.apiService.addToWishlist(id).subscribe(
-        res => { 
-          this.getUserWishlist();
-          this._helperService.addSuccessToMessages(`${this.addSuccess} ${name} to wishlist!`);
-
-        },
-        err => {
-          this.getUserWishlist();
-          this._helperService.addErrorToMessages(`${this.addFailedMessage} ${name} to wishlist!`);
-        }
-
-      );
-    }
-  }
-
-  removeFromWishlist(id: string, name: string){
-
-    this.apiService.removeFromWishlist(id).subscribe(
-      res => { 
-        this.getUserWishlist();
-        this._helperService.addSuccessToMessages(`${this.removeSuccess} ${name} from wishlist!`);
-
-      },
-      err => {
-        this.getUserWishlist();
-        this._helperService.addErrorToMessages(`${this.removeFailedMessage} ${name} from wishlist.`);
-      }
-
-    );
-  }
-
-  moreInformation(funkopop: FunkoPop){
-    this._helperService.removeAllErrors();
-    this._helperService.removeAllSuccess();
-    let series: string = funkopop.series.toString().replace(/ /g, '-').toLowerCase();
-    let category = funkopop.category.toString().replace(/ /g, '-').toLowerCase();
-    let name = funkopop.name.replace(/ /g, '-').toLowerCase();
-
-    this.router.navigate([`funko/${series}/${category}/${name}`]);
   }
 }
