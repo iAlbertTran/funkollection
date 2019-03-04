@@ -16,7 +16,8 @@ export class CollectionComponent implements OnInit {
   getFunkoPopFailedMessage: string = 'Unable to retrieve any Pop! Vinyls ';
 
   collection = [];
-  wishlist = [];
+  collectionID = [];
+  wishlistID = [];
 
   collectionValue = 0;
   averageValue = 0;
@@ -32,9 +33,9 @@ export class CollectionComponent implements OnInit {
 
   ngOnInit() {
     this.getUserCollection();
-    this.getUserWishlist();
+    this.getUserCollectionID();
+    this.getUserWishlistID();
   }
-
 
   getUserCollection(){
     this.apiService.getUserCollection()
@@ -42,60 +43,135 @@ export class CollectionComponent implements OnInit {
         res => { 
           if(res['statusCode'] == 200){
             let pops = res['funkopops'];
-            let size = 0;
-            
-            let totalValue = 0
-            pops.forEach((ele) => {
-              totalValue += ele.value;
 
-              if(this.seriesList.hasOwnProperty(ele.series)){
-                this.seriesList[ele.series] += 1;
-              } else{
-                this.seriesList[ele.series] = 1;
-              }
-            });
-
-
-            Object.keys(this.seriesList).forEach( (key) => {
-              this.seriesChartX.push(key);
-              this.seriesChartY.push(this.seriesList[key]);
-            });
-
-
-            this.averageValue = Math.round(totalValue / pops.length);
-            this.collectionValue = Math.round(totalValue);
-
+            this.calculateCollectionValue(pops);
             this.displaySeriesChart();
             this.getTopFive(pops);
-
-            setInterval(() =>{
-              if(size == pops.length)
-                return;
-              this.collection.push(pops[size]);
-              ++size;
-            }, 50);
+            this.staggerEntrance(pops);
           }
         },
         err => {
-          this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
+          this._helperService.addErrorToMessages(this._helperService.getFunkoPopFailedMessage);
         }
 
       );
   }
 
-  getUserWishlist(){
+  getUserCollectionID(){
+    this.apiService.getUserCollectionID()
+    .subscribe(
+      res => { 
+        if(res['statusCode'] == 200){
+          this.collectionID = res['funkopops'];
+        }
+      },
+      err => {
+        this._helperService.addErrorToMessages(this._helperService.getFunkoPopFailedMessage);
+      }
+
+    );
+  }
+  
+  getUserWishlistID(){
     this.apiService.getUserWishlistID()
       .subscribe(
         res => { 
           if(res['statusCode'] == 200){
-            this.wishlist = res['funkopops'];
+            this.wishlistID = res['funkopops'];
           }
         },
         err => {
-          this._helperService.addErrorToMessages(this.getFunkoPopFailedMessage);
+          this._helperService.addErrorToMessages(this._helperService.getFunkoPopFailedMessage);
         }
 
       );
+  }
+
+  addToCollection(id: string, name: string){
+    $(`#${id}-collection-button`).addClass('animated faster pulse');
+
+    setTimeout(() => {
+      $(`#${id}-collection-button`).removeClass('animated faster pulse');
+    }, 500);
+
+    if(this.collectionID.includes(id)){
+      this.removeFromCollection(id, name);
+    }
+
+    else{
+
+      this.apiService.addToCollection(id).subscribe(
+        res => { 
+          this.getUserCollectionID();
+          this._helperService.addSuccessToMessages(`${this._helperService.addSuccess} ${name} to collection!`);
+        },
+        err => {
+          this.getUserCollectionID();
+          this._helperService.addErrorToMessages(`${this._helperService.addFailedMessage} ${name} to collection!`);
+        }
+
+      );
+    }
+  }
+  
+  removeFromCollection(id: string, name: string){
+
+    this.apiService.removeFromCollection(id).subscribe(
+      res => { 
+        this.getUserCollectionID();
+        this._helperService.addSuccessToMessages(`${this._helperService.removeSuccess} ${name} from collection!`);
+
+      },
+      err => {
+        this.getUserCollectionID();
+        this._helperService.addErrorToMessages(`${this._helperService.removeFailedMessage} ${name} from collection!`);
+      }
+
+    );
+  }
+    
+  addToWishlist(id: string, name: string){
+    $(`#${id}-wishlist-button`).addClass('animated faster pulse');
+
+    setTimeout(() => {
+      $(`#${id}-wishlist-button`).removeClass('animated faster pulse');
+    }, 500);
+
+    if(this.wishlistID.includes(id)){
+      this.removeFromWishlist(id, name);
+    }
+
+    else{
+
+      this.apiService.addToWishlist(id).subscribe(
+        res => { 
+          this.getUserWishlistID();
+          this._helperService.addSuccessToMessages(`${this._helperService.addSuccess} ${name} to wishlist!`);
+
+        },
+        err => {
+          this.getUserWishlistID();
+          this._helperService.addErrorToMessages(`${this._helperService.addFailedMessage} ${name} to wishlist!`);
+        }
+
+      );
+    }
+  }
+    
+  removeFromWishlist(id: string, name: string){
+
+    this.apiService.removeFromWishlist(id).subscribe(
+      res => { 
+        this.getUserWishlistID();
+        this._helperService.addSuccessToMessages(`${this._helperService.removeSuccess} ${name} from wishlist!`);
+
+      },
+      err => {
+        this.getUserWishlistID();
+        this._helperService.addErrorToMessages(`${this._helperService.removeFailedMessage} ${name} from wishlist.`);
+      }
+
+    );
   }
 
   displaySeriesChart(){
@@ -170,5 +246,38 @@ export class CollectionComponent implements OnInit {
     });
 
     this.topFive = sorted.slice(0, 5);
+  }
+
+  calculateCollectionValue(pops){
+    let totalValue = 0
+    pops.forEach((ele) => {
+      totalValue += ele.value;
+
+      if(this.seriesList.hasOwnProperty(ele.series)){
+        this.seriesList[ele.series] += 1;
+      } else{
+        this.seriesList[ele.series] = 1;
+      }
+    });
+
+
+    Object.keys(this.seriesList).forEach( (key) => {
+      this.seriesChartX.push(key);
+      this.seriesChartY.push(this.seriesList[key]);
+    });
+
+
+    this.averageValue = Math.round(totalValue / pops.length);
+    this.collectionValue = Math.round(totalValue);
+  }
+
+  staggerEntrance(pops){
+    let size = 0;
+    setInterval(() =>{
+      if(size == pops.length)
+        return;
+      this.collection.push(pops[size]);
+      ++size;
+    }, 50);
   }
 }
