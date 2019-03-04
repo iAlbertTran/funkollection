@@ -18,8 +18,8 @@
                             Category: {{ individualpop.category }}</div>
                         <div id='{{ individualpop.id }}-back-options' class="pop-info-options">
                             <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle more-info-button" (click)="_helperService.moreInformation(individualpop)"></i>
-                            <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="this._helperService.collection.includes(individualpop.id)" (click)="this._helperService.addToCollection(individualpop.id, individualpop.name)"></i>
-                            <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="this._helperService.wishlist.includes(individualpop.id)" (click)="this._helperService.addToWishlist(individualpop.id, individualpop.name)"></i>
+                            <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(individualpop.id)" (click)="addToCollection(individualpop.id, individualpop.name)"></i>
+                            <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(individualpop.id)" (click)="addToWishlist(individualpop.id, individualpop.name)"></i>
                         </div>
                     </div>
                 </div>
