@@ -33,6 +33,7 @@ import { CountdownTimerModule } from 'ngx-countdown-timer';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CollectionComponent } from './collection/collection.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 
 export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     parse(url: string): UrlTree {
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
         { path: 'dashboard', component: DashboardComponent},
         { path: 'collection', component: CollectionComponent}, 
         { path: 'wishlist', component: WishlistComponent}, 
+        { path: 'disclaimer', component: DisclaimerComponent}, 
         { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] },
         { path: 'funko/:series/:category/:name', component: FunkopopComponent},
       ]
@@ -72,6 +74,7 @@ const appRoutes: Routes = [
     FunkopopComponent,
     CollectionComponent,
     WishlistComponent,
+    DisclaimerComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
