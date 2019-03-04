@@ -1,7 +1,28 @@
 <div class="content">
-  <div class="funkopop-grid">
-      <div class="pop-list">
-
+    <div class='wishlist-info'>
+      <canvas #seriesChart id="seriesChart" width="350" height="100"></canvas>
+      <div class='top-five'>
+          <p class='top-five-header'>Top 5</p>
+          <div class='top-pop' *ngFor="let pop of topFive" (click)="_helperService.moreInformation(pop)">
+              <div class='top-pop-img-container'>
+                      <img class='top-pop-img' src='{{apiService.baseURL}}/funkopop/{{ pop.image }}' />
+              </div>
+              <div class='top-pop-text'>
+                  <p class='top-pop-name'>{{ pop.name }}</p>
+                  <p>${{ pop.value }}</p>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="funkopop-grid">
+        <div class="pop-list">
+          <div #individualCard class='animated fadeInUp faster wishlist-value'>
+              <p class='wishlst-header'>Wishlist Statistics</p>
+              <p>Estimated value:</p>
+              <p><span class='text-color-green'>${{ wishlistValue }} ( ${{ averageValue }} / vinyl )</span></p>
+              <p>Total Figures:</p>
+              <p><span class='text-color-green'>{{ wishlist.length }}</span></p>
+          </div>
           <div #individualCard class="individual-card animated fadeInUp faster" *ngFor="let individualpop of wishlist">
               <div class="card-container">
                   <div #imageContainer class='image-container' [ngStyle]="{'height.px': individualCard.offsetWidth}">
@@ -16,13 +37,14 @@
                           <i class="fas fa-caret-right"></i>
                           Category: {{ individualpop.category }}</div>
                       <div id='{{ individualpop.id }}-back-options' class="pop-info-options">
-                          <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle more-info-button" (click)="moreInformation(individualpop)"></i>
-                          <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collection.includes(individualpop.id)" (click)="addToCollection(individualpop.id, individualpop.name)"></i>
-                          <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlist.includes(individualpop)" (click)="addToWishlist(individualpop.id, individualpop.name)"></i>
+                          <i id='{{ individualpop.id }}-info-button' class="fas fa-info-circle more-info-button" (click)="_helperService.moreInformation(individualpop)"></i>
+                          <i id='{{ individualpop.id }}-collection-button' class="fas fa-plus-circle" [class.text-color-green]="collectionID.includes(individualpop.id)" (click)="addToCollection(individualpop.id, individualpop.name)"></i>
+                          <i id='{{ individualpop.id }}-wishlist-button' class="fab fa-gratipay" [class.text-color-red]="wishlistID.includes(individualpop.id)" (click)="addToWishlist(individualpop.id, individualpop.name)"></i>
                       </div>
                   </div>
               </div>
           </div>
-      </div>  
+        </div>  
+    </div>
   </div>
-</div>
+  
