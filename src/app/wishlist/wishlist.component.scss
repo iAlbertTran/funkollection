@@ -271,13 +271,13 @@
 
 
 @media only screen and (max-width: 768px) {
-    .collection-info{
+    .wishlist-info{
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    .collection-info .top-five{
+    .wishlist-info .top-five{
         border-left: none;
     }
 }
@@ -304,6 +304,9 @@
 }
 
 @media only screen and (max-width: 480px) {
+    .content{
+        padding: 5px;
+    }
 
     .series-container .series-title{
         text-align: center;

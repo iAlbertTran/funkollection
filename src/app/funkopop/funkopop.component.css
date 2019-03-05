@@ -258,7 +258,7 @@ th, td {
     justify-content: center;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 900px) {
 
     .content{
         padding: 10px;
